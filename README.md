@@ -39,7 +39,7 @@ And 1 response component is provided:
 5. Get the listener component to verify the IPN by calling the ``verifyIpn()`` method. If the IPN is verified this method will return true, otherwise it will return false. This should be done in a try catch block as the listener or request components may throw exceptions.
 6. You can use the method ``getStatusReport()`` to get the details of the request and the response.
 
-```
+```php
 <?php
 
 $request = new \PayPal\Ipn\Request\cURL(); 
@@ -150,7 +150,7 @@ By default the mode is set to ``production`` (this is done in the listener / req
 
 To create a custom request component you **must** extend ``\PayPal\Ipn\Request`` as this has the base methods and properties that the listener component is dependent on.  There is only 1 abstract method that needs to be implemented: ``send()``. This is the method that makes the request to PayPal.
 
-```
+```php
 <?php namespace PayPal\Ipn\Request;
 
 class CustomRequest extends \PayPal\Ipn\Request
@@ -168,7 +168,7 @@ class CustomRequest extends \PayPal\Ipn\Request
 
 To create a custom response component you **must** extend ``\PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``status`` or ``body`` must set the respective protected properties. 
 
-```
+```php
 <?php namespace PayPal\Ipn\Response;
 
 class CustomResponse extends \PayPal\Ipn\Response
@@ -200,7 +200,7 @@ Using your custom request componenet is as simple as
 2. configure the component
 3. pass to the constructor of the listener component
 
-```
+```php
 <?php
 
 $request = new \PayPal\Ipn\Request\CustomRequest(); 
@@ -221,7 +221,7 @@ Using your custom response componenet is as simple as
 2. configure the component
 3. pass to the constructor of the request component
 
-```
+```php
 <?php
 
 $response = new \PayPal\Ipn\Response\CustomResponse();
@@ -244,7 +244,7 @@ $listener = new \PayPal\Ipn\Listener($request);
 
 By default the data in the ``$_POST`` array will be used to verify the IPN. In some situations you may not have access to ``$_POST`` (some frameworks unset this and use custom accessors). To get around this you can pass an array of data to the constructor of the request component
 
-```
+```php
 <?php
 
 $data = array(
