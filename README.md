@@ -160,9 +160,9 @@ custom = xyz123
 charset = windows-1252
 verify_sign = An5ns1Kso7MWUdW4ErQKJJJ4qi4-AiDQdSQlWgandPafaHfLyF8oqvxy
 ```
-You can switch between sandbox or production mode. You do this by calling ``setMode($mode)`` on the listener component. Valid values for $mode are ``sandbox`` or ``production``. This will set where the request is made too (PayPals sandbox server or production server). Internally this calls the ``setHost()`` method of the request component.
+You can switch between sandbox or production mode. You do this by calling ``setMode($mode)`` on the listener component. Valid values for ``$mode`` are ``sandbox`` or ``production``. This will set where the request is made too (PayPals sandbox server or production server). Internally this calls the ``setHost()`` method of the request component.
 
-By default the mode is set to ``production`` (this is done in the listener / request constructor).
+By default the mode is set to ``production`` (this is done in the listener / request component constructor).
 
 ###Creating Custom Request Components
 
