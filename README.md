@@ -7,7 +7,25 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 - Flexible, extensible, component based architecture
 - Easily switch between sandbox and production mode
 - Generate useful status reports (request & response)
-- Namespaced, composer ready, framework independent
+- Namespaced, composer ready, framework independent, PSR-0
+
+###Prerequisites
+
+1. PHP>=5.3.0
+2. A good understanding of how the PayPal Instant Payment Notification system works. see [https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf](https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf)
+3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
+
+
+```php
+require '<path-to-src>/src/PayPal/Ipn/Response.php';
+require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
+require '<path-to-src>/PayPal/Ipn/Request.php';
+require '<path-to-src>/PayPal/Ipn/Request/cURL.php';
+require '<path-to-src>/PayPal/Ipn/Request/Socket.php';
+require '<path-to-src>/PayPal/Ipn/Listener.php';
+
+```
+***Note:*** *All of the code examples in the rest of this document assume you have the above files above included manually or autoloaded*
 
 ###Architecture
 
