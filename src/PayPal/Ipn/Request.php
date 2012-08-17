@@ -54,7 +54,7 @@ abstract class Request
      * @var object
      */
     protected $response;
-   
+
     /**
      * Create a new instance
      *
@@ -62,11 +62,11 @@ abstract class Request
      * @param bool|object $responseObj Optional response object to be used by request
      */
     public function __construct($data = false, $responseObj = false)
-	{
-		$this->response = $responseObj ? $responseObj : new Response\Standard();
-		$this->setData($data);
-		$this->setHost();
-	}
+    {
+        $this->response = $responseObj ? $responseObj : new Response\Standard();
+        $this->setData($data);
+        $this->setHost();
+    }
 
     /**
      * Set data to be used in the request
@@ -74,10 +74,10 @@ abstract class Request
      * @param bool|array $data Can pass array of data otherwise $_POST data will be used
      */
     public function setData($data = false)
-	{
-		$this->data = is_array($data) ? $data : $_POST;
-		$this->encodedData = $this->encodeData($this->data);
-	}
+    {
+        $this->data = is_array($data) ? $data : $_POST;
+        $this->encodedData = $this->encodeData($this->data);
+    }
 
     /**
      * Get data to be used in the request
@@ -85,9 +85,9 @@ abstract class Request
      * @return array
      */
     public function getData()
-	{
-		return $this->data;
-	}
+    {
+        return $this->data;
+    }
 
     /**
      * Set the host that the request will be sent too
@@ -95,9 +95,9 @@ abstract class Request
      * @param string $environment Can either be 'production' or 'sandbox'. Defaults to 'production'
      */
     public function setHost($environment = 'production')
-	{
-		$this->host = ($environment == 'production') ? self::PRODUCTION_HOST : self::SANDBOX_HOST;
-	}
+    {
+        $this->host = ($environment == 'production') ? self::PRODUCTION_HOST : self::SANDBOX_HOST;
+    }
 
     /**
      * Get the host to be used for the request
@@ -105,9 +105,9 @@ abstract class Request
      * @return string
      */
     public function getHost()
-	{
-		return $this->host;
-	}
+    {
+        return $this->host;
+    }
 
     /**
      * Get the encoded data to be sent along with the request
@@ -115,9 +115,9 @@ abstract class Request
      * @return string
      */
     public function getEncodedData()
-	{
-		return $this->encodedData;
-	}
+    {
+        return $this->encodedData;
+    }
 
     /**
      * Get the response object associated with the request
@@ -125,9 +125,9 @@ abstract class Request
      * @return object
      */
     public function getResponse()
-   	{
-   		return $this->response;
-   	}
+    {
+        return $this->response;
+    }
 
     /**
      * Set whether the request should be sent over SSL or not
@@ -135,9 +135,9 @@ abstract class Request
      * @param bool $useSSL
      */
     public function secure($useSSL)
-	{
-		$this->useSSL = (bool)$useSSL;
-	}
+    {
+        $this->useSSL = (bool)$useSSL;
+    }
 
     /**
      * Set the timeout for the request
@@ -145,20 +145,20 @@ abstract class Request
      * @param int $timeout
      */
     public function setTimeout($timeout)
-	{
-		$this->timeout = (int)$timeout;
-	}
-	
-	/**
+    {
+        $this->timeout = (int)$timeout;
+    }
+
+    /**
      * Get the URI to be used to make the request
      *
      * @return string
      */
     public function getRequestUri()
-	{
-		$prefix = $this->useSSL ? 'https://' : 'http://';
-		return $prefix . $this->host . '/cgi-bin/webscr';
-	}
+    {
+        $prefix = $this->useSSL ? 'https://' : 'http://';
+        return $prefix . $this->host . '/cgi-bin/webscr';
+    }
 
     /**
      * URL encodes array of data
@@ -168,13 +168,13 @@ abstract class Request
      * @return string
      */
     protected function encodeData($data)
-	{
-		$encodedData = 'cmd=_notify-validate';
-		foreach ($data as $k => $v) {
-			$encodedData .= '&' . $k . '=' . urlencode($v);
-		}
-		return $encodedData;
-	}
+    {
+        $encodedData = 'cmd=_notify-validate';
+        foreach ($data as $k => $v) {
+            $encodedData .= '&' . $k . '=' . urlencode($v);
+        }
+        return $encodedData;
+    }
 
     /**
      * Request send method to be implemented by classes that extend the Reåquest class

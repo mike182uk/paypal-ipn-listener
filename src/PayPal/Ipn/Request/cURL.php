@@ -24,16 +24,16 @@ class cURL extends \PayPal\Ipn\Request
      * @throws CurlException
      */
     public function __construct()
-	{
+    {
         if (!function_exists('curl_version')) {
             throw new CurlException('cURL extension is either not enabled or not installed');
         }
 
-		parent::__construct();	
+        parent::__construct();
 
-		$this->followLocation = false;
-		$this->forceSSLv3 = true;
-	}
+        $this->followLocation = false;
+        $this->forceSSLv3 = true;
+    }
 
     /**
      * Set whether cURL will use the CURLOPT_FOLLOWLOCATION to follow any
@@ -63,9 +63,9 @@ class cURL extends \PayPal\Ipn\Request
      * @throws CurlException
      */
     public function send()
-	{	
+    {
         $ch = curl_init();
-        
+
         curl_setopt($ch, CURLOPT_URL, $this->getRequestUri());
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->encodedData);
@@ -73,14 +73,14 @@ class cURL extends \PayPal\Ipn\Request
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
-        
+
         if ($this->forceSSLv3) {
             curl_setopt($ch, CURLOPT_SSLVERSION, 3);
         }
-        
+
         $responseBody = curl_exec($ch);
         $responseStatus = strval(curl_getinfo($ch, CURLINFO_HTTP_CODE));
-        
+
         $this->response->setBody($responseBody);
         $this->response->setStatus($responseStatus);
 
@@ -89,5 +89,5 @@ class cURL extends \PayPal\Ipn\Request
             $error = curl_error($ch);
             throw new CurlException('cURL error: [' . $errno . '] ' . $error);
         }
-	}
+    }
 }

@@ -22,9 +22,9 @@ abstract class Response
      * @param string $body
      */
     public function setBody($body)
-	{
-		$this->body = $body;
-	}
+    {
+        $this->body = $body;
+    }
 
     /**
      * Sets the response HTTP status
@@ -32,9 +32,9 @@ abstract class Response
      * @param int $status
      */
     public function setStatus($status)
-	{
-		$this->status = (int)$status;
-	}
+    {
+        $this->status = (int)$status;
+    }
 
     /**
      * Get the response body
@@ -42,9 +42,9 @@ abstract class Response
      * @return string
      */
     public function getBody()
-	{
-		return $this->body;
-	}
+    {
+        return $this->body;
+    }
 
     /**
      * Get the response status
@@ -52,7 +52,7 @@ abstract class Response
      * @return int|string
      */
     public function getStatus()
-	{
-		return $this->status;
-	}
+    {
+        return $this->status;
+    }
 }

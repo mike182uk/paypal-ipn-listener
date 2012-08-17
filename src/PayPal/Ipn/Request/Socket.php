@@ -10,12 +10,12 @@ class Socket extends \PayPal\Ipn\Request
      * @throws SocketException
      */
     public function send()
-	{	
-		$port = $this->useSSL ? '443' : '80';
-		$uri = $this->getRequestUri();
-		
+    {
+        $port = $this->useSSL ? '443' : '80';
+        $uri = $this->getRequestUri();
+
         $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
-        
+
         if (!$fp) { 
             throw new SocketException('fsockopen error: [' . $errno . '] ' . $error);
         } 
@@ -25,12 +25,12 @@ class Socket extends \PayPal\Ipn\Request
         $headers .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $headers .= "Content-Length: ".strlen($this->encodedData)."\r\n";
         $headers .= "Connection: Close\r\n\r\n";
-        
+
         fputs($fp, $headers . $this->encodedData . "\r\n\r\n");
-        
+
         $responseBody = '';
         $responseStatus = 0;
-        
+
         while (!feof($fp)) { 
             if (empty($responseBody)) {
                 $responseBody .= $responseStatus = fgets($fp, 1024); // extract HTTP status from first line 
@@ -40,21 +40,21 @@ class Socket extends \PayPal\Ipn\Request
                 $responseBody .= fgets($fp, 1024); 
             }
         } 
-        
+
         fclose($fp);
-        
+
         $this->response->setBody($responseBody);
         $this->response->setStatus($responseStatus);
-	}
-	
-	/**
+    }
+
+    /**
      * Get the URI to be used to make the request
      *
      * @return string
      */
     public function getRequestUri()
-	{
-		$prefix = $this->useSSL ? 'ssl://' : '';
-		return $prefix . $this->host;
-	}
+    {
+        $prefix = $this->useSSL ? 'ssl://' : '';
+        return $prefix . $this->host;
+    }
 }
