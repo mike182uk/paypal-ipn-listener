@@ -17,7 +17,7 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 
 
 ```php
-require '<path-to-src>/src/PayPal/Ipn/Response.php';
+require '<path-to-src>/PayPal/Ipn/Response.php';
 require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
 require '<path-to-src>/PayPal/Ipn/Request.php';
 require '<path-to-src>/PayPal/Ipn/Request/cURL.php';
