@@ -50,7 +50,7 @@ class cURL extends \PayPal\Ipn\Request
      * Explicitly sets cURL to use SSL version 3. Use this if cURL
      * is compiled with GnuTLS SSL.
      *
-     * @param bool $value
+     * @param bool $forceSSLv3
      */
     public function forceSSLv3($forceSSLv3)
     {
