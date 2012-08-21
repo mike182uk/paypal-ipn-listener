@@ -11,7 +11,7 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 
 ###Prerequisites
 
-1. PHP>=5.3.0
+1. PHP >=5.3.0
 2. A good understanding of how the PayPal Instant Payment Notification system works. see [https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf](https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf)
 3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
 
@@ -35,7 +35,7 @@ This package is built out of a few components that work together:
 2. Request - Communicates with PayPal
 3. Response - Stores the response from PayPal
 
-The request and response components are swapable. If you have a certain way you need to implement the request, or store the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
+The request and response components are swappable. If you have a certain way you need to implement the request, or store the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
 
 Both of these classes are abstract and must be extended.
 
@@ -72,7 +72,7 @@ try {
 	$status = $listener->verifyIpn();	
 }
 catch (\Exception $e) {
-	echo $e->getMessage();	
+    $error = $e->getMessage();
 }
 
 if ($status) {
@@ -212,7 +212,7 @@ class CustomResponse extends \PayPal\Ipn\Response
 
 #####Request
 
-Using your custom request componenet is as simple as 
+Using your custom request component is as simple as
 
 1. create an instance of the component
 2. configure the component
@@ -233,7 +233,7 @@ $listener = new \PayPal\Ipn\Listener($request);
 
 #####Response
 
-Using your custom response componenet is as simple as 
+Using your custom response component is as simple as
 
 1. create an instance of the component
 2. configure the component
