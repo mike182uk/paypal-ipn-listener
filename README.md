@@ -1,6 +1,6 @@
 #PayPal IPN Listener
 
-A composer compatible PayPal instant payment notification listener for PHP >=5.3.0. If you are looking a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
+A composer compatible PayPal instant payment notification listener for PHP >=5.3.0. If you are looking for a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
 
 ###Features
 
@@ -19,8 +19,8 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 require '<path-to-src>/PayPal/Ipn/Response.php';
 require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
 require '<path-to-src>/PayPal/Ipn/Request.php';
-require '<path-to-src>/PayPal/Ipn/Request/cURL.php';
-require '<path-to-src>/PayPal/Ipn/Request/Socket.php';
+require '<path-to-src>/PayPal/Ipn/Request/cURL.php'; //This only needs to be included if you are using cURL to communicate with PayPal
+require '<path-to-src>/PayPal/Ipn/Request/Socket.php'; //This only needs to be included if you are using sockets (fsock) to communicate with PayPal
 require '<path-to-src>/PayPal/Ipn/Listener.php';
 ```
 ***Note:*** *All of the code examples in the rest of this document assume you have the above files above included manually or autoloaded*
@@ -29,9 +29,9 @@ require '<path-to-src>/PayPal/Ipn/Listener.php';
 
 This package is built out of a few components that work together:
 
-1. Listener - Listens for and processes the IPN
-2. Request - Communicates with PayPal
-3. Response - Stores the response from PayPal
+1. ``Listener`` - Listens for and processes the IPN
+2. ``Request`` - Communicates with PayPal
+3. ``Response`` - Stores the response from PayPal
 
 The request and response components are swappable. If you have a certain way you need to implement the request, or store the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
 
