@@ -13,7 +13,6 @@ class CurlRequestTest extends PHPUnit_Framework_TestCase
 
     public function testExtendsRequestObject()
     {
-        $this->assertEquals(true, ($this->curlRequestObj instanceof Request));
+        $this->assertInstanceOf('\PayPal\Ipn\Request', $this->curlRequestObj);
     }
-
 }

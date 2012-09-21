@@ -8,12 +8,18 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->curlRequestObj = new Request\Socket();
+        $this->socketRequestObj = new Request\Socket();
     }
 
     public function testExtendsRequestObject()
     {
-        $this->assertEquals(true, ($this->curlRequestObj instanceof Request));
+        $this->assertInstanceOf('\PayPal\Ipn\Request', $this->socketRequestObj);
     }
 
+    public function testGetUri()
+    {
+        $uri = $this->socketRequestObj->getRequestUri();
+        $isValidUri = (filter_var($uri, FILTER_VALIDATE_URL)) ? true : false;
+        $this->assertTrue($isValidUri);
+    }
 }
