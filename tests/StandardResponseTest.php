@@ -4,7 +4,7 @@ use \PayPal\Ipn\Response as Response;
 
 class StandardResponseTest extends PHPUnit_Framework_TestCase
 {
-    private $standardRespObj;
+    protected $standardRespObj;
 
     public function setUp()
     {
