@@ -98,7 +98,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\PayPal\Ipn\Response', $req->getResponse());
         $this->assertSame($_POST, $req->getData());
     }
-    
+
     public function testConstructorWithCustomArgValues()
     {
         $resp = new MockResponse();
