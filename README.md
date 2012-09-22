@@ -8,6 +8,7 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 - Easily switch between sandbox and production mode
 - Generate useful status reports (request & response)
 - Namespaced, composer ready, framework independent, PSR-0, PSR-1
+- Unit tested with PHPUnit
 
 ###Prerequisites
 
