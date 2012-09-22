@@ -16,7 +16,7 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\PayPal\Ipn\Request', $this->socketRequestObj);
     }
 
-    public function testGetUri()
+    public function testGetRequestUri()
     {
         $uri = $this->socketRequestObj->getRequestUri();
         $isValidUri = (filter_var($uri, FILTER_VALIDATE_URL)) ? true : false;
