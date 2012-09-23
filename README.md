@@ -1,15 +1,13 @@
-#PayPal IPN Listener
+#PayPal IPN Listener [![Build Status](https://secure.travis-ci.org/mike182uk/paypal-ipn-listener.png)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 
-[![Build Status](https://secure.travis-ci.org/mike182uk/paypal-ipn-listener.png)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
-
-A composer compatible PayPal instant payment notification listener for PHP >=5.3.0. If you are looking for a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
+A composer compatible PayPal Instant Payment Notification listener for PHP >=5.3.0. If you are looking for a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
 
 ###Features
 
 - Flexible, extensible, component based architecture
 - Easily switch between sandbox and production mode
 - Generate useful status reports (request & response)
-- Namespaced, composer ready, framework independent, PSR-0, PSR-1
+- Namespaced, composer ready, framework independent, PSR-0, PSR-1, PSR-2
 - Unit tested with PHPUnit
 
 ###Prerequisites
@@ -19,6 +17,10 @@ A composer compatible PayPal instant payment notification listener for PHP >=5.3
 3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
 
 ```php
+require '<path-to-src>/PayPal/Ipn/Exception/CurlRequestException.php';
+require '<path-to-src>/PayPal/Ipn/Exception/SocketRequestException.php';
+require '<path-to-src>/PayPal/Ipn/Exception/UnexpectedResponseBodyException.php';
+require '<path-to-src>/PayPal/Ipn/Exception/UnexpectedResponseStatusException.php';
 require '<path-to-src>/PayPal/Ipn/Response.php';
 require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
 require '<path-to-src>/PayPal/Ipn/Request.php';
