@@ -2,6 +2,8 @@
 
 namespace PayPal\Ipn\Request;
 
+use PayPal\Ipn\Exception;
+
 class Socket extends \PayPal\Ipn\Request
 {
     /**
@@ -17,7 +19,7 @@ class Socket extends \PayPal\Ipn\Request
         $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
 
         if (!$fp) {
-            throw new SocketException('fsockopen error: [' . $errno . '] ' . $error);
+            throw new Exception\SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
         }
 
         $headers = "POST /cgi-bin/webscr HTTP/1.0\r\n";
