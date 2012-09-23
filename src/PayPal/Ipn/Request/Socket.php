@@ -22,7 +22,7 @@ class Socket extends \PayPal\Ipn\Request
             throw new Exception\SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
         }
 
-        $headers = "POST /cgi-bin/webscr HTTP/1.0\r\n";
+        $headers = "POST /cgi-bin/webscr HTTP/1.1\r\n";
         $headers .= "Host: " . $this->getHost() . "\r\n";
         $headers .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $headers .= "Content-Length: ".strlen($this->encodedData)."\r\n";
