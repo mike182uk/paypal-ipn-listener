@@ -1,6 +1,6 @@
-<?php namespace PayPal\Ipn\Request;
+<?php
 
-class CurlException extends \Exception {}
+namespace PayPal\Ipn\Request;
 
 class cURL extends \PayPal\Ipn\Request
 {
@@ -43,7 +43,7 @@ class cURL extends \PayPal\Ipn\Request
      */
     public function followLocation($followLocation)
     {
-        $this->followLocation = (bool)$followLocation;
+        $this->followLocation = (bool) $followLocation;
     }
 
     /**
@@ -54,7 +54,7 @@ class cURL extends \PayPal\Ipn\Request
      */
     public function forceSSLv3($forceSSLv3)
     {
-        $this->forceSSLv3 = (bool)$forceSSLv3;
+        $this->forceSSLv3 = (bool) $forceSSLv3;
     }
 
     /**

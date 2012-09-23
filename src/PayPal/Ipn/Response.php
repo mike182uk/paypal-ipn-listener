@@ -1,4 +1,6 @@
-<?php namespace PayPal\Ipn;
+<?php
+
+namespace PayPal\Ipn;
 
 abstract class Response
 {
@@ -33,7 +35,7 @@ abstract class Response
      */
     public function setStatus($status)
     {
-        $this->status = (int)$status;
+        $this->status = (int) $status;
     }
 
     /**

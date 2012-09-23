@@ -1,4 +1,6 @@
-<?php namespace PayPal\Ipn;
+<?php
+
+namespace PayPal\Ipn;
 
 abstract class Request
 {
@@ -58,7 +60,7 @@ abstract class Request
     /**
      * Create a new instance
      *
-     * @param bool|array $data Data to be used in the request. Can pass array of data otherwise $_POST data will be used
+     * @param bool|array  $data        Data to be used in the request. Can pass array of data otherwise $_POST data will be used
      * @param bool|object $responseObj Optional response object to be used by request
      */
     public function __construct($data = false, $responseObj = false)
@@ -136,7 +138,7 @@ abstract class Request
      */
     public function secure($useSSL)
     {
-        $this->useSSL = (bool)$useSSL;
+        $this->useSSL = (bool) $useSSL;
     }
 
     /**
@@ -146,7 +148,7 @@ abstract class Request
      */
     public function setTimeout($timeout)
     {
-        $this->timeout = (int)$timeout;
+        $this->timeout = (int) $timeout;
     }
 
     /**
@@ -157,6 +159,7 @@ abstract class Request
     public function getRequestUri()
     {
         $prefix = $this->useSSL ? 'https://' : 'http://';
+
         return $prefix . $this->host . '/cgi-bin/webscr';
     }
 
@@ -173,6 +176,7 @@ abstract class Request
         foreach ($data as $k => $v) {
             $encodedData .= '&' . $k . '=' . urlencode($v);
         }
+
         return $encodedData;
     }
 

@@ -1,8 +1,6 @@
-<?php namespace PayPal\Ipn;
+<?php
 
-class UnexpectedResponseStatusException extends \Exception {}
-
-class UnexpectedResponseBodyException extends \Exception {}
+namespace PayPal\Ipn;
 
 class Listener
 {
@@ -17,7 +15,7 @@ class Listener
      * Create a new instance
      *
      * @param object $request Request object to be used to make the request to PayPal
-     * @param string $mode Can either be 'production' or 'sandbox'. Defaults to 'production'
+     * @param string $mode    Can either be 'production' or 'sandbox'. Defaults to 'production'
      */
     public function __construct($request, $mode = 'production')
     {
@@ -65,11 +63,9 @@ class Listener
         //check the response body
         if (strpos($responseBody, 'VERIFIED') !== false) {
             return true;
-        } 
-        elseif (strpos($responseBody, 'INVALID') !== false) {
+        } elseif (strpos($responseBody, 'INVALID') !== false) {
             return false;
-        } 
-        else {
+        } else {
             throw new UnexpectedResponseBodyException('Unexpected body response received');
         }
     }
@@ -86,6 +82,7 @@ class Listener
         $dashLine = function($length = 80) {
             $l = '';
             for ($i = 0; $i < $length; $i++) { $l .= '-'; }
+
             return $l;
         };
         $linebreak = "\n";
