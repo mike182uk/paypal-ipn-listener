@@ -16,9 +16,10 @@ class Socket extends \PayPal\Ipn\Request
         $port = $this->useSSL ? '443' : '80';
         $uri = $this->getRequestUri();
 
-        $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
-
-        if (!$fp) {
+        try {
+            $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
+        }
+        catch (\Exception $e) { 
             throw new Exception\SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
         }
 
