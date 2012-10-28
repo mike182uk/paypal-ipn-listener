@@ -22,4 +22,28 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
         $isValidUri = (filter_var($uri, FILTER_VALIDATE_URL)) ? true : false;
         $this->assertTrue($isValidUri);
     }
+
+    public function testExceptionIsThrownOnSocketError()
+    {
+        $this->setExpectedException('\PayPal\Ipn\Exception\SocketRequestException');
+
+        $mockCurlRequest = new MockSocketRequest();
+        
+        $mockCurlRequest->send();
+    }
+
+    public function testSend()
+    {
+        $this->socketRequestObj->send();
+
+        $this->assertEquals(200, $this->socketRequestObj->getResponse()->getStatus());
+    }
+}
+
+class MockSocketRequest extends \PayPal\Ipn\Request\Socket
+{
+    public function getRequestUri()
+    {
+        return '';
+    }
 }
