@@ -8,7 +8,7 @@ class CurlRequestTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->curlRequestObj = new Request\cURL();
+        $this->curlRequestObj = new Request\Curl();
     }
 
     public function testExtendsRequestObject()
@@ -33,7 +33,7 @@ class CurlRequestTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class MockCurlRequest extends \PayPal\Ipn\Request\cURL
+class MockCurlRequest extends \PayPal\Ipn\Request\Curl
 {
     public function getRequestUri()
     {

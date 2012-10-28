@@ -24,7 +24,7 @@ require '<path-to-src>/PayPal/Ipn/Exception/UnexpectedResponseStatusException.ph
 require '<path-to-src>/PayPal/Ipn/Response.php';
 require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
 require '<path-to-src>/PayPal/Ipn/Request.php';
-require '<path-to-src>/PayPal/Ipn/Request/cURL.php'; //This only needs to be included if you are using cURL to communicate with PayPal
+require '<path-to-src>/PayPal/Ipn/Request/Curl.php'; //This only needs to be included if you are using Curl to communicate with PayPal
 require '<path-to-src>/PayPal/Ipn/Request/Socket.php'; //This only needs to be included if you are using sockets (fsock) to communicate with PayPal
 require '<path-to-src>/PayPal/Ipn/Listener.php';
 ```
@@ -44,7 +44,7 @@ Both of these classes are abstract and must be extended.
 
 By default 2 request components are provided:
 
-1. ``\PayPal\Ipn\Request\cURL`` - sends the request to PayPal via cURL
+1. ``\PayPal\Ipn\Request\Curl`` - sends the request to PayPal via Curl
 2. ``\PayPal\Ipn\Request\Socket`` - sends the request to PayPal via sockets (fsock)
 
 And 1 response component is provided:
@@ -63,7 +63,7 @@ And 1 response component is provided:
 ```php
 <?php
 
-$request = new \PayPal\Ipn\Request\cURL(); 
+$request = new \PayPal\Ipn\Request\Curl(); 
 
 $request->useSSL(true); //dont need to do this as its done by default, just demonstrating configuring the request component
 
@@ -266,7 +266,7 @@ $data = array(
 	//...
 );
 
-$request = new \PayPal\Ipn\Request\cURL($data);
+$request = new \PayPal\Ipn\Request\Curl($data);
 
 ...
 ```

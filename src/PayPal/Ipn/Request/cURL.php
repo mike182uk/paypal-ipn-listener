@@ -4,7 +4,7 @@ namespace PayPal\Ipn\Request;
 
 use PayPal\Ipn\Exception;
 
-class cURL extends \PayPal\Ipn\Request
+class Curl extends \PayPal\Ipn\Request
 {
     /**
      * Should cURL follow location headers in the response
