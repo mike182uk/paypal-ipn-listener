@@ -1,13 +1,13 @@
 #PayPal IPN Listener [![Build Status](https://secure.travis-ci.org/mike182uk/paypal-ipn-listener.png)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 
-A composer compatible PayPal Instant Payment Notification listener for PHP >=5.3.0. If you are looking for a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
+A PayPal IPN (Instant Payment Notification) listener for PHP >=5.3.0. If you are looking for a < 5.3.0 compatible PayPal IPN Listener i highly recommend - [https://github.com/Quixotix/PHP-PayPal-IPN](https://github.com/Quixotix/PHP-PayPal-IPN) (This package is heavily based around this).
 
 ###Features
 
 - Flexible, extensible, component based architecture
 - Easily switch between sandbox and production mode
 - Generate useful status reports (request & response)
-- Namespaced, composer ready, framework independent, PSR-0, PSR-1, PSR-2
+- Namespaced, framework independent, PSR-0, PSR-2
 - Unit tested with PHPUnit
 
 ###Prerequisites
@@ -16,19 +16,7 @@ A composer compatible PayPal Instant Payment Notification listener for PHP >=5.3
 2. A good understanding of how the PayPal Instant Payment Notification system works. see [https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf](https://cms.paypal.com/cms_content/US/en_US/files/developer/IPNGuide.pdf)
 3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
 
-```php
-require '<path-to-src>/PayPal/Ipn/Exception/CurlRequestException.php';
-require '<path-to-src>/PayPal/Ipn/Exception/SocketRequestException.php';
-require '<path-to-src>/PayPal/Ipn/Exception/UnexpectedResponseBodyException.php';
-require '<path-to-src>/PayPal/Ipn/Exception/UnexpectedResponseStatusException.php';
-require '<path-to-src>/PayPal/Ipn/Response.php';
-require '<path-to-src>/PayPal/Ipn/Response/Standard.php';
-require '<path-to-src>/PayPal/Ipn/Request.php';
-require '<path-to-src>/PayPal/Ipn/Request/Curl.php'; //This only needs to be included if you are using Curl to communicate with PayPal
-require '<path-to-src>/PayPal/Ipn/Request/Socket.php'; //This only needs to be included if you are using sockets (fsock) to communicate with PayPal
-require '<path-to-src>/PayPal/Ipn/Listener.php';
-```
-***Note:*** *All of the code examples in the rest of this document assume you have the above files above included manually or autoloaded*
+***Note:*** *All of the code examples in the rest of this document assume you have the required files above included manually or autoloaded.*
 
 ###Architecture
 
@@ -36,9 +24,9 @@ This package is built out of a few components that work together:
 
 1. ``Listener`` - Listens for and processes the IPN
 2. ``Request`` - Communicates with PayPal
-3. ``Response`` - Stores the response from PayPal
+3. ``Response`` - Handles response from PayPal
 
-The request and response components are swappable. If you have a certain way you need to implement the request, or store the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
+The request and response components are swappable. If you have a certain way you need to implement the request, or handle the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
 
 Both of these classes are abstract and must be extended.
 
@@ -47,13 +35,13 @@ By default 2 request components are provided:
 1. ``\PayPal\Ipn\Request\Curl`` - sends the request to PayPal via Curl
 2. ``\PayPal\Ipn\Request\Socket`` - sends the request to PayPal via sockets (fsock)
 
-And 1 response component is provided:
+1 response component is provided:
 
 1. ``\PayPal\Ipn\Response\Standard`` - saves the HTTP status and body from the response from PayPal
 
 ###Workflow
 
-1. Create an instance of the request component you want to use to communicate with PayPal. If you want to use a custom repsonse component, instantiate this first and pass to the request components constructor.
+1. Create an instance of the request component you want to use to communicate with PayPal. If you want to use a custom **repsonse** component, instantiate this first and pass to the request components constructor.
 2. Configure any properties required on the request component (set custom request properties etc.)
 3. Create an instance of the listener component and pass it the request component in its constructor.
 4. Configure any properties required on the listener component (set mode etc.)
