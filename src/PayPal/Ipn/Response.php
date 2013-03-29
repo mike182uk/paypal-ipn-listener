@@ -2,7 +2,7 @@
 
 namespace PayPal\Ipn;
 
-abstract class Response
+class Response
 {
     /**
      * The response body

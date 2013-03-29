@@ -2,6 +2,8 @@
 
 namespace PayPal\Ipn;
 
+use PayPal\Ipn\Response;
+
 abstract class Request
 {
     /**
@@ -65,7 +67,7 @@ abstract class Request
      */
     public function __construct($data = false, $responseObj = false)
     {
-        $this->response = $responseObj ? $responseObj : new Response\Standard();
+        $this->response = $responseObj ? $responseObj : new Response();
         $this->setData($data);
         $this->setHost();
     }
