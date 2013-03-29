@@ -47,8 +47,6 @@ By default 2 request components are provided:
 6. You can use the method ``getReport()`` to get the details of the request and the response.
 
 ```php
-<?php
-
 $request = new PayPal\Ipn\Request\Curl();
 
 $request->secure(true); //dont need to do this as its done by default, just demonstrating configuring the request component
@@ -62,14 +60,15 @@ try {
 }
 catch (Exception $e) {
     $error = $e->getMessage();
+    $status = false;
 }
 
 if ($status) {
-	//verified...
+	// verified...
 }
 else {
-	//invalid...
-	$report = $listener->getStatusReport();
+	// invalid...
+	$report = $listener->getReport();
 }
 ```
 
@@ -77,76 +76,76 @@ A standard status report will look like:
 
 ```
 --------------------------------------------------------------------------------
-[16/08/2012 12:45:18] - https://www.sandbox.paypal.com/cgi-bin/webscr
+[29/03/2013 11:30:55] - https://www.sandbox.paypal.com/cgi-bin/webscr
 --------------------------------------------------------------------------------
 
-RESPONSE STATUS:
+RESPONSE STATUS: 
 ----------------
 
 200
 
-RESPONSE BODY:
+RESPONSE BODY: 
 --------------
 
 HTTP/1.1 200 OK
-Date: Thu, 16 Aug 2012 19:45:17 GMT
+Date: Fri, 29 Mar 2013 18:30:54 GMT
 Server: Apache
 X-Frame-Options: SAMEORIGIN
-Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=Kv1AEAL_1vbz-6Bw3LKSY-DU4rQCAaOoKw1RGJ07QLFG176CoS9-MoJHVtlhOTIKXJcsmoQeMS-UKYhSLHt7j1E5kIz_2vzZ2GnO3EqqfFE63Ju69evuBm6GLrctc-KqfE0L_m%7cE2pk1y69udVsPEIsxe1d4WlL5gwDJiDG40vIjdGe02GsDllp03GTTDL0FesOJmJmF4X2Bm%7c_VxjNUgUVv3NO4zQCdmDPwS5MhStpENsZ0pDvxPKqgj1bN1klsJA8rCVP8PhTGzqdtGmeG%7c1345146318; domain=.paypal.com; path=/; Secure; HttpOnly
-Set-Cookie: cookie_check=yes; expires=Sun, 14-Aug-2022 19:45:18 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=KbVIUQRbqU9DF1_YFipOUOd5a832twJ54x4IHGQtD2cTQowuLRbR5rESIUNaFUiBLihRwW93-qALGl4neGpS9168qgX-Zsluj6TdeSEzLcxr9ovZ-RqlQ4rZDoe8xHVrPpSkF0%7c22hdUyjFPlSIxGOw4iFkWRKD1jIzUgoyTxXvFE1ZA7oUi8K-HNJ9-YYP99TXZxo_6l-xmm%7c3CJlR-97Ev4_99B9-k1RQeLIlne0QDovW2u5r0Oy2H08QUsZR5LOhVQ6Zgf6c0Wtzk7T5m%7c1364581855; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Mon, 27-Mar-2023 18:30:55 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
 Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
-Set-Cookie: navlns=0.0; expires=Wed, 11-Aug-2032 19:45:18 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
-Set-Cookie: Apache=10.72.109.11.1345146317856113; path=/; expires=Sat, 09-Aug-42 19:45:17 GMT
+Set-Cookie: navlns=0.0; expires=Thu, 24-Mar-2033 18:30:55 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1364581854884362; path=/; expires=Sun, 22-Mar-43 18:30:54 GMT
 X-Cnection: close
 Transfer-Encoding: chunked
 Content-Type: text/html; charset=UTF-8
 
 VERIFIED
 
-RAW POST:
+RAW POST: 
 ---------
 
-cmd=_notify-validate&test_ipn=1&payment_type=instant&payment_date=12%3A44%3A16+Aug+16%2C+2012+PDT&payment_status=Completed&address_status=confirmed&payer_status=verified&first_name=John&last_name=Smith&payer_email=buyer%40paypalsandbox.com&payer_id=TESTBUYERID01&address_name=John+Smith&address_country=United+States&address_country_code=US&address_zip=95131&address_state=CA&address_city=San+Jose&address_street=123%2C+any+street&business=seller%40paypalsandbox.com&receiver_email=seller%40paypalsandbox.com&receiver_id=TESTSELLERID1&residence_country=US&item_name=something&item_number=AK-1234&quantity=1&shipping=3.04&tax=2.02&mc_currency=USD&mc_fee=0.44&mc_gross=12.34&mc_gross_1=9.34&txn_type=web_accept&txn_id=168161944&notify_version=2.1&custom=xyz123&charset=windows-1252&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AiDQdSQlWgandPafaHfLyF8oqvxy
+cmd=_notify-validate&address_state=CA&quantity=1&txn_id=412577516&last_name=Smith&mc_currency=USD&payer_status=verified&address_status=confirmed&tax=2.02&invoice=abc1234&shipping=3.04&address_street=123%2C+any+street&payer_email=buyer%40paypalsandbox.com&mc_gross1=9.34&item_name=something&first_name=John&business=seller%40paypalsandbox.com&verify_sign=Amg6IbBhoWJKr8kse4uOHb9jn02XA-ysmE.No2VnDuMQSdHCNtd7vYj9&payer_id=TESTBUYERID01&payment_date=11%3A30%3A05+29+Mar+2013+PDT&address_country=United+States&payment_status=Completed&receiver_email=seller%40paypalsandbox.com&payment_type=instant&address_zip=95131&address_city=San+Jose&mc_gross=12.34&mc_fee=0.44&residence_country=US&address_country_code=US¬ify_version=2.1&receiver_id=seller%40paypalsandbox.com&txn_type=web_accept&custom=xyz123&item_number=AK-1234&address_name=John+Smith&test_ipn=1
 
-POST VARIABLES:
+POST VARIABLES: 
 ---------------
 
-test_ipn = 1
-payment_type = instant
-payment_date = 12:44:16 Aug 16, 2012 PDT
-payment_status = Completed
-address_status = confirmed
-payer_status = verified
-first_name = John
-last_name = Smith
-payer_email = buyer@paypalsandbox.com
-payer_id = TESTBUYERID01
-address_name = John Smith
-address_country = United States
-address_country_code = US
-address_zip = 95131
 address_state = CA
-address_city = San Jose
-address_street = 123, any street
-business = seller@paypalsandbox.com
-receiver_email = seller@paypalsandbox.com
-receiver_id = TESTSELLERID1
-residence_country = US
-item_name = something
-item_number = AK-1234
 quantity = 1
-shipping = 3.04
-tax = 2.02
+txn_id = 412577516
+last_name = Smith
 mc_currency = USD
-mc_fee = 0.44
+payer_status = verified
+address_status = confirmed
+tax = 2.02
+invoice = abc1234
+shipping = 3.04
+address_street = 123, any street
+payer_email = buyer@paypalsandbox.com
+mc_gross1 = 9.34
+item_name = something
+first_name = John
+business = seller@paypalsandbox.com
+verify_sign = Amg6IbBhoWJKr8kse4uOHb9jn02XA-ysmE.No2VnDuMQSdHCNtd7vYj9
+payer_id = TESTBUYERID01
+payment_date = 11:30:05 29 Mar 2013 PDT
+address_country = United States
+payment_status = Completed
+receiver_email = seller@paypalsandbox.com
+payment_type = instant
+address_zip = 95131
+address_city = San Jose
 mc_gross = 12.34
-mc_gross_1 = 9.34
-txn_type = web_accept
-txn_id = 168161944
+mc_fee = 0.44
+residence_country = US
+address_country_code = US
 notify_version = 2.1
+receiver_id = seller@paypalsandbox.com
+txn_type = web_accept
 custom = xyz123
-charset = windows-1252
-verify_sign = An5ns1Kso7MWUdW4ErQKJJJ4qi4-AiDQdSQlWgandPafaHfLyF8oqvxy
+item_number = AK-1234
+address_name = John Smith
+test_ipn = 1
 ```
 You can switch between sandbox or production mode. You do this by calling ``setMode($mode)`` on the listener component. Valid values for ``$mode`` are ``sandbox`` or ``production``. This will set where the request is made too (PayPals sandbox server or production server). Internally this calls the ``setHost()`` method of the request component.
 
@@ -157,8 +156,6 @@ By default the mode is set to ``production`` (this is done in the listener / req
 To create a custom request component you **must** extend ``PayPal\Ipn\Request`` as this has the base methods and properties that the listener component is dependent on.  There is only 1 abstract method that needs to be implemented: ``send()``. This is the method that makes the request to PayPal.
 
 ```php
-<?php 
-
 namespace PayPal\Ipn\Request;
 
 use PayPal\Ipn\Request as IpnRequest;
@@ -177,8 +174,6 @@ class CustomRequest extends IpnRequest
 To create a custom response component you **should** extend ``PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``statusCode`` or ``body`` must set the respective protected properties.
 
 ```php
-<?php 
-
 namespace PayPal\Ipn\Response;
 
 use PayPal\Ipn\Response as IpnResponse;
@@ -212,8 +207,6 @@ Using your custom request component is as simple as
 3. pass to the constructor of the listener component
 
 ```php
-<?php
-
 $request = new PayPal\Ipn\Request\CustomRequest();
 
 $request->someCustomMethod();
@@ -232,8 +225,6 @@ Using your custom response component is as simple as
 3. pass to the constructor of the request component
 
 ```php
-<?php
-
 $response = new PayPal\Ipn\Response\CustomResponse();
 
 $response->someCustomMethod();
@@ -254,8 +245,6 @@ $listener = new PayPal\Ipn\Listener($request);
 By default the data in the ``$_POST`` array will be used to verify the IPN. In some situations you may not have access to ``$_POST`` (some frameworks unset this and use custom accessors). To get around this you can pass an array of data to the constructor of the request component:
 
 ```php
-<?php
-
 $data = array(
 	//...
 );
@@ -264,3 +253,10 @@ $request = new PayPal\Ipn\Request\Curl($data);
 
 ...
 ```
+
+#####Testing The Listener
+
+PayPal provide an Instant Payment Notification (IPN) simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
+
+The simulator only tells you if the IPN was sent successfully. To get more information about the status of the IPN (what data was sent, what response it got etc.) you need to record this somewhere (use the listener components ``getStatus()`` method and write to file somewhere etc).
+
