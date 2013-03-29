@@ -2,7 +2,7 @@
 
 namespace PayPal\Ipn;
 
-use PayPal\Ipn\Exception;
+use PayPal\Ipn\Exception\UnexpectedResponseBodyException;
 
 class Listener
 {
@@ -59,7 +59,7 @@ class Listener
 
         //make sure 200 response received
         if ($responseStatus != 200) {
-            throw new Exception\UnexpectedResponseStatusException(sprintf('Unexpected response status: %s received',  $responseStatus));
+            throw new UnexpectedResponseStatusException(sprintf('Unexpected response status: %s received',  $responseStatus));
         }
 
         //check the response body
@@ -68,7 +68,7 @@ class Listener
         } elseif (strpos($responseBody, 'INVALID') !== false) {
             return false;
         } else {
-            throw new Exception\UnexpectedResponseBodyException('Unexpected response body received');
+            throw new UnexpectedResponseBodyException('Unexpected response body received');
         }
     }
 

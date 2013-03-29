@@ -2,9 +2,11 @@
 
 namespace PayPal\Ipn\Request;
 
-use PayPal\Ipn\Exception;
+use PayPal\Ipn\Request as IpnRequest;
+use PayPal\Ipn\Exception\SocketRequestException;
+use Exception;
 
-class Socket extends \PayPal\Ipn\Request
+class Socket extends IpnRequest
 {
     /**
      * Sends the request to PayPal
@@ -19,8 +21,8 @@ class Socket extends \PayPal\Ipn\Request
         try {
             $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
         }
-        catch (\Exception $e) { 
-            throw new Exception\SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
+        catch (Exception $e) {
+            throw new SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
         }
 
         $headers = "POST /cgi-bin/webscr HTTP/1.1\r\n";

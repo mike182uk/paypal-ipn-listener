@@ -1,6 +1,6 @@
 <?php
 
-use \PayPal\Ipn\Request as Request;
+use PayPal\Ipn\Request\Socket as SocketRequest;
 
 class SocketRequestTest extends PHPUnit_Framework_TestCase
 {
@@ -8,12 +8,12 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->socketRequestObj = new Request\Socket();
+        $this->socketRequestObj = new SocketRequest();
     }
 
     public function testExtendsRequestObject()
     {
-        $this->assertInstanceOf('\PayPal\Ipn\Request', $this->socketRequestObj);
+        $this->assertInstanceOf('PayPal\Ipn\Request', $this->socketRequestObj);
     }
 
     public function testGetRequestUri()
@@ -25,10 +25,10 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
 
     public function testExceptionIsThrownOnSocketError()
     {
-        $this->setExpectedException('\PayPal\Ipn\Exception\SocketRequestException');
+        $this->setExpectedException('PayPal\Ipn\Exception\SocketRequestException');
 
         $mockCurlRequest = new MockSocketRequest();
-        
+
         $mockCurlRequest->send();
     }
 
@@ -40,7 +40,7 @@ class SocketRequestTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class MockSocketRequest extends \PayPal\Ipn\Request\Socket
+class MockSocketRequest extends SocketRequest
 {
     public function getRequestUri()
     {

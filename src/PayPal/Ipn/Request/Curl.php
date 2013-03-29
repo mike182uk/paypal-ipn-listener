@@ -2,9 +2,10 @@
 
 namespace PayPal\Ipn\Request;
 
-use PayPal\Ipn\Exception;
+use PayPal\Ipn\Request as IpnRequest;
+use PayPal\Ipn\Exception\CurlRequestException;
 
-class Curl extends \PayPal\Ipn\Request
+class Curl extends IpnRequest
 {
     /**
      * Should cURL follow location headers in the response
@@ -28,7 +29,7 @@ class Curl extends \PayPal\Ipn\Request
     public function __construct()
     {
         if (!function_exists('curl_version')) {
-            throw new Exception\CurlRequestException('cURL extension is either not enabled or not installed');
+            throw new CurlRequestException('cURL extension is either not enabled or not installed');
         }
 
         parent::__construct();
@@ -89,7 +90,7 @@ class Curl extends \PayPal\Ipn\Request
         if ($responseBody === false or $responseStatus == '0') {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            throw new Exception\CurlRequestException('cURL error: [' . $errno . '] ' . $error);
+            throw new CurlRequestException('cURL error: [' . $errno . '] ' . $error);
         }
     }
 }

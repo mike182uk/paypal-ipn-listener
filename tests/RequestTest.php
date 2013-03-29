@@ -1,5 +1,8 @@
 <?php
 
+use PayPal\Ipn\Request;
+use PayPal\Ipn\Response;
+
 class RequestTest extends PHPUnit_Framework_TestCase
 {
     protected $mockRequestObj;
@@ -15,18 +18,18 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
         $this->mockRequestObj->setHost($host);
 
-        $this->assertEquals(\PayPal\Ipn\Request::SANDBOX_HOST, $this->mockRequestObj->getHost());
+        $this->assertEquals(PayPal\Ipn\Request::SANDBOX_HOST, $this->mockRequestObj->getHost());
     }
 
     public function testDefaultHostGetsSet()
     {
         //test if no mode is passed
         $this->mockRequestObj->setHost();
-        $this->assertEquals(\PayPal\Ipn\Request::PRODUCTION_HOST, $this->mockRequestObj->getHost());
+        $this->assertEquals(PayPal\Ipn\Request::PRODUCTION_HOST, $this->mockRequestObj->getHost());
 
         //test if invalid mode is passed
         $this->mockRequestObj->setHost('invalid-mode');
-        $this->assertEquals(\PayPal\Ipn\Request::SANDBOX_HOST, $this->mockRequestObj->getHost());
+        $this->assertEquals(PayPal\Ipn\Request::SANDBOX_HOST, $this->mockRequestObj->getHost());
     }
 
     public function testSetAndGetData()
@@ -84,7 +87,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
     public function testGetResponse()
     {
-        $this->assertInstanceOf('\PayPal\Ipn\Response', $this->mockRequestObj->getResponse());
+        $this->assertInstanceOf('PayPal\Ipn\Response', $this->mockRequestObj->getResponse());
     }
 
     public function testConstructorDefaults()
@@ -95,7 +98,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
         $req = new MockRequest();
 
-        $this->assertInstanceOf('\PayPal\Ipn\Response', $req->getResponse());
+        $this->assertInstanceOf('PayPal\Ipn\Response', $req->getResponse());
         $this->assertSame($_POST, $req->getData());
     }
 
@@ -111,7 +114,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class MockRequest extends \PayPal\Ipn\Request
+class MockRequest extends Request
 {
 
     public function getTimeoutValue()
@@ -127,7 +130,7 @@ class MockRequest extends \PayPal\Ipn\Request
     public function send() { }
 }
 
-class MockResponse extends \PayPal\Ipn\Response
+class MockResponse extends Response
 {
 
 }
