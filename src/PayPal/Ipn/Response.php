@@ -2,7 +2,7 @@
 
 namespace PayPal\Ipn;
 
-abstract class Response
+class Response
 {
     /**
      * The response body
@@ -16,7 +16,7 @@ abstract class Response
      *
      * @var int
      */
-    protected $status;
+    protected $statusCode;
 
     /**
      * Sets the response body
@@ -29,13 +29,13 @@ abstract class Response
     }
 
     /**
-     * Sets the response HTTP status
+     * Sets the response HTTP status code
      *
      * @param int $status
      */
-    public function setStatus($status)
+    public function setStatusCode($statusCode)
     {
-        $this->status = (int) $status;
+        $this->statusCode = (int) $statusCode;
     }
 
     /**
@@ -49,12 +49,12 @@ abstract class Response
     }
 
     /**
-     * Get the response status
+     * Get the response status code
      *
      * @return int|string
      */
-    public function getStatus()
+    public function getStatusCode()
     {
-        return $this->status;
+        return $this->statusCode;
     }
 }

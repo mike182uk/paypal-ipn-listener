@@ -2,7 +2,8 @@
 
 namespace PayPal\Ipn;
 
-use PayPal\Ipn\Exception;
+use PayPal\Ipn\Exception\UnexpectedResponseBodyException;
+use PayPal\Ipn\Exception\UnexpectedResponseStatusException;
 
 class Listener
 {
@@ -11,7 +12,7 @@ class Listener
      *
      * @var object
      */
-    private $request;
+    protected $request;
 
     /**
      * Create a new instance
@@ -44,31 +45,31 @@ class Listener
      */
     public function verifyIpn()
     {
-        //cache the request object
+        // cache the request object
         $request =& $this->request;
 
-        //send the request
+        // send the request
         $request->send();
 
-        //cache response object
+        // cache response object
         $response = $request->getResponse();
 
-        //cache response values
-        $responseStatus = $response->getStatus();
+        // cache response values
+        $responseStatus = $response->getStatusCode();
         $responseBody = $response->getBody();
 
-        //make sure 200 response received
+        // make sure 200 response received
         if ($responseStatus != 200) {
-            throw new Exception\UnexpectedResponseStatusException(sprintf('Unexpected response status: %s received',  $responseStatus));
+            throw new UnexpectedResponseStatusException(sprintf('Unexpected response status: %d received',  $responseStatus));
         }
 
-        //check the response body
+        // check the response body
         if (strpos($responseBody, 'VERIFIED') !== false) {
             return true;
         } elseif (strpos($responseBody, 'INVALID') !== false) {
             return false;
         } else {
-            throw new Exception\UnexpectedResponseBodyException('Unexpected response body received');
+            throw new UnexpectedResponseBodyException('Unexpected response body received');
         }
     }
 
@@ -77,10 +78,12 @@ class Listener
      *
      * @return string
      */
-    public function getStatusReport()
+    public function getReport()
     {
-        //output
+        // output
         $output = '';
+
+        // helpers
         $dashLine = function($length = 80) {
             $l = '';
             for ($i = 0; $i < $length; $i++) { $l .= '-'; }
@@ -92,30 +95,30 @@ class Listener
             $output .= $data . $linebreak;
         };
 
-        //data
+        // cache request + response objects
         $request = $this->request;
         $response = $request->getResponse();
 
-        //generate status report
+        // generate report
         $newline($dashLine());
         $newline('[' . date('d/m/Y H:i:s') . '] - ' . $request->getRequestUri());
         $newline($dashLine() . $linebreak);
 
         $newline('RESPONSE STATUS: ');
         $newline($dashLine(16) . $linebreak);
-        $newline($response->getStatus() . $linebreak);
+        $newline($response->getStatusCode() . $linebreak);
 
         $newline('RESPONSE BODY: ');
         $newline($dashLine(14) . $linebreak);
 
         $newline($response->getBody() . $linebreak);
 
-        $newline('POST: ');
-        $newline($dashLine(5) . $linebreak);
+        $newline('RAW POST: ');
+        $newline($dashLine(9) . $linebreak);
 
         $newline($request->getEncodedData() . $linebreak);
 
-        $newline('USER POST VARS: ');
+        $newline('POST VARIABLES: ');
         $newline($dashLine(15) . $linebreak);
 
         foreach ($request->getData() as $k => $v) {

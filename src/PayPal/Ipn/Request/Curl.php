@@ -2,19 +2,20 @@
 
 namespace PayPal\Ipn\Request;
 
-use PayPal\Ipn\Exception;
+use PayPal\Ipn\Request as IpnRequest;
+use PayPal\Ipn\Exception\CurlRequestException;
 
-class Curl extends \PayPal\Ipn\Request
+class Curl extends IpnRequest
 {
     /**
-     * Should cURL follow location headers in the response
+     * Should curl follow location headers in the response
      *
      * @var bool
      */
     protected $followLocation;
 
     /**
-     * Should cURL use SSL version 3
+     * Should curl use SSL version 3
      *
      * @var bool
      */
@@ -23,12 +24,12 @@ class Curl extends \PayPal\Ipn\Request
     /**
      * Create a new instance
      *
-     * @throws CurlException
+     * @throws CurlRequestException
      */
     public function __construct()
     {
         if (!function_exists('curl_version')) {
-            throw new Exception\CurlRequestException('cURL extension is either not enabled or not installed');
+            throw new CurlRequestException('Curl extension is either not enabled or not installed');
         }
 
         parent::__construct();
@@ -84,12 +85,12 @@ class Curl extends \PayPal\Ipn\Request
         $responseStatus = strval(curl_getinfo($ch, CURLINFO_HTTP_CODE));
 
         $this->response->setBody($responseBody);
-        $this->response->setStatus($responseStatus);
+        $this->response->setStatusCode($responseStatus);
 
         if ($responseBody === false or $responseStatus == '0') {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            throw new Exception\CurlRequestException('cURL error: [' . $errno . '] ' . $error);
+            throw new CurlRequestException(sprintf('cURL error: [%d] %s', $errno, $error));
         }
     }
 }

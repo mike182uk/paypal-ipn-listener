@@ -1,39 +1,40 @@
 <?php
 
-use \PayPal\Ipn\Request as Request;
+use PayPal\Ipn\Request;
+use PayPal\Ipn\Request\Curl as CurlRequest;
 
 class CurlRequestTest extends PHPUnit_Framework_TestCase
 {
-    protected $curlRequestObj;
+    protected $request;
 
     public function setUp()
     {
-        $this->curlRequestObj = new Request\Curl();
+        $this->request = new CurlRequest();
     }
 
     public function testExtendsRequestObject()
     {
-        $this->assertInstanceOf('\PayPal\Ipn\Request', $this->curlRequestObj);
+        $this->assertInstanceOf('PayPal\Ipn\Request', $this->request);
     }
 
     public function testExceptionIsThrownOnCurlError()
     {
-    	$this->setExpectedException('\PayPal\Ipn\Exception\CurlRequestException');
+    	$this->setExpectedException('PayPal\Ipn\Exception\CurlRequestException');
 
     	$mockCurlRequest = new MockCurlRequest();
-    	
+
     	$mockCurlRequest->send();
     }
 
     public function testSend()
     {
-    	$this->curlRequestObj->send();
+    	$this->request->send();
 
-    	$this->assertEquals(200, $this->curlRequestObj->getResponse()->getStatus());
+    	$this->assertEquals(200, $this->request->getResponse()->getStatusCode());
     }
 }
 
-class MockCurlRequest extends \PayPal\Ipn\Request\Curl
+class MockCurlRequest extends CurlRequest
 {
     public function getRequestUri()
     {

@@ -1,46 +1,46 @@
 <?php
 
-use \PayPal\Ipn\Request as Request;
+use PayPal\Ipn\Request\Socket as SocketRequest;
 
 class SocketRequestTest extends PHPUnit_Framework_TestCase
 {
-    protected $socketRequestObj;
+    protected $request;
 
     public function setUp()
     {
-        $this->socketRequestObj = new Request\Socket();
+        $this->request = new SocketRequest();
     }
 
     public function testExtendsRequestObject()
     {
-        $this->assertInstanceOf('\PayPal\Ipn\Request', $this->socketRequestObj);
+        $this->assertInstanceOf('PayPal\Ipn\Request', $this->request);
     }
 
     public function testGetRequestUri()
     {
-        $uri = $this->socketRequestObj->getRequestUri();
+        $uri = $this->request->getRequestUri();
         $isValidUri = (filter_var($uri, FILTER_VALIDATE_URL)) ? true : false;
         $this->assertTrue($isValidUri);
     }
 
     public function testExceptionIsThrownOnSocketError()
     {
-        $this->setExpectedException('\PayPal\Ipn\Exception\SocketRequestException');
+        $this->setExpectedException('PayPal\Ipn\Exception\SocketRequestException');
 
         $mockCurlRequest = new MockSocketRequest();
-        
+
         $mockCurlRequest->send();
     }
 
     public function testSend()
     {
-        $this->socketRequestObj->send();
+        $this->request->send();
 
-        $this->assertEquals(200, $this->socketRequestObj->getResponse()->getStatus());
+        $this->assertEquals(200, $this->request->getResponse()->getStatusCode());
     }
 }
 
-class MockSocketRequest extends \PayPal\Ipn\Request\Socket
+class MockSocketRequest extends SocketRequest
 {
     public function getRequestUri()
     {
