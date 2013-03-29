@@ -106,7 +106,7 @@ class Listener
 
         $newline('RESPONSE STATUS: ');
         $newline($dashLine(16) . $linebreak);
-        $newline($response->getStatus() . $linebreak);
+        $newline($response->getStatusCode() . $linebreak);
 
         $newline('RESPONSE BODY: ');
         $newline($dashLine(14) . $linebreak);
