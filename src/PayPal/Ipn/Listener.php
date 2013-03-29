@@ -77,7 +77,7 @@ class Listener
      *
      * @return string
      */
-    public function getStatusReport()
+    public function getReport()
     {
         //output
         $output = '';
