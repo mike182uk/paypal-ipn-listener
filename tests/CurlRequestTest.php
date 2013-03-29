@@ -5,16 +5,16 @@ use PayPal\Ipn\Request\Curl as CurlRequest;
 
 class CurlRequestTest extends PHPUnit_Framework_TestCase
 {
-    protected $curlRequestObj;
+    protected $request;
 
     public function setUp()
     {
-        $this->curlRequestObj = new CurlRequest();
+        $this->request = new CurlRequest();
     }
 
     public function testExtendsRequestObject()
     {
-        $this->assertInstanceOf('PayPal\Ipn\Request', $this->curlRequestObj);
+        $this->assertInstanceOf('PayPal\Ipn\Request', $this->request);
     }
 
     public function testExceptionIsThrownOnCurlError()
@@ -28,9 +28,9 @@ class CurlRequestTest extends PHPUnit_Framework_TestCase
 
     public function testSend()
     {
-    	$this->curlRequestObj->send();
+    	$this->request->send();
 
-    	$this->assertEquals(200, $this->curlRequestObj->getResponse()->getStatus());
+    	$this->assertEquals(200, $this->request->getResponse()->getStatusCode());
     }
 }
 

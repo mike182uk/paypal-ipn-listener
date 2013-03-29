@@ -48,7 +48,7 @@ class Socket extends IpnRequest
         fclose($fp);
 
         $this->response->setBody($responseBody);
-        $this->response->setStatus($responseStatus);
+        $this->response->setStatusCode($responseStatus);
     }
 
     /**

@@ -1,36 +1,36 @@
 <?php
 
-use PayPal\Ipn\Response;
+use PayPal\Ipn\Response as IpnResponse;
 
 class ResponseTest extends PHPUnit_Framework_TestCase
 {
-    protected $standardRespObj;
+    protected $response;
 
     public function setUp()
     {
-        $this->standardRespObj = new Response();
+        $this->response = new IpnResponse();
     }
 
     public function testExtendsResponseObject()
     {
-        $this->assertInstanceOf('PayPal\Ipn\Response', $this->standardRespObj);
+        $this->assertInstanceOf('PayPal\Ipn\Response', $this->response);
     }
 
     public function testGetAndSetBody()
     {
         $content = 'TEST BODY CONTENT';
 
-        $this->standardRespObj->setBody($content);
+        $this->response->setBody($content);
 
-        $this->assertEquals($content, $this->standardRespObj->getBody());
+        $this->assertEquals($content, $this->response->getBody());
     }
 
-    public function testGetAndSetStatus()
+    public function testGetAndSetStatusCode()
     {
         $content = 200;
 
-        $this->standardRespObj->setStatus($content);
+        $this->response->setStatusCode($content);
 
-        $this->assertEquals($content, $this->standardRespObj->getStatus());
+        $this->assertEquals($content, $this->response->getStatusCode());
     }
 }

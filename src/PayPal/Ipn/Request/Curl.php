@@ -85,7 +85,7 @@ class Curl extends IpnRequest
         $responseStatus = strval(curl_getinfo($ch, CURLINFO_HTTP_CODE));
 
         $this->response->setBody($responseBody);
-        $this->response->setStatus($responseStatus);
+        $this->response->setStatusCode($responseStatus);
 
         if ($responseBody === false or $responseStatus == '0') {
             $errno = curl_errno($ch);
