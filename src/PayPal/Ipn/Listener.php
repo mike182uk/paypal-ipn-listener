@@ -12,7 +12,7 @@ class Listener
      *
      * @var object
      */
-    private $request;
+    protected $request;
 
     /**
      * Create a new instance
