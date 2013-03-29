@@ -3,6 +3,7 @@
 namespace PayPal\Ipn;
 
 use PayPal\Ipn\Exception\UnexpectedResponseBodyException;
+use PayPal\Ipn\Exception\UnexpectedResponseStatusException;
 
 class Listener
 {
@@ -44,25 +45,25 @@ class Listener
      */
     public function verifyIpn()
     {
-        //cache the request object
+        // cache the request object
         $request =& $this->request;
 
-        //send the request
+        // send the request
         $request->send();
 
-        //cache response object
+        // cache response object
         $response = $request->getResponse();
 
-        //cache response values
+        // cache response values
         $responseStatus = $response->getStatus();
         $responseBody = $response->getBody();
 
-        //make sure 200 response received
+        // make sure 200 response received
         if ($responseStatus != 200) {
             throw new UnexpectedResponseStatusException(sprintf('Unexpected response status: %d received',  $responseStatus));
         }
 
-        //check the response body
+        // check the response body
         if (strpos($responseBody, 'VERIFIED') !== false) {
             return true;
         } elseif (strpos($responseBody, 'INVALID') !== false) {
@@ -79,8 +80,10 @@ class Listener
      */
     public function getReport()
     {
-        //output
+        // output
         $output = '';
+
+        // helpers
         $dashLine = function($length = 80) {
             $l = '';
             for ($i = 0; $i < $length; $i++) { $l .= '-'; }
@@ -92,11 +95,11 @@ class Listener
             $output .= $data . $linebreak;
         };
 
-        //data
+        // cache request + response objects
         $request = $this->request;
         $response = $request->getResponse();
 
-        //generate status report
+        // generate report
         $newline($dashLine());
         $newline('[' . date('d/m/Y H:i:s') . '] - ' . $request->getRequestUri());
         $newline($dashLine() . $linebreak);
@@ -110,12 +113,12 @@ class Listener
 
         $newline($response->getBody() . $linebreak);
 
-        $newline('POST: ');
-        $newline($dashLine(5) . $linebreak);
+        $newline('RAW POST: ');
+        $newline($dashLine(9) . $linebreak);
 
         $newline($request->getEncodedData() . $linebreak);
 
-        $newline('USER POST VARS: ');
+        $newline('POST VARIABLES: ');
         $newline($dashLine(15) . $linebreak);
 
         foreach ($request->getData() as $k => $v) {
