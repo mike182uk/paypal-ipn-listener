@@ -6,9 +6,7 @@ A PayPal IPN (Instant Payment Notification) listener for PHP >=5.3.0. If you are
 
 - Flexible, extensible, component based architecture
 - Easily switch between sandbox and production mode
-- Generate useful status reports (request & response)
-- Namespaced, framework independent, PSR-0, PSR-2
-- Unit tested with PHPUnit
+- Generate useful reports (request & response)
 
 ###Prerequisites
 
@@ -26,18 +24,18 @@ This package is built out of a few components that work together:
 2. ``Request`` - Communicates with PayPal
 3. ``Response`` - Handles response from PayPal
 
-The request and response components are swappable. If you have a certain way you need to implement the request, or handle the response you can do this by extending the base classes: ``\PayPal\Ipn\Request`` and ``\PayPal\Ipn\Response``.
+The request and response components are swappable. If you have a certain way you need to implement the request, or handle the response you can do this by extending the base classes: ``PayPal\Ipn\Request`` and ``PayPal\Ipn\Response``.
 
-Both of these classes are abstract and must be extended.
+``PayPal\Ipn\Request`` is abstract and must be extended.
 
 By default 2 request components are provided:
 
-1. ``\PayPal\Ipn\Request\Curl`` - sends the request to PayPal via Curl
-2. ``\PayPal\Ipn\Request\Socket`` - sends the request to PayPal via sockets (fsock)
+1. ``PayPal\Ipn\Request\Curl`` - sends the request to PayPal via Curl
+2. ``PayPal\Ipn\Request\Socket`` - sends the request to PayPal via sockets (fsock)
 
 1 response component is provided:
 
-1. ``\PayPal\Ipn\Response\Standard`` - saves the HTTP status and body from the response from PayPal
+1. ``PayPal\Ipn\Response`` - saves the HTTP status and body from the response from PayPal
 
 ###Workflow
 
@@ -46,23 +44,23 @@ By default 2 request components are provided:
 3. Create an instance of the listener component and pass it the request component in its constructor.
 4. Configure any properties required on the listener component (set mode etc.)
 5. Get the listener component to verify the IPN by calling the ``verifyIpn()`` method. If the IPN is verified this method will return true, otherwise it will return false. This should be done in a try catch block as the listener or request components may throw exceptions.
-6. You can use the method ``getStatusReport()`` to get the details of the request and the response.
+6. You can use the method ``getReport()`` to get the details of the request and the response.
 
 ```php
 <?php
 
-$request = new \PayPal\Ipn\Request\Curl();
+$request = new PayPal\Ipn\Request\Curl();
 
 $request->secure(true); //dont need to do this as its done by default, just demonstrating configuring the request component
 
-$listener = new \PayPal\Ipn\Listener($request);
+$listener = new PayPal\Ipn\Listener($request);
 
 $listener->setMode('sandbox');
 
 try {
 	$status = $listener->verifyIpn();
 }
-catch (\Exception $e) {
+catch (Exception $e) {
     $error = $e->getMessage();
 }
 
@@ -105,12 +103,12 @@ Content-Type: text/html; charset=UTF-8
 
 VERIFIED
 
-POST:
------
+RAW POST:
+---------
 
 cmd=_notify-validate&test_ipn=1&payment_type=instant&payment_date=12%3A44%3A16+Aug+16%2C+2012+PDT&payment_status=Completed&address_status=confirmed&payer_status=verified&first_name=John&last_name=Smith&payer_email=buyer%40paypalsandbox.com&payer_id=TESTBUYERID01&address_name=John+Smith&address_country=United+States&address_country_code=US&address_zip=95131&address_state=CA&address_city=San+Jose&address_street=123%2C+any+street&business=seller%40paypalsandbox.com&receiver_email=seller%40paypalsandbox.com&receiver_id=TESTSELLERID1&residence_country=US&item_name=something&item_number=AK-1234&quantity=1&shipping=3.04&tax=2.02&mc_currency=USD&mc_fee=0.44&mc_gross=12.34&mc_gross_1=9.34&txn_type=web_accept&txn_id=168161944&notify_version=2.1&custom=xyz123&charset=windows-1252&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AiDQdSQlWgandPafaHfLyF8oqvxy
 
-USER POST VARS:
+POST VARIABLES:
 ---------------
 
 test_ipn = 1
@@ -156,12 +154,16 @@ By default the mode is set to ``production`` (this is done in the listener / req
 
 ###Creating Custom Request Components
 
-To create a custom request component you **must** extend ``\PayPal\Ipn\Request`` as this has the base methods and properties that the listener component is dependent on.  There is only 1 abstract method that needs to be implemented: ``send()``. This is the method that makes the request to PayPal.
+To create a custom request component you **must** extend ``PayPal\Ipn\Request`` as this has the base methods and properties that the listener component is dependent on.  There is only 1 abstract method that needs to be implemented: ``send()``. This is the method that makes the request to PayPal.
 
 ```php
-<?php namespace PayPal\Ipn\Request;
+<?php 
 
-class CustomRequest extends \PayPal\Ipn\Request
+namespace PayPal\Ipn\Request;
+
+use PayPal\Ipn\Request as IpnRequest;
+
+class CustomRequest extends IpnRequest
 {
 	public function send()
 	{
@@ -172,12 +174,16 @@ class CustomRequest extends \PayPal\Ipn\Request
 
 ###Creating Custom Response Components
 
-To create a custom response component you **must** extend ``\PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``status`` or ``body`` must set the respective protected properties.
+To create a custom response component you **should** extend ``PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``statusCode`` or ``body`` must set the respective protected properties.
 
 ```php
-<?php namespace PayPal\Ipn\Response;
+<?php 
 
-class CustomResponse extends \PayPal\Ipn\Response
+namespace PayPal\Ipn\Response;
+
+use PayPal\Ipn\Response as IpnResponse;
+
+class CustomResponse extends IpnResponse
 {
 	public function setBody($body)
 	{
@@ -186,9 +192,9 @@ class CustomResponse extends \PayPal\Ipn\Response
 		//do something else
 	}
 
-	public function setStatus($status)
+	public function setStatusCode($statusCode)
 	{
-		$this->status = $status;
+		$this->statusCode = $statusCode;
 
 		//do something else
 	}
@@ -208,11 +214,11 @@ Using your custom request component is as simple as
 ```php
 <?php
 
-$request = new \PayPal\Ipn\Request\CustomRequest();
+$request = new PayPal\Ipn\Request\CustomRequest();
 
 $request->someCustomMethod();
 
-$listener = new \PayPal\Ipn\Listener($request);
+$listener = new PayPal\Ipn\Listener($request);
 
 ...
 ```
@@ -228,13 +234,13 @@ Using your custom response component is as simple as
 ```php
 <?php
 
-$response = new \PayPal\Ipn\Response\CustomResponse();
+$response = new PayPal\Ipn\Response\CustomResponse();
 
 $response->someCustomMethod();
 
-$request = new \PayPal\Ipn\Request\CustomRequest(false, $response);
+$request = new PayPal\Ipn\Request\CustomRequest(false, $response);
 
-$listener = new \PayPal\Ipn\Listener($request);
+$listener = new PayPal\Ipn\Listener($request);
 
 ...
 ```
@@ -245,7 +251,7 @@ $listener = new \PayPal\Ipn\Listener($request);
 
 #####Data Source
 
-By default the data in the ``$_POST`` array will be used to verify the IPN. In some situations you may not have access to ``$_POST`` (some frameworks unset this and use custom accessors). To get around this you can pass an array of data to the constructor of the request component
+By default the data in the ``$_POST`` array will be used to verify the IPN. In some situations you may not have access to ``$_POST`` (some frameworks unset this and use custom accessors). To get around this you can pass an array of data to the constructor of the request component:
 
 ```php
 <?php
@@ -254,7 +260,7 @@ $data = array(
 	//...
 );
 
-$request = new \PayPal\Ipn\Request\Curl($data);
+$request = new PayPal\Ipn\Request\Curl($data);
 
 ...
 ```
