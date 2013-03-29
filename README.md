@@ -51,16 +51,16 @@ By default 2 request components are provided:
 ```php
 <?php
 
-$request = new \PayPal\Ipn\Request\Curl(); 
+$request = new \PayPal\Ipn\Request\Curl();
 
-$request->useSSL(true); //dont need to do this as its done by default, just demonstrating configuring the request component
+$request->secure(true); //dont need to do this as its done by default, just demonstrating configuring the request component
 
 $listener = new \PayPal\Ipn\Listener($request);
 
 $listener->setMode('sandbox');
 
 try {
-	$status = $listener->verifyIpn();	
+	$status = $listener->verifyIpn();
 }
 catch (\Exception $e) {
     $error = $e->getMessage();
@@ -82,12 +82,12 @@ A standard status report will look like:
 [16/08/2012 12:45:18] - https://www.sandbox.paypal.com/cgi-bin/webscr
 --------------------------------------------------------------------------------
 
-RESPONSE STATUS: 
+RESPONSE STATUS:
 ----------------
 
 200
 
-RESPONSE BODY: 
+RESPONSE BODY:
 --------------
 
 HTTP/1.1 200 OK
@@ -105,12 +105,12 @@ Content-Type: text/html; charset=UTF-8
 
 VERIFIED
 
-POST: 
+POST:
 -----
 
 cmd=_notify-validate&test_ipn=1&payment_type=instant&payment_date=12%3A44%3A16+Aug+16%2C+2012+PDT&payment_status=Completed&address_status=confirmed&payer_status=verified&first_name=John&last_name=Smith&payer_email=buyer%40paypalsandbox.com&payer_id=TESTBUYERID01&address_name=John+Smith&address_country=United+States&address_country_code=US&address_zip=95131&address_state=CA&address_city=San+Jose&address_street=123%2C+any+street&business=seller%40paypalsandbox.com&receiver_email=seller%40paypalsandbox.com&receiver_id=TESTSELLERID1&residence_country=US&item_name=something&item_number=AK-1234&quantity=1&shipping=3.04&tax=2.02&mc_currency=USD&mc_fee=0.44&mc_gross=12.34&mc_gross_1=9.34&txn_type=web_accept&txn_id=168161944&notify_version=2.1&custom=xyz123&charset=windows-1252&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AiDQdSQlWgandPafaHfLyF8oqvxy
 
-USER POST VARS: 
+USER POST VARS:
 ---------------
 
 test_ipn = 1
@@ -172,7 +172,7 @@ class CustomRequest extends \PayPal\Ipn\Request
 
 ###Creating Custom Response Components
 
-To create a custom response component you **must** extend ``\PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``status`` or ``body`` must set the respective protected properties. 
+To create a custom response component you **must** extend ``\PayPal\Ipn\Response`` as this has the base methods and properties that the request component is dependent on.  There are no abstract methods that need to be implemented, but any custom setters for for the ``status`` or ``body`` must set the respective protected properties.
 
 ```php
 <?php namespace PayPal\Ipn\Response;
@@ -182,14 +182,14 @@ class CustomResponse extends \PayPal\Ipn\Response
 	public function setBody($body)
 	{
 		$this->body = $body;
-		
+
 		//do something else
 	}
-	
+
 	public function setStatus($status)
 	{
 		$this->status = $status;
-		
+
 		//do something else
 	}
 }
@@ -208,7 +208,7 @@ Using your custom request component is as simple as
 ```php
 <?php
 
-$request = new \PayPal\Ipn\Request\CustomRequest(); 
+$request = new \PayPal\Ipn\Request\CustomRequest();
 
 $request->someCustomMethod();
 
@@ -232,7 +232,7 @@ $response = new \PayPal\Ipn\Response\CustomResponse();
 
 $response->someCustomMethod();
 
-$request = new \PayPal\Ipn\Request\CustomRequest(false, $response); 
+$request = new \PayPal\Ipn\Request\CustomRequest(false, $response);
 
 $listener = new \PayPal\Ipn\Listener($request);
 
