@@ -55,7 +55,7 @@ class Listener
         $response = $request->getResponse();
 
         // cache response values
-        $responseStatus = $response->getStatus();
+        $responseStatus = $response->getStatusCode();
         $responseBody = $response->getBody();
 
         // make sure 200 response received
