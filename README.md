@@ -72,19 +72,19 @@ else {
 }
 ```
 
-A standard status report will look like:
+A report will look like:
 
 ```
 --------------------------------------------------------------------------------
 [29/03/2013 11:30:55] - https://www.sandbox.paypal.com/cgi-bin/webscr
 --------------------------------------------------------------------------------
 
-RESPONSE STATUS: 
+RESPONSE STATUS:
 ----------------
 
 200
 
-RESPONSE BODY: 
+RESPONSE BODY:
 --------------
 
 HTTP/1.1 200 OK
@@ -102,12 +102,12 @@ Content-Type: text/html; charset=UTF-8
 
 VERIFIED
 
-RAW POST: 
+RAW POST:
 ---------
 
 cmd=_notify-validate&address_state=CA&quantity=1&txn_id=412577516&last_name=Smith&mc_currency=USD&payer_status=verified&address_status=confirmed&tax=2.02&invoice=abc1234&shipping=3.04&address_street=123%2C+any+street&payer_email=buyer%40paypalsandbox.com&mc_gross1=9.34&item_name=something&first_name=John&business=seller%40paypalsandbox.com&verify_sign=Amg6IbBhoWJKr8kse4uOHb9jn02XA-ysmE.No2VnDuMQSdHCNtd7vYj9&payer_id=TESTBUYERID01&payment_date=11%3A30%3A05+29+Mar+2013+PDT&address_country=United+States&payment_status=Completed&receiver_email=seller%40paypalsandbox.com&payment_type=instant&address_zip=95131&address_city=San+Jose&mc_gross=12.34&mc_fee=0.44&residence_country=US&address_country_code=US¬ify_version=2.1&receiver_id=seller%40paypalsandbox.com&txn_type=web_accept&custom=xyz123&item_number=AK-1234&address_name=John+Smith&test_ipn=1
 
-POST VARIABLES: 
+POST VARIABLES:
 ---------------
 
 address_state = CA
@@ -254,7 +254,7 @@ $request = new PayPal\Ipn\Request\Curl($data);
 ...
 ```
 
-#####Testing The Listener
+#####Testing
 
 PayPal provide an Instant Payment Notification (IPN) simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
 

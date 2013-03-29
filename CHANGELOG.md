@@ -9,6 +9,6 @@
 - Added basic listener test
 - Misc refactoring + cleaning up
 
-##1.0
+##1.0.0
 
 First realease
