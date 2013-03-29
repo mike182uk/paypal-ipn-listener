@@ -59,7 +59,7 @@ class Listener
 
         //make sure 200 response received
         if ($responseStatus != 200) {
-            throw new UnexpectedResponseStatusException(sprintf('Unexpected response status: %s received',  $responseStatus));
+            throw new UnexpectedResponseStatusException(sprintf('Unexpected response status: %d received',  $responseStatus));
         }
 
         //check the response body

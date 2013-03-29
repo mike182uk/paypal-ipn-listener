@@ -8,14 +8,14 @@ use PayPal\Ipn\Exception\CurlRequestException;
 class Curl extends IpnRequest
 {
     /**
-     * Should cURL follow location headers in the response
+     * Should curl follow location headers in the response
      *
      * @var bool
      */
     protected $followLocation;
 
     /**
-     * Should cURL use SSL version 3
+     * Should curl use SSL version 3
      *
      * @var bool
      */
@@ -24,12 +24,12 @@ class Curl extends IpnRequest
     /**
      * Create a new instance
      *
-     * @throws CurlException
+     * @throws CurlRequestException
      */
     public function __construct()
     {
         if (!function_exists('curl_version')) {
-            throw new CurlRequestException('cURL extension is either not enabled or not installed');
+            throw new CurlRequestException('Curl extension is either not enabled or not installed');
         }
 
         parent::__construct();
@@ -90,7 +90,7 @@ class Curl extends IpnRequest
         if ($responseBody === false or $responseStatus == '0') {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            throw new CurlRequestException('cURL error: [' . $errno . '] ' . $error);
+            throw new CurlRequestException(sprintf('cURL error: [%d] %s', $errno, $error));
         }
     }
 }

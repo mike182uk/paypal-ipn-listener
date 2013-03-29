@@ -22,13 +22,13 @@ class Socket extends IpnRequest
             $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
         }
         catch (Exception $e) {
-            throw new SocketRequestException('fsockopen error: [' . $errno . '] ' . $error);
+            throw new SocketRequestException(sprintf('fsockopen error: [%d] %s', $errno, $error));
         }
 
         $headers = "POST /cgi-bin/webscr HTTP/1.1\r\n";
         $headers .= "Host: " . $this->getHost() . "\r\n";
         $headers .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $headers .= "Content-Length: ".strlen($this->encodedData)."\r\n";
+        $headers .= "Content-Length: " . strlen($this->encodedData) . "\r\n";
         $headers .= "Connection: Close\r\n\r\n";
 
         fputs($fp, $headers . $this->encodedData . "\r\n\r\n");
