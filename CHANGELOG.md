@@ -1,5 +1,9 @@
 #Changelog
 
+##1.1.1
+
+- add MIT license
+
 ##1.1.0
 
 - Removed ``PayPal\Ipn\Response\Standard``
