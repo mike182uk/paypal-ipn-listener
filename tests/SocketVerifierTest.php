@@ -30,5 +30,18 @@ class SocketVerifierTest extends PHPUnit_Framework_TestCase
         $verificationResponse = $verifier->sendVerificationRequest();
 
         $this->assertContains('INVALID', $verificationResponse->getBody());
+
+        $verifier = $this->getMock(
+            'PayPal\Ipn\Verifier\SocketVerifier',
+            array('getRequestUri')
+        );
+
+        $verifier->expects($this->any())
+                 ->method('getRequestUri')
+                 ->will($this->returnValue('//INVALID URI'));
+
+        $this->setExpectedException('RuntimeException');
+
+        $verificationResponse = $verifier->sendVerificationRequest();
     }
 }

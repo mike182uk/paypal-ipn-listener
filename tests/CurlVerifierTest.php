@@ -57,7 +57,19 @@ class CurlVerifierTest extends PHPUnit_Framework_TestCase
         $verifier->setEnvironment('sandbox');
 
         $verificationResponse = $verifier->sendVerificationRequest();
-
         $this->assertContains('INVALID', $verificationResponse->getBody());
+
+        $verifier = $this->getMock(
+            'PayPal\Ipn\Verifier\CurlVerifier',
+            array('getRequestUri')
+        );
+
+        $verifier->expects($this->any())
+                 ->method('getRequestUri')
+                 ->will($this->returnValue('//INVALID URI'));
+
+        $this->setExpectedException('RuntimeException');
+
+        $verificationResponse = $verifier->sendVerificationRequest();
     }
 }
