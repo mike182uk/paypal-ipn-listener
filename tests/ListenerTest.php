@@ -121,19 +121,19 @@ class ListenerTest extends PHPUnit_Framework_TestCase
 
         $counter = 0;
 
-        $listener->onVerifiedIpn(function() use (&$counter){
+        $listener->onVerifiedIpn(function() use (&$counter) {
             $counter++;
         });
 
-        $listener->onVerifiedIpn(function() use (&$counter){
+        $listener->onVerifiedIpn(function() use (&$counter) {
             $counter++;
         });
 
-        $listener->onInvalidIpn(function() use (&$counter){
+        $listener->onInvalidIpn(function() use (&$counter) {
             $counter++;
         });
 
-        $listener->onInvalidIpn(function() use (&$counter){
+        $listener->onInvalidIpn(function() use (&$counter) {
             $counter++;
         });
 
