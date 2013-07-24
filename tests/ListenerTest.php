@@ -162,19 +162,31 @@ class ListenerTest extends PHPUnit_Framework_TestCase
         $verifier = $this->getMockForAbstractClass('PayPal\Ipn\Verifier');
         $ipnMessage = Message::createFromGlobals();
 
-        $verifier->expects($this->any())
+        $verifier->expects($this->at(0))
                  ->method('sendVerificationRequest')
                  ->will($this->returnValue(new VerificationResponse('INVALID', 200)));
+
+        $verifier->expects($this->at(1))
+                 ->method('sendVerificationRequest')
+                 ->will($this->returnValue(new VerificationResponse('VERIFIED', 200)));
 
         $verifier->setIpnMessage($ipnMessage);
         $verifier->setEnvironment('sandbox');
         $listener->setVerifier($verifier);
 
-        $listener->listen(function(){
-            echo 'test';
-        }, function(){
-            echo 'test';
-        });
+        $status = null;
+        for ($i = 0; $i <= 1; $i++) {
+            $listener->listen(function() use (&$status) {
+                $status = true;
+            }, function() use (&$status) {
+                $status = false;
+            });
 
+            if ($i == 0) {
+                $this->assertEquals(false, $status);
+            } elseif ($i == 1) {
+                $this->assertEquals(true, $status);
+            }
+        }
     }
 }
