@@ -1,5 +1,9 @@
 #Changelog
 
+##2.0
+
+- Rewrite from the ground up
+
 ##1.1.1
 
 - add MIT license
