@@ -5,21 +5,21 @@ namespace PayPal\Ipn;
 class VerificationResponse
 {
     /**
-     * Verification outcome body
+     * Verification response body
      *
      * @var string
      */
     protected $body;
 
     /**
-     * Verification outcome status code
+     * Verification response status code
      *
      * @var integer
      */
     protected $statusCode;
 
     /**
-     * Create a new instance of the verification outcome
+     * Create a new instance of the verification response
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class VerificationResponse
     }
 
     /**
-     * Get the verification outcome body
+     * Get the verification response body
      *
      * @return string
      */
@@ -40,7 +40,7 @@ class VerificationResponse
     }
 
     /**
-     * Get the verification outcome status code
+     * Get the verification response status code
      *
      * @return string
      */
