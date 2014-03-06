@@ -10,10 +10,10 @@ use Exception;
 class SocketVerifier extends Verifier
 {
     /**
-     * Send the IPN verification request to PayPal
+     * Send the IPN verification request to PayPal.
      *
-     * @return \PayPal\Ipn\VerificationResponse
-     * @throws \RuntimeException
+     * @return VerificationResponse
+     * @throws RuntimeException
      */
     public function sendVerificationRequest()
     {
@@ -23,7 +23,7 @@ class SocketVerifier extends Verifier
         try {
             $fp = fsockopen($uri, $port, $errno, $error, $this->timeout);
         } catch (Exception $e) {
-            throw new RuntimeException(sprintf('fsockopen error: [%d] %s', $errno, $error));
+            throw new RuntimeException(sprintf('fsockopen error: [%d] %s.', $errno, $error));
         }
 
         $data = 'cmd=_notify-validate&' . $this->ipnMessage;
@@ -54,7 +54,7 @@ class SocketVerifier extends Verifier
     }
 
     /**
-     * Get the URI to be used to make the request to
+     * Get the URI to be used to make the request to.
      *
      * @return string
      */

@@ -9,23 +9,23 @@ use RuntimeException;
 class CurlVerifier extends Verifier
 {
     /**
-     * Flag to indicate whether curl follow location headers in the response
+     * Flag to indicate whether curl follow location headers in the response.
      *
-     * @var bool
+     * @var boolean
      */
     protected $followLocation = false;
 
     /**
-     * Flag to indicate whether curl should use SSL v3
+     * Flag to indicate whether curl should use SSL v3.
      *
-     * @var bool
+     * @var boolean
      */
     protected $forceSSLv3 = true;
 
     /**
-     * Create an instance of the curl verifier, check curl is enabled
+     * Create an instance of the curl verifier, check curl is enabled.
      *
-     * @return void
+     * @throws RuntimeException
      */
     public function __construct()
     {
@@ -36,10 +36,9 @@ class CurlVerifier extends Verifier
 
     /**
      * Set whether curl will use the CURLOPT_FOLLOWLOCATION to follow any
-     * location headers in the response
+     * location headers in the response.
      *
-     * @param  bool $followLocation
-     * @return void
+     * @param boolean $followLocation
      */
     public function followLocation($followLocation)
     {
@@ -50,8 +49,7 @@ class CurlVerifier extends Verifier
      * Explicitly set curl to use SSL version 3. Use this if cURL
      * is compiled with GnuTLS SSL.
      *
-     * @param  bool $forceSSLv3
-     * @return void
+     * @param boolean $forceSSLv3
      */
     public function forceSSLv3($forceSSLv3)
     {
@@ -59,10 +57,10 @@ class CurlVerifier extends Verifier
     }
 
     /**
-     * Send the IPN verification request to PayPal
+     * Send the IPN verification request to PayPal.
      *
-     * @return \PayPal\Ipn\VerificationResponse
-     * @throws \RuntimeException
+     * @return VerificationResponse
+     * @throws RuntimeException
      */
     public function sendVerificationRequest()
     {
@@ -88,16 +86,16 @@ class CurlVerifier extends Verifier
         if ($responseBody === false or $responseStatusCode == '0') {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            throw new RuntimeException(sprintf('Curl error: [%d] %s', $errno, $error));
+            throw new RuntimeException(sprintf('Curl error: [%d] %s.', $errno, $error));
         }
 
         return new VerificationResponse($responseBody, $responseStatusCode);
     }
 
     /**
-     * Check curl is enabled on the system
+     * Check curl is enabled on the system.
      *
-     * @return bool
+     * @return boolean
      */
     protected function curlEnabled()
     {

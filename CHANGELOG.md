@@ -1,6 +1,6 @@
 #Changelog
 
-##2.0
+##2.0.0
 
 - Rewrite from the ground up
 
@@ -19,4 +19,4 @@
 
 ##1.0.0
 
-First realease
+First release

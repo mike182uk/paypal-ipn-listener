@@ -2,39 +2,37 @@
 
 namespace PayPal\Ipn;
 
-use PayPal\Ipn\Message;
-use PayPal\Ipn\VerificationResponse;
 use UnexpectedValueException;
 use RuntimeException;
 
 abstract class Verifier
 {
     /**
-     * PayPal sandbox host
+     * PayPal sandbox host.
      */
     const SANDBOX_HOST = 'www.sandbox.paypal.com';
 
     /**
-     * PayPal production host
+     * PayPal production host.
      */
     const PRODUCTION_HOST = 'www.paypal.com';
 
     /**
-     * IPN message instance
+     * IPN message instance.
      *
-     * @var null|\PayPal\Ipn\Message
+     * @var null|Message
      */
     protected $ipnMessage = null;
 
     /**
-     * Host to make IPN verification request to
+     * Host to make IPN verification request to.
      *
      * @var string
      */
     protected $host = self::PRODUCTION_HOST;
 
     /**
-     * Flag to indicate whether IPN verification request should be made over SSL or not
+     * Flag to indicate whether IPN verification request should be made over SSL or not.
      *
      * @var boolean
      */
@@ -42,24 +40,23 @@ abstract class Verifier
 
     /**
      * Amount of time (in seconds) to wait for the PayPal server to respond
-     * to IPN verification request before timing out
+     * to IPN verification request before timing out.
      *
      * @var integer
      */
     protected $timeout = 30;
 
     /**
-     * IPN verification response instance
+     * IPN verification response instance.
      *
-     * @var null|\PayPal\Ipn\VerificationResponse
+     * @var null|VerificationResponse
      */
     protected $verificationResponse = null;
 
     /**
-     * Set the IPN message
+     * Set the IPN message.
      *
-     * @param  \PayPal\Ipn\Message $ipnMessage
-     * @return void
+     * @param Message $ipnMessage
      */
     public function setIpnMessage(Message $ipnMessage)
     {
@@ -67,9 +64,9 @@ abstract class Verifier
     }
 
     /**
-     * Get the IPN message instance
+     * Get the IPN message instance.
      *
-     * @return \PayPal\Ipn\Message
+     * @return Message
      */
     public function getIpnMessage()
     {
@@ -77,9 +74,9 @@ abstract class Verifier
     }
 
     /**
-     * Get the IPN verification response instance
+     * Get the IPN verification response instance.
      *
-     * @return \PayPal\Ipn\VerificationResponse
+     * @return VerificationResponse
      */
     public function getVerificationResponse()
     {
@@ -87,11 +84,9 @@ abstract class Verifier
     }
 
     /**
-     * Set the environment
+     * Set the environment.
      *
      * @param string $environment
-     *
-     * @return void
      */
     public function setEnvironment($environment)
     {
@@ -99,7 +94,7 @@ abstract class Verifier
     }
 
     /**
-     * Get the environment based on the current host set
+     * Get the environment based on the current host set.
      *
      * @return string
      */
@@ -109,7 +104,7 @@ abstract class Verifier
     }
 
     /**
-     * Get the host to be used for the IPN verification request
+     * Get the host to be used for the IPN verification request.
      *
      * @return string
      */
@@ -119,10 +114,9 @@ abstract class Verifier
     }
 
     /**
-     * Set whether the IPN verification request should be sent over SSL or not
+     * Set whether the IPN verification request should be sent over SSL or not.
      *
-     * @param  bool $useSSL
-     * @return void
+     * @param boolean $useSSL
      */
     public function secure($useSSL)
     {
@@ -130,10 +124,9 @@ abstract class Verifier
     }
 
     /**
-     * Set the timeout for the IPN verification request
+     * Set the timeout for the IPN verification request.
      *
-     * @param  int  $timeout
-     * @return void
+     * @param integer $timeout
      */
     public function setTimeout($timeout)
     {
@@ -141,7 +134,7 @@ abstract class Verifier
     }
 
     /**
-     * Get the URI to be used to make the IPN verification request to
+     * Get the URI to be used to make the IPN verification request to.
      *
      * @return string
      */
@@ -153,17 +146,17 @@ abstract class Verifier
     }
 
     /**
-     * Verify the IPN message
+     * Verify the IPN message.
      *
-     * @return bool
-     * @throws \UnexpectedValueException
-     * @throws \RuntimeException
+     * @return boolean
+     * @throws UnexpectedValueException
+     * @throws RuntimeException
      */
     public function verify()
     {
         // make sure IPN message has been set
         if (is_null($this->ipnMessage)) {
-            throw new RuntimeException('IPN message has not been set');
+            throw new RuntimeException('IPN message has not been set.');
         }
 
         $this->verificationResponse = $this->sendVerificationRequest();
@@ -172,7 +165,7 @@ abstract class Verifier
         $body = $this->verificationResponse->getBody();
 
         if ($statusCode !== 200) {
-            throw new UnexpectedValueException(sprintf('Unexpected status code: [%d] received', $statusCode));
+            throw new UnexpectedValueException(sprintf('Unexpected status code: [%d] received.', $statusCode));
         }
 
         if (strpos($body, 'VERIFIED') !== false) {
@@ -180,14 +173,14 @@ abstract class Verifier
         } elseif (strpos($body, 'INVALID') !== false) {
             return false;
         } else {
-            throw new UnexpectedValueException('Response body does not contain VERIFIED or INVALID keywords');
+            throw new UnexpectedValueException('Response body does not contain VERIFIED or INVALID keywords.');
         }
     }
 
     /**
-     * Send the IPN verification request to PayPal
+     * Send the IPN verification request to PayPal.
      *
-     * @return void
+     *  @return VerificationResponse
      */
     abstract public function sendVerificationRequest();
 }

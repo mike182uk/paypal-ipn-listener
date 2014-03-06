@@ -2,38 +2,36 @@
 
 namespace PayPal\Ipn;
 
-use PayPal\Ipn\Verifier;
-use PayPal\Ipn\Message;
 use RuntimeException;
 use Closure;
 
 class Listener
 {
     /**
-     * Verifier instance
+     * Verifier instance.
      *
-     * @var null|\PayPal\Ipn\Verifier
+     * @var Verifier
      */
     protected $verifier = null;
 
     /**
-     * Verified IPN callback stack
+     * Verified IPN callback stack.
      *
      * @var array
      */
     protected $verifiedIpnCallbackStack = array();
 
     /**
-     * Invalid IPN callback stack
+     * Invalid IPN callback stack.
      *
      * @var array
      */
     protected $invalidIpnCallbackStack = array();
 
     /**
-     * Get the verifier instance
+     * Get the verifier instance.
      *
-     * @return \PayPal\Ipn\Verifier
+     * @return Verifier
      */
     public function getVerifier()
     {
@@ -41,10 +39,9 @@ class Listener
     }
 
     /**
-     * Set the verifier instance
+     * Set the verifier instance.
      *
-     * @param  \PayPal\Ipn\Verifier $verifier
-     * @return void
+     * @param Verifier $verifier
      */
     public function setVerifier(Verifier $verifier)
     {
@@ -52,7 +49,7 @@ class Listener
     }
 
     /**
-     * Set a callback to be exectuted when the IPN is verified
+     * Set a callback to be executed when the IPN is verified.
      *
      * @param  Closure $callback
      * @return void
@@ -63,7 +60,7 @@ class Listener
     }
 
     /**
-     * Set a callback to be exectuted when the IPN is invalid
+     * Set a callback to be executed when the IPN is invalid.
      *
      * @param  Closure $callback
      * @return void
@@ -74,17 +71,17 @@ class Listener
     }
 
     /**
-     * Verify the IPN
+     * Verify the IPN.
      *
-     * @param  bool              $executeCallbacks
-     * @return bool
-     * @throws \RuntimeException
+     * @param  boolean          $executeCallbacks
+     * @return boolean
+     * @throws RuntimeException
      */
     public function processIpn($executeCallbacks = true)
     {
         // make sure a verifier has been set
         if (is_null($this->verifier)) {
-            throw new RuntimeException('IPN verifier has not been set');
+            throw new RuntimeException('IPN verifier has not been set.');
         }
 
         $ipnVerificationStatus = $this->verifier->verify();
@@ -99,11 +96,10 @@ class Listener
     }
 
     /**
-     * Listen for an IPN and execute callable based on verification status
+     * Listen for an IPN and execute callable based on verification status.
      *
-     * @param  Closure      $verifiedIpnCallback
-     * @param  Closure|null $invalidIpnCallback
-     * @return void
+     * @param Closure      $verifiedIpnCallback
+     * @param Closure|null $invalidIpnCallback
      */
     public function listen(Closure $verifiedIpnCallback, Closure $invalidIpnCallback = null)
     {
@@ -117,10 +113,9 @@ class Listener
     }
 
     /**
-     * Execute all callables in a given stack
+     * Execute all callables in a given stack.
      *
-     * @param  array $stack
-     * @return void
+     * @param array $stack
      */
     protected function processCallbackStack($stack)
     {
@@ -130,10 +125,10 @@ class Listener
     }
 
     /**
-     * Get a text based report of the latest IPN verification request
+     * Get a text based report of the latest IPN verification request.
      *
      * @return string
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getReport()
     {
@@ -141,23 +136,23 @@ class Listener
         $output = '';
 
         // helpers
-        $dashLine = function($length = 100) {
+        $dashLine = function ($length = 100) {
             $l = '';
             for ($i = 0; $i < $length; $i++) { $l .= '-'; }
 
             return $l;
         };
         $linebreak = "\n";
-        $newline = function($data) use (&$output, &$linebreak) {
+        $newline = function ($data) use (&$output, &$linebreak) {
             $output .= $data . $linebreak;
         };
 
         // make sure a verifier has been set
         if (is_null($this->verifier)) {
-            throw new RuntimeException('IPN verifier has not been set');
+            throw new RuntimeException('IPN verifier has not been set.');
         }
 
-        // cache objects locally for convience
+        // cache objects locally for convenience
         $verifier = $this->verifier;
         $ipnMessage = $verifier->getIpnMessage();
         $verificationResponse = $verifier->getVerificationResponse();
@@ -171,11 +166,11 @@ class Listener
         // if a verification request was made
         if (!is_null($verificationResponse)) {
             $newline('VERIFICATION RESPONSE STATUS: ');
-            $newline($dashLine(28) . $linebreak);
+            $newline($dashLine(29) . $linebreak);
             $newline($verificationResponse->getStatusCode() . $linebreak);
 
             $newline('VERIFICATION RESPONSE BODY: ');
-            $newline($dashLine(26) . $linebreak);
+            $newline($dashLine(27) . $linebreak);
             $newline($verificationResponse->getBody() . $linebreak);
 
             $newline('VERIFICATION REQUEST POST DATA: ');
@@ -183,8 +178,8 @@ class Listener
 
             $newline($ipnMessage . $linebreak);
 
-            $newline('IPN MESSAGE: ');
-            $newline($dashLine(12) . $linebreak);
+            $newline('IPN MESSAGE DATA: ');
+            $newline($dashLine(17) . $linebreak);
 
             foreach ($ipnMessage as $k => $v) {
                 $newline($k . ' = ' . $v);

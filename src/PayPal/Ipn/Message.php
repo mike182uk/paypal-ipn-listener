@@ -9,26 +9,26 @@ use IteratorAggregate;
 class Message implements ArrayAccess, IteratorAggregate
 {
     /**
-     * IPN message data
+     * IPN message data.
      *
      * @var array
      */
     protected $data;
 
     /**
-     * Create a new instance of the IPN message
+     * Create a new instance of the IPN message.
      *
      * @param array $data
      */
-    public function __construct(Array $data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
 
     /**
-     * Create a new instance of the IPN message using globals for the data
+     * Create a new instance of the IPN message using globals for the data.
      *
-     * @return \PayPal\Ipn\Message
+     * @return Message
      */
     public static function createFromGlobals()
     {
@@ -49,7 +49,7 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Get the raw post data
+     * Get the raw post data.
      *
      * @return string
      */
@@ -59,10 +59,10 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Determine if a given offset exists
+     * Determine if a given offset exists.
      *
-     * @param  string $key
-     * @return bool
+     * @param  string  $key
+     * @return boolean
      */
     public function offsetExists($key)
     {
@@ -70,7 +70,7 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Get the value at a given offset
+     * Get the value at a given offset.
      *
      * @param  string $key
      * @return string
@@ -81,7 +81,7 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Set the value at a given offset
+     * Set the value at a given offset.
      *
      * @param  string $key
      * @param  string $value
@@ -93,10 +93,9 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Unset the value at a given offset
+     * Unset the value at a given offset.
      *
-     * @param  string $key
-     * @return void
+     * @param string $key
      */
     public function offsetUnset($key)
     {
@@ -104,9 +103,9 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Get iterator for IteratorAggregate interface
+     * Get iterator for IteratorAggregate interface.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
@@ -114,7 +113,7 @@ class Message implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Convert the IPN message to its string representation
+     * Convert the IPN message to its string representation.
      *
      * @return string
      */
