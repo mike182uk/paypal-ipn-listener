@@ -19,4 +19,4 @@
 
 ##1.0.0
 
-First realease
+First release
