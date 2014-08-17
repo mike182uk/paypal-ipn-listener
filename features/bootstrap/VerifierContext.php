@@ -27,10 +27,10 @@ class VerifierContext implements SnippetAcceptingContext
     public function iHaveReceivedAnIpnMessageContaining(PyStringNode $string)
     {
         $data = array();
-        $vars = explode('&', $string);
+        $keyValuePairs = explode('&', $string);
 
-        foreach ($vars as $var) {
-            list($k, $v) = explode('=', $var);
+        foreach ($keyValuePairs as $keyValuePair) {
+            list($k, $v) = explode('=', $keyValuePair);
 
             $data[$k] = $v;
         }
