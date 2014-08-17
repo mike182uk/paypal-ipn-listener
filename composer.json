@@ -11,11 +11,13 @@
         }
     ],
     "require" : {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "guzzlehttp/guzzle": "4.*"
     },
     "require-dev" : {
         "phpspec/phpspec": "2.1.*@dev",
-        "bossa/phpspec2-expect": "dev-master"
+        "bossa/phpspec2-expect": "dev-master",
+        "behat/behat": "3.0.*@dev"
     },
     "autoload": {
         "psr-0": { "": "src/" }
