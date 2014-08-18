@@ -24,18 +24,9 @@ class VerifierContext implements SnippetAcceptingContext
     /**
      * @Given I have received an IPN message containing:
      */
-    public function iHaveReceivedAnIpnMessageContaining(PyStringNode $string)
+    public function iHaveReceivedAnIpnMessageContaining(PyStringNode $rawPostData)
     {
-        $data = array();
-        $keyValuePairs = explode('&', $string);
-
-        foreach ($keyValuePairs as $keyValuePair) {
-            list($k, $v) = explode('=', $keyValuePair);
-
-            $data[$k] = $v;
-        }
-
-        $this->message = new Message($data);
+        $this->message = new Message($rawPostData);
     }
 
     /**

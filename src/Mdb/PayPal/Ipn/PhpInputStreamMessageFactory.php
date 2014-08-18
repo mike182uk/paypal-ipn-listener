@@ -24,15 +24,6 @@ class PhpInputStreamMessageFactory implements MessageFactory
     {
         $streamContents = $this->phpInputStreamAdapter->getContents();
 
-        $data  = array();
-        $keyValuePairs = explode('&', $streamContents);
-
-        foreach ($keyValuePairs as $keyValuePair) {
-            list($k, $v) = explode('=', $keyValuePair);
-
-            $data[$k] = urldecode($v);
-        }
-
-        return new Message($data);
+        return new Message($streamContents);
     }
 }

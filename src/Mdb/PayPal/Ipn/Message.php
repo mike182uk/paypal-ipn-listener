@@ -10,10 +10,14 @@ class Message
     private $data;
 
     /**
-     * @param array $data
+     * @param array|string $data
      */
-    public function __construct(array $data)
+    public function __construct($data)
     {
+        if (!is_array($data)) {
+            $data = $this->extractDataFromRawPostDataString($data);
+        }
+
         $this->data = $data;
     }
 
@@ -45,5 +49,24 @@ class Message
         }
 
         return rtrim($str, '&');
+    }
+
+    /**
+     * @param $rawPostData
+     *
+     * @return array
+     */
+    private function extractDataFromRawPostDataString($rawPostData)
+    {
+        $data = array();
+        $keyValuePairs = explode('&', $rawPostData);
+
+        foreach ($keyValuePairs as $keyValuePair) {
+            list($k, $v) = explode('=', $keyValuePair);
+
+            $data[$k] = urldecode($v);
+        }
+
+        return $data;
     }
 }
