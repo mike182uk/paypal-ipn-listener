@@ -38,6 +38,14 @@ class Message
     }
 
     /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->data;
+    }
+
+    /**
      * @return string
      */
     public function __toString()

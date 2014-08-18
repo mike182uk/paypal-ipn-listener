@@ -23,6 +23,18 @@ class MessageSpec extends ObjectBehavior
         $this->get('baz')->shouldReturn('quz');
     }
 
+    function it_can_retrieve_all_properties_set()
+    {
+        $data = array(
+            'foo' => 'bar',
+            'baz' => 'quz'
+        );
+
+        $this->beConstructedWith($data);
+
+        $this->getAll()->shouldReturn($data);
+    }
+
     function it_should_return_an_empty_string_when_retrieving_a_non_existent_property()
     {
         $this->get('bar')->shouldReturn('');
