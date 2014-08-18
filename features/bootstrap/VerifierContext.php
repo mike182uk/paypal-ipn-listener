@@ -7,7 +7,7 @@ use Behat\Gherkin\Node\TableNode;
 use Mdb\PayPal\Ipn\Message;
 use Mdb\PayPal\Ipn\ApiAdapter;
 use Mdb\PayPal\Ipn\Verifier;
-use GuzzleHttp\Client;
+use Guzzle\Http\Client;
 
 class VerifierContext implements SnippetAcceptingContext
 {

@@ -2,7 +2,7 @@
 
 namespace Mdb\PayPal\Ipn;
 
-use GuzzleHttp\ClientInterface;
+use Guzzle\Http\ClientInterface;
 use Mdb\PayPal\Ipn\Exception\ApiRequestFailureException;
 use RuntimeException;
 
@@ -35,9 +35,9 @@ class ApiAdapter
         $requestBody = 'cmd=_notify-validate&' . (string) $message;
 
         try {
-            $response = $this->httpClient->post(self::API_URI, array(
-                'body' => $requestBody
-            ));
+            $request = $this->httpClient->post(self::API_URI, array(), $requestBody);
+
+            $response = $request->send();
         } catch (RuntimeException $e) {
             throw new ApiRequestFailureException(
                 sprintf('Failed to communicate with API: %s', $e->getMessage())
