@@ -2,12 +2,12 @@
 
 namespace Mdb\PayPal\Ipn;
 
-class StreamWrapperAdapter
+class PhpInputStreamAdapter
 {
     /**
      * @return string
      */
-    public function getInputStreamContents()
+    public function getContents()
     {
         return file_get_contents('php://input');
     }

@@ -3,17 +3,17 @@
 namespace spec\Mdb\PayPal\Ipn;
 
 use Mdb\PayPal\Ipn\Message;
-use Mdb\PayPal\Ipn\StreamWrapperAdapter;
+use Mdb\PayPal\Ipn\PhpInputStreamAdapter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class StreamWrapperMessageFactorySpec extends ObjectBehavior
+class PhpInputStreamMessageFactorySpec extends ObjectBehavior
 {
     function let(
-       StreamWrapperAdapter $streamWrapperAdapter
+       PhpInputStreamAdapter $phpInputStreamAdapter
     )
     {
-        $this->beConstructedWith($streamWrapperAdapter);
+        $this->beConstructedWith($phpInputStreamAdapter);
     }
 
     function it_is_a_message_factory()
@@ -22,12 +22,12 @@ class StreamWrapperMessageFactorySpec extends ObjectBehavior
     }
 
     function it_can_create_a_message_from_the_input_stream(
-        StreamWrapperAdapter $streamWrapperAdapter
+        PhpInputStreamAdapter $phpInputStreamAdapter
     )
     {
         $streamContents = 'foo=bar&baz=quz';
 
-        $streamWrapperAdapter->getInputStreamContents()->willReturn($streamContents);
+        $phpInputStreamAdapter->getContents()->willReturn($streamContents);
 
         $message = $this->createMessage();
 
@@ -35,12 +35,12 @@ class StreamWrapperMessageFactorySpec extends ObjectBehavior
     }
 
     function it_url_decodes_values_from_the_input_stream(
-        StreamWrapperAdapter $streamWrapperAdapter
+        PhpInputStreamAdapter $phpInputStreamAdapter
     )
     {
         $streamContents = 'foo=bar&baz=quz+foo+%28bar%29';
 
-        $streamWrapperAdapter->getInputStreamContents()->willReturn($streamContents);
+        $phpInputStreamAdapter->getContents()->willReturn($streamContents);
 
         $message = $this->createMessage();
 

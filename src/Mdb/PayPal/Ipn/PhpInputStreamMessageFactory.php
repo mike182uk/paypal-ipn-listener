@@ -2,19 +2,19 @@
 
 namespace Mdb\PayPal\Ipn;
 
-class StreamWrapperMessageFactory implements MessageFactory
+class PhpInputStreamMessageFactory implements MessageFactory
 {
     /**
-     * @var StreamWrapperAdapter
+     * @var PhpInputStreamAdapter
      */
-    private $streamWrapperAdapter;
+    private $phpInputStreamAdapter;
 
     /**
-     * @param StreamWrapperAdapter $streamWrapperAdapter
+     * @param PhpInputStreamAdapter $streamWrapperAdapter
      */
-    public function __construct(StreamWrapperAdapter $streamWrapperAdapter)
+    public function __construct(PhpInputStreamAdapter $streamWrapperAdapter)
     {
-        $this->streamWrapperAdapter = $streamWrapperAdapter;
+        $this->phpInputStreamAdapter = $streamWrapperAdapter;
     }
 
     /**
@@ -22,7 +22,7 @@ class StreamWrapperMessageFactory implements MessageFactory
      */
     public function createMessage()
     {
-        $streamContents = $this->streamWrapperAdapter->getInputStreamContents();
+        $streamContents = $this->phpInputStreamAdapter->getContents();
 
         $data  = array();
         $keyValuePairs = explode('&', $streamContents);
