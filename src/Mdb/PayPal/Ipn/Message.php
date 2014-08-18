@@ -52,14 +52,14 @@ class Message
     }
 
     /**
-     * @param $rawPostData
+     * @param string $rawPostDataString
      *
      * @return array
      */
-    private function extractDataFromRawPostDataString($rawPostData)
+    private function extractDataFromRawPostDataString($rawPostDataString)
     {
         $data = array();
-        $keyValuePairs = explode('&', $rawPostData);
+        $keyValuePairs = explode('&', $rawPostDataString);
 
         foreach ($keyValuePairs as $keyValuePair) {
             list($k, $v) = explode('=', $keyValuePair);

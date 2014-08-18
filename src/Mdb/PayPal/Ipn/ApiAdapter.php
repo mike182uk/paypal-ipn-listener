@@ -8,19 +8,24 @@ use RuntimeException;
 
 class ApiAdapter
 {
-    const API_URI = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-
     /**
      * @var ClientInterface
      */
     private $httpClient;
 
     /**
-     * @param ClientInterface $httpClient
+     * @var string
      */
-    public function __construct(ClientInterface $httpClient)
+    private $apiBaseUrl;
+
+    /**
+     * @param ClientInterface $httpClient
+     * @param string $apiBaseUrl
+     */
+    public function __construct(ClientInterface $httpClient, $apiBaseUrl)
     {
         $this->httpClient = $httpClient;
+        $this->apiBaseUrl = $apiBaseUrl;
     }
 
     /**
@@ -35,7 +40,7 @@ class ApiAdapter
         $requestBody = 'cmd=_notify-validate&' . (string) $message;
 
         try {
-            $request = $this->httpClient->post(self::API_URI, array(), $requestBody);
+            $request = $this->httpClient->post($this->apiBaseUrl, array(), $requestBody);
 
             $response = $request->send();
         } catch (RuntimeException $e) {

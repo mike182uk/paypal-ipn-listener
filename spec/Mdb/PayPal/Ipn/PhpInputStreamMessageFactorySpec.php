@@ -34,7 +34,7 @@ class PhpInputStreamMessageFactorySpec extends ObjectBehavior
         $message->shouldHaveType('Mdb\PayPal\Ipn\Message');
     }
 
-    function it_url_decodes_values_from_the_input_stream(
+    function it_should_url_decode_values_from_the_input_stream(
         PhpInputStreamAdapter $phpInputStreamAdapter
     )
     {

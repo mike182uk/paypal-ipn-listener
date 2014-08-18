@@ -11,6 +11,8 @@ use Guzzle\Http\Client;
 
 class VerifierContext implements SnippetAcceptingContext
 {
+    const API_BASE_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+
     /**
      * @var Message
      */
@@ -35,7 +37,7 @@ class VerifierContext implements SnippetAcceptingContext
     public function iVerifyTheIpnMessageWithPaypal()
     {
         $httpClient = new Client();
-        $apiAdapter = new ApiAdapter($httpClient);
+        $apiAdapter = new ApiAdapter($httpClient, self::API_BASE_URL);
         $verifier = new Verifier($apiAdapter);
 
         $this->verificationResult = $verifier->verify($this->message);

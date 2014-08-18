@@ -30,7 +30,7 @@ class ListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_dispatches_an_event_when_a_message_is_verified(
+    function it_should_dispatch_an_event_when_a_message_is_verified(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     )
@@ -47,7 +47,7 @@ class ListenerSpec extends ObjectBehavior
         $this->listen();
     }
 
-    function it_dispatches_an_event_when_a_message_is_invalid(
+    function it_should_dispatch_an_event_when_a_message_is_invalid(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     )
@@ -64,7 +64,7 @@ class ListenerSpec extends ObjectBehavior
         $this->listen();
     }
 
-    function it_dispatches_an_event_when_it_fails_to_verify_a_message_due_to_an_unexpected_value_being_returned(
+    function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_an_unexpected_value_being_returned(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     )
@@ -81,7 +81,7 @@ class ListenerSpec extends ObjectBehavior
         $this->listen();
     }
 
-    function it_dispatches_an_event_when_it_fails_to_verify_a_message_due_to_a_failure_communicating_with_api(
+    function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_a_failure_communicating_with_api(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     )

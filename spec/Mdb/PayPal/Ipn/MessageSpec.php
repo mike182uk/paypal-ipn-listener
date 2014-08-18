@@ -23,7 +23,7 @@ class MessageSpec extends ObjectBehavior
         $this->get('baz')->shouldReturn('quz');
     }
 
-    function it_returns_an_empty_string_when_retrieving_a_non_existent_property()
+    function it_should_return_an_empty_string_when_retrieving_a_non_existent_property()
     {
         $this->get('bar')->shouldReturn('');
     }
@@ -33,7 +33,7 @@ class MessageSpec extends ObjectBehavior
         $this->__toString()->shouldReturn('foo=bar&baz=quz');
     }
 
-    function it_url_encodes_property_values_when_represented_as_a_string()
+    function it_should_url_encode_property_values_when_represented_as_a_string()
     {
         $data = array(
             'foo' => 'foo + bar (baz)'
@@ -54,7 +54,7 @@ class MessageSpec extends ObjectBehavior
         $this->get('baz')->shouldReturn('quz');
     }
 
-    function it_url_decodes_values_when_using_string_of_raw_post_data_for_its_data_source()
+    function it_should_url_decode_values_when_using_a_string_of_raw_post_data_for_its_data_source()
     {
         $data = 'foo=foo+%2B+bar+%28baz%29';
 

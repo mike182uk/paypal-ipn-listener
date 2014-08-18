@@ -17,7 +17,7 @@ class VerifierSpec extends ObjectBehavior
         $this->beConstructedWith($apiAdapter);
     }
 
-    function it_returns_true_when_an_ipn_message_is_verified(
+    function it_should_return_true_when_an_ipn_message_is_verified(
         Message $message,
         ApiAdapter $apiAdapter
     )
@@ -29,7 +29,7 @@ class VerifierSpec extends ObjectBehavior
         $this->verify($message)->shouldReturn(true);
     }
 
-    function it_returns_false_when_an_ipn_message_is_invalid(
+    function it_should_return_false_when_an_ipn_message_is_invalid(
         Message $message,
         ApiAdapter $apiAdapter
     )
@@ -41,7 +41,7 @@ class VerifierSpec extends ObjectBehavior
         $this->verify($message)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_when_an_unexpected_status_keyword_is_encountered(
+    function it_should_throw_an_exception_when_an_unexpected_status_keyword_is_encountered(
         Message $message,
         ApiAdapter $apiAdapter
     )
