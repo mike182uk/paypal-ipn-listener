@@ -1,4 +1,4 @@
-#PayPal IPN Listener 
+#PayPal IPN Listener
 
 [![Build Status](https://secure.travis-ci.org/mike182uk/paypal-ipn-listener.png)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/badges/quality-score.png?s=177fb185eb107af059d2016bfe03236274298d1b)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
@@ -42,7 +42,7 @@ Add this package as a dependency in `composer.json`.
 ```js
 {
     "require" : {
-        "mike182uk/paypal-ipn-listener" : "v2.0.0"
+        "mike182uk/paypal-ipn-listener" : "v2.0.1"
     }
 }
 ```

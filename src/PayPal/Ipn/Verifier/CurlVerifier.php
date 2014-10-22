@@ -16,11 +16,11 @@ class CurlVerifier extends Verifier
     protected $followLocation = false;
 
     /**
-     * Flag to indicate whether curl should use SSL v3.
+     * Flag to indicate whether curl should use SSL or not.
      *
      * @var boolean
      */
-    protected $forceSSLv3 = true;
+    protected $forceSSL = true;
 
     /**
      * Create an instance of the curl verifier, check curl is enabled.
@@ -50,10 +50,22 @@ class CurlVerifier extends Verifier
      * is compiled with GnuTLS SSL.
      *
      * @param boolean $forceSSLv3
+     *
+     * @deprecated Use forceSSL instead.
      */
     public function forceSSLv3($forceSSLv3)
     {
-        $this->forceSSLv3 = (bool) $forceSSLv3;
+        $this->forceSSL($forceSSLv3);
+    }
+
+    /**
+     * Set curl to use SSL
+     *
+     * @param boolean $forceSSL
+     */
+    public function forceSSL($forceSSL)
+    {
+        $this->forceSSL = (bool) $forceSSL;
     }
 
     /**
@@ -76,8 +88,8 @@ class CurlVerifier extends Verifier
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
 
-        if ($this->forceSSLv3) {
-            curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+        if ($this->forceSSL) {
+            curl_setopt($ch, CURLOPT_SSLVERSION, 1);
         }
 
         $responseBody = curl_exec($ch);

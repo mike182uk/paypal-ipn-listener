@@ -40,15 +40,15 @@ class CurlVerifierTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(false, 'followLocation', $verifier);
     }
 
-    public function testForceSSLv3()
+    public function testForceSSL()
     {
         $verifier = new CurlVerifier;
 
-        $verifier->forceSSLv3('VALUE THAT SHOULD BE CAST TO TRUE');
-        $this->assertAttributeEquals(true, 'forceSSLv3', $verifier);
+        $verifier->forceSSL('VALUE THAT SHOULD BE CAST TO TRUE');
+        $this->assertAttributeEquals(true, 'forceSSL', $verifier);
 
-        $verifier->forceSSLv3(false);
-        $this->assertAttributeEquals(false, 'forceSSLv3', $verifier);
+        $verifier->forceSSL(false);
+        $this->assertAttributeEquals(false, 'forceSSL', $verifier);
     }
 
     public function testSendVerificationRequest()
