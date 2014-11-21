@@ -87,6 +87,7 @@ class CurlVerifier extends Verifier
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close', 'User-Agent: MIKE182UK-IPN-LISTENER'));
 
         if ($this->forceSSL) {
             curl_setopt($ch, CURLOPT_SSLVERSION, 1);
