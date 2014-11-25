@@ -1,5 +1,10 @@
 #Changelog
 
+##2.0.2
+
+- Send `User-Agent` header in `CurlVerifier::sendVerificationRequest`
+- Send `Connection: Close` header in `CurlVerifier::sendVerificationRequest`
+
 ##2.0.1
 
 - use TLSv1 instead of SSLv3
