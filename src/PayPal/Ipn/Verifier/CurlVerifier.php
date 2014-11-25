@@ -79,6 +79,10 @@ class CurlVerifier extends Verifier
         $ch = curl_init();
 
         $data = 'cmd=_notify-validate&' . $this->ipnMessage;
+        $httpHeaders = array(
+            'User-Agent: mike182uk\paypal-ipn-listener',
+            'Connection: Close'
+        );
 
         curl_setopt($ch, CURLOPT_URL, $this->getRequestUri());
         curl_setopt($ch, CURLOPT_POST, true);
@@ -87,7 +91,7 @@ class CurlVerifier extends Verifier
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close', 'User-Agent: MIKE182UK-IPN-LISTENER'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeaders);
 
         if ($this->forceSSL) {
             curl_setopt($ch, CURLOPT_SSLVERSION, 1);
