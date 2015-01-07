@@ -42,12 +42,12 @@ Add this package as a dependency in `composer.json`.
 ```js
 {
     "require" : {
-        "mike182uk/paypal-ipn-listener" : "v2.0.1"
+        "mike182uk/paypal-ipn-listener" : "v2.0.2"
     }
 }
 ```
 
-##<a id="architecutre"></a>Architecutre
+##<a id="architecture"></a>Architecture
 
 This package is made up of several components that work together:
 
