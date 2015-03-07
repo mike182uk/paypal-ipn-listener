@@ -1,1 +1,7 @@
 formatter.name: pretty
+suites:
+  default:
+    namespace: Mdb\PayPal\Ipn
+    psr4_prefix: Mdb\PayPal\Ipn
+    src_path: src/
+    spec_prefix: spec\

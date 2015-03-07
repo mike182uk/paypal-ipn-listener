@@ -22,7 +22,9 @@
         "fabpot/php-cs-fixer": "~1.0"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": {
+          "Mdb\\PayPal\\Ipn\\": "src/"
+        }
     },
     "config": {
         "bin-dir" : "bin"
