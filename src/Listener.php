@@ -39,8 +39,7 @@ class Listener
         MessageFactory $messageFactory,
         Verifier $verifier,
         EventDispatcher $eventDispatcher
-    )
-    {
+    ) {
         $this->messageFactory = $messageFactory;
         $this->verifier = $verifier;
         $this->eventDispatcher = $eventDispatcher;

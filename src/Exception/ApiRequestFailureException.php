@@ -4,4 +4,6 @@ namespace Mdb\PayPal\Ipn\Exception;
 
 use RuntimeException;
 
-class ApiRequestFailureException extends RuntimeException {}
+class ApiRequestFailureException extends RuntimeException
+{
+}

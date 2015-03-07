@@ -20,7 +20,7 @@ class ApiAdapter
 
     /**
      * @param ClientInterface $httpClient
-     * @param string $apiBaseUrl
+     * @param string          $apiBaseUrl
      */
     public function __construct(ClientInterface $httpClient, $apiBaseUrl)
     {
@@ -37,7 +37,7 @@ class ApiAdapter
      */
     public function verifyIpnMessage(Message $message)
     {
-        $requestBody = 'cmd=_notify-validate&' . (string) $message;
+        $requestBody = 'cmd=_notify-validate&'.(string) $message;
 
         try {
             $request = $this->httpClient->post($this->apiBaseUrl, array(), $requestBody);
