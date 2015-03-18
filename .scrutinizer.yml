@@ -2,19 +2,5 @@ filter:
   paths:
     - src/*
 
-tools:
-  php_analyzer: true
-  php_changetracking: true
-  php_code_coverage: false
-  php_code_sniffer:
-    config:
-      standard: PSR2
-  php_cpd: true
-  php_cs_fixer:
-    config:
-      level: 'all'
-  php_loc: true
-  php_mess_detector: true
-  php_pdepend: true
-  php_sim: true
-  sensiolabs_security_checker: true
+checks:
+  php: true
