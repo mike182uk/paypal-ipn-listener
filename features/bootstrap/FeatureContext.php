@@ -3,15 +3,41 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\SnippetAcceptingContext;
 
-class VerifierContext implements SnippetAcceptingContext
 class FeatureContext implements SnippetAcceptingContext
 {
+    private $ipnMessageData = array();
+
+    /**
+     * @beforeScenario @invalidIpn
+     */
+    public function willFailVerification()
+    {
+        $this->ipnMessageData = array(
+            '__verified' => 0,
+        );
+    }
+
+    /**
+     * @beforeScenario @verifiedIpn
+     */
+    public function willPassVerification()
+    {
+        $this->ipnMessageData = array(
+            '__verified' => 1,
+        );
+    }
+
     /**
      * @Given I have received an IPN message
      */
     public function iHaveReceivedAnIpnMessage()
     {
-        throw new PendingException();
+        $data = array(
+            'foo' => 'bar',
+            'baz' => 'qux',
+        );
+
+        $this->ipnMessageData = array_merge($this->ipnMessageData, $data);
     }
 
     /**
