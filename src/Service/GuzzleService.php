@@ -35,7 +35,10 @@ class GuzzleService implements Service
      */
     public function verifyIpnMessage(Message $message)
     {
-        $requestBody = 'cmd=_notify-validate&'.(string) $message;
+        $requestBody = array_merge(
+            array('cmd' => '_notify-validate'),
+            $message->getAll()
+        );
 
         try {
             $response = $this->httpClient->post(
