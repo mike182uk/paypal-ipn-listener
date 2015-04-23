@@ -12,7 +12,7 @@ class ServiceResponseSpec extends ObjectBehavior
         $this->beConstructedWith('foo');
     }
 
-    function it_should_retrieve_a_body()
+    function it_should_retrieve_the_body()
     {
         $this->getBody()->shouldReturn('foo');
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Mdb\PayPal\Ipn;
+namespace spec\Mdb\PayPal\Ipn\MessageFactory;
 
 use Mdb\PayPal\Ipn\InputStream;
 use PhpSpec\ObjectBehavior;

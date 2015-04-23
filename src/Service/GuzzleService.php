@@ -36,7 +36,7 @@ class GuzzleService implements Service
     public function verifyIpnMessage(Message $message)
     {
         $requestBody = array_merge(
-            array('cmd' => '_notify-validate'),
+            ['cmd' => '_notify-validate'],
             $message->getAll()
         );
 

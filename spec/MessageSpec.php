@@ -25,10 +25,10 @@ class MessageSpec extends ObjectBehavior
 
     function it_should_retrieve_all_properties()
     {
-        $this->getAll()->shouldReturn(array(
+        $this->getAll()->shouldReturn([
             'foo' => 'bar',
             'baz' => 'quz'
-        ));
+        ]);
     }
 
     function it_should_return_an_empty_string_when_retrieving_a_non_existent_property()

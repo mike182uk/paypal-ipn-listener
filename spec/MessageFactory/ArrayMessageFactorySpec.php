@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Mdb\PayPal\Ipn;
+namespace spec\Mdb\PayPal\Ipn\MessageFactory;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,7 +17,7 @@ class ArrayMessageFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Mdb\PayPal\Ipn\MessageFactory');
     }
 
-    function it_should_create_a_message_from_the_passed_array()
+    function it_should_create_a_message_from_an_array()
     {
         $this->createMessage()->shouldHaveType('Mdb\PayPal\Ipn\Message');
     }

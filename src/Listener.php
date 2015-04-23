@@ -70,7 +70,7 @@ class Listener
     }
 
     /**
-     * @param mixed $listener
+     * @param callable $listener
      */
     public function onVerified($listener)
     {
@@ -78,7 +78,7 @@ class Listener
     }
 
     /**
-     * @param mixed $listener
+     * @param callable $listener
      */
     public function onInvalid($listener)
     {
@@ -86,7 +86,7 @@ class Listener
     }
 
     /**
-     * @param mixed $listener
+     * @param callable $listener
      */
     public function onVerificationFailure($listener)
     {

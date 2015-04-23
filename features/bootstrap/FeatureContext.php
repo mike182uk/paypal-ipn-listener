@@ -3,7 +3,7 @@
 use Assert\Assertion;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use GuzzleHttp\Client;
-use Mdb\PayPal\Ipn\ArrayMessageFactory;
+use Mdb\PayPal\Ipn\MessageFactory\ArrayMessageFactory;
 use Mdb\PayPal\Ipn\Event\MessageVerificationEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
 use Mdb\PayPal\Ipn\Listener;
@@ -24,21 +24,21 @@ class FeatureContext implements SnippetAcceptingContext
     /**
      * @var bool
      */
-    private $invalidIpnSeen = false;
+    private $invalidIpn = false;
 
     /**
      * @var bool
      */
-    private $verifiedIpnSeen = false;
+    private $verifiedIpn = false;
 
     /**
      * @beforeScenario @invalidIpn
      */
     public function willFailVerification()
     {
-        $this->ipnMessageData = array(
+        $this->ipnMessageData = [
             '__verified' => 0,
-        );
+        ];
     }
 
     /**
@@ -46,18 +46,18 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function willPassVerification()
     {
-        $this->ipnMessageData = array(
+        $this->ipnMessageData = [
             '__verified' => 1,
-        );
+        ];
     }
 
     /**
      * @afterScenario
      */
-    public function resetSeenIpns()
+    public function resetIpnStatus()
     {
-        $this->invalidIpnSeen = false;
-        $this->verifiedIpnSeen = false;
+        $this->invalidIpn = false;
+        $this->verifiedIpn = false;
     }
 
     /**
@@ -65,10 +65,10 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function iHaveReceivedAnIpnMessage()
     {
-        $data = array(
+        $data = [
             'foo' => 'bar',
             'baz' => 'qux',
-        );
+        ];
 
         $this->ipnMessageData = array_merge($this->ipnMessageData, $data);
     }
@@ -94,11 +94,11 @@ class FeatureContext implements SnippetAcceptingContext
         $that = $this;
 
         $listener->onInvalid(function (MessageVerificationEvent $event) use ($that) {
-            $that->invalidIpnSeen = true;
+            $that->invalidIpn = true;
         });
 
         $listener->onVerified(function (MessageVerificationEvent $event) use ($that) {
-            $that->verifiedIpnSeen = true;
+            $that->verifiedIpn = true;
         });
 
         $listener->onVerificationFailure(function (MessageVerificationFailureEvent $event) {
@@ -115,7 +115,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function paypalShouldReportThatTheIpnMessageIsUntrustworthy()
     {
-        Assertion::true($this->invalidIpnSeen);
+        Assertion::true($this->invalidIpn);
     }
 
     /**
@@ -123,7 +123,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function paypalShouldReportThatTheIpnMessageIsTrustworthy()
     {
-        Assertion::true($this->verifiedIpnSeen);
+        Assertion::true($this->verifiedIpn);
     }
 
     /**

@@ -34,7 +34,10 @@ class GuzzleServiceSpec extends ObjectBehavior
 
         $message->getAll()->willReturn(['foo' => 'bar']);
 
-        $this->verifyIpnMessage($message)->shouldHaveType('Mdb\PayPal\Ipn\ServiceResponse');
+        $response = $this->verifyIpnMessage($message);
+
+        $response->shouldHaveType('Mdb\PayPal\Ipn\ServiceResponse');
+        $response->getBody()->shouldReturn('foo');
     }
 
     function it_should_throw_a_service_exception_when_a_request_fails(

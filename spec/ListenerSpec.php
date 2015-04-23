@@ -2,7 +2,9 @@
 
 namespace spec\Mdb\PayPal\Ipn;
 
-use Mdb\PayPal\Ipn\Event\MessageVerificationEvent;
+use Mdb\PayPal\Ipn\Event\MessageInvalidEvent;
+use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
+use Mdb\PayPal\Ipn\Event\MessageVerifiedEvent;
 use Mdb\PayPal\Ipn\Listener;
 use Mdb\PayPal\Ipn\Message;
 use Mdb\PayPal\Ipn\MessageFactory;
@@ -92,14 +94,14 @@ class ListenerSpec extends ObjectBehavior
         $this->listen();
     }
 
-    function itshould_attach_a_listener_for_the_message_verified_event(EventDispatcher $eventDispatcher)
+    function it_should_attach_a_listener_for_the_message_verified_event(EventDispatcher $eventDispatcher)
     {
         $eventDispatcher->addListener(
             Listener::IPN_VERIFIED_EVENT,
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onVerified(function (IpnMessageEvent $event) {});
+        $this->onVerified(function (MessageVerifiedEvent $event) {});
     }
 
     function it_should_attach_a_listener_for_the_message_invalid_event(EventDispatcher $eventDispatcher)
@@ -109,7 +111,7 @@ class ListenerSpec extends ObjectBehavior
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onInvalid(function (MessageVerificationEvent $event) {});
+        $this->onInvalid(function (MessageInvalidEvent $event) {});
     }
 
     function it_should_attach_a_listener_for_the_message_verification_failure_event(EventDispatcher $eventDispatcher)
@@ -119,6 +121,6 @@ class ListenerSpec extends ObjectBehavior
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onVerificationFailure(function (MessageVerificationEvent $event) {});
+        $this->onVerificationFailure(function (MessageVerificationFailureEvent $event) {});
     }
 }
