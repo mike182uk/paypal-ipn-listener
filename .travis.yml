@@ -7,14 +7,25 @@ php:
   - 7.0
   - hhvm
 
+env:
+  - MOCK_SERVER_PORT=3000
+
+before_install:
+  - sudo apt-get update
+  - travis_retry sudo apt-get install -y nodejs
+  - pushd $TRAVIS_BUILD_DIR/features/bootstrap/server
+  - travis_retry npm install
+  - nohup node server.js &
+  - popd
+
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source --dev
+  - travis_retry composer install --no-interaction --prefer-source
 
 script:
+  - bin/php-cs-fixer fix --dry-run --verbose
   - bin/phpspec run -fprogress
   - bin/behat -fprogress
-  - bin/php-cs-fixer fix --dry-run --verbose
 
 matrix:
   allow_failures:
