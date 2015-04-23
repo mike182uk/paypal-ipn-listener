@@ -9,9 +9,7 @@ use Prophecy\Argument;
 
 class PhpInputStreamMessageFactorySpec extends ObjectBehavior
 {
-    function let(
-       PhpInputStreamAdapter $phpInputStreamAdapter
-    )
+    function let(PhpInputStreamAdapter $phpInputStreamAdapter)
     {
         $this->beConstructedWith($phpInputStreamAdapter);
     }
@@ -21,9 +19,7 @@ class PhpInputStreamMessageFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Mdb\PayPal\Ipn\MessageFactory');
     }
 
-    function it_can_create_a_message_from_the_input_stream(
-        PhpInputStreamAdapter $phpInputStreamAdapter
-    )
+    function it_can_create_a_message_from_the_input_stream(PhpInputStreamAdapter $phpInputStreamAdapter)
     {
         $streamContents = 'foo=bar&baz=quz';
 
@@ -34,9 +30,7 @@ class PhpInputStreamMessageFactorySpec extends ObjectBehavior
         $message->shouldHaveType('Mdb\PayPal\Ipn\Message');
     }
 
-    function it_should_url_decode_values_from_the_input_stream(
-        PhpInputStreamAdapter $phpInputStreamAdapter
-    )
+    function it_should_url_decode_values_from_the_input_stream(PhpInputStreamAdapter $phpInputStreamAdapter)
     {
         $streamContents = 'foo=bar&baz=quz+foo+%28bar%29';
 

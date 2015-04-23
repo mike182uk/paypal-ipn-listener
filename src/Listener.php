@@ -11,9 +11,9 @@ use UnexpectedValueException;
 
 class Listener
 {
-    const IPN_VERIFIED_EVENT = 'ipn.message.verified';
-    const IPN_INVALID_EVENT  = 'ipn.message.invalid';
-    const IPN_VERIFICATION_FAILURE_EVENT = 'ipn.message.verification_failure';
+    const EVENT_IPN_VERIFIED = 'ipn.message.verified';
+    const EVENT_IPN_INVALID  = 'ipn.message.invalid';
+    const EVENT_IPN_VERIFICATION_FAILURE = 'ipn.message.verification.failure';
 
     /**
      * @var MessageFactory
@@ -53,17 +53,17 @@ class Listener
             $result = $this->verifier->verify($message);
 
             if ($result) {
-                $eventName = self::IPN_VERIFIED_EVENT;
+                $eventName = self::EVENT_IPN_VERIFIED;
                 $event = new MessageVerifiedEvent($message);
             } else {
-                $eventName = self::IPN_INVALID_EVENT;
+                $eventName = self::EVENT_IPN_INVALID;
                 $event = new MessageInvalidEvent($message);
             }
         } catch (UnexpectedValueException $e) {
-            $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
+            $eventName = self::EVENT_IPN_VERIFICATION_FAILURE;
             $event = new MessageVerificationFailureEvent($message);
         } catch (ApiRequestFailureException $e) {
-            $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
+            $eventName = self::EVENT_IPN_VERIFICATION_FAILURE;
             $event = new MessageVerificationFailureEvent($message);
         }
 
@@ -75,7 +75,7 @@ class Listener
      */
     public function onVerified($listener)
     {
-        $this->eventDispatcher->addListener(self::IPN_VERIFIED_EVENT, $listener);
+        $this->eventDispatcher->addListener(self::EVENT_IPN_VERIFIED, $listener);
     }
 
     /**
@@ -83,7 +83,7 @@ class Listener
      */
     public function onInvalid($listener)
     {
-        $this->eventDispatcher->addListener(self::IPN_INVALID_EVENT, $listener);
+        $this->eventDispatcher->addListener(self::EVENT_IPN_INVALID, $listener);
     }
 
     /**
@@ -91,6 +91,6 @@ class Listener
      */
     public function onVerificationFailure($listener)
     {
-        $this->eventDispatcher->addListener(self::IPN_VERIFICATION_FAILURE_EVENT, $listener);
+        $this->eventDispatcher->addListener(self::EVENT_IPN_VERIFICATION_FAILURE, $listener);
     }
 }

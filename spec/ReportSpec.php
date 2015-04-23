@@ -8,18 +8,14 @@ use Prophecy\Argument;
 
 class ReportSpec extends ObjectBehavior
 {
-    function it_has_a_mutable_ipn_message(
-        Message $message
-    )
+    function it_has_a_mutable_ipn_message(Message $message)
     {
         $this->setIpnMessage($message);
 
         $this->getIpnMessage()->shouldReturn($message);
     }
 
-    function it_can_be_represented_as_a_string(
-        Message $message
-    )
+    function it_can_be_represented_as_a_string(Message $message)
     {
         $message->getAll()->willReturn(array(
             'foo' => 'bar',

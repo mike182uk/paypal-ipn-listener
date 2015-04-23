@@ -10,11 +10,11 @@ class PhpInputStreamMessageFactory implements MessageFactory
     private $phpInputStreamAdapter;
 
     /**
-     * @param PhpInputStreamAdapter $streamWrapperAdapter
+     * @param PhpInputStreamAdapter $phpInputStreamAdapter
      */
-    public function __construct(PhpInputStreamAdapter $streamWrapperAdapter)
+    public function __construct(PhpInputStreamAdapter $phpInputStreamAdapter)
     {
-        $this->phpInputStreamAdapter = $streamWrapperAdapter;
+        $this->phpInputStreamAdapter = $phpInputStreamAdapter;
     }
 
     /**

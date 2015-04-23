@@ -25,7 +25,7 @@ class Verifier
     /**
      * @param Message $message
      *
-     * @return boolean
+     * @return bool
      *
      * @throws UnexpectedValueException
      */
@@ -37,6 +37,6 @@ class Verifier
             throw new UnexpectedValueException(sprintf('Unexpected verification status encountered: %s', $apiResponse));
         }
 
-        return $apiResponse == self::STATUS_KEYWORD_VERIFIED;
+        return $apiResponse === self::STATUS_KEYWORD_VERIFIED;
     }
 }

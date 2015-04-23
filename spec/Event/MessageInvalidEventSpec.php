@@ -8,9 +8,7 @@ use Prophecy\Argument;
 
 class IpnMessageInvalidEventSpec extends ObjectBehavior
 {
-    function let(
-        Message $message
-    )
+    function let(Message $message)
     {
         $this->beConstructedWith($message);
     }
@@ -21,9 +19,7 @@ class IpnMessageInvalidEventSpec extends ObjectBehavior
         $this->shouldHaveType('Mdb\PayPal\Ipn\Event\MessageVerificationEvent');
     }
 
-    function it_can_retrieve_the_ipn_message(
-        Message $message
-    )
+    function it_can_retrieve_the_ipn_message(Message $message)
     {
         $this->getMessage()->shouldReturn($message);
     }
