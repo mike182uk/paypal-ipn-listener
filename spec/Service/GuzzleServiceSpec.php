@@ -32,7 +32,7 @@ class GuzzleServiceSpec extends ObjectBehavior
             Argument::type('array')
         )->willReturn($response);
 
-        $message->__toString()->willReturn('foo');
+        $message->getAll()->willReturn(['foo' => 'bar']);
 
         $this->verifyIpnMessage($message)->shouldHaveType('Mdb\PayPal\Ipn\ServiceResponse');
     }
@@ -46,7 +46,7 @@ class GuzzleServiceSpec extends ObjectBehavior
             Argument::type('array')
         )->willThrow('Exception');
 
-        $message->__toString()->willReturn('foo');
+        $message->getAll()->willReturn(['foo' => 'bar']);
 
         $this->shouldThrow('Mdb\PayPal\Ipn\Exception\ServiceException')->during('verifyIpnMessage', array($message));
     }

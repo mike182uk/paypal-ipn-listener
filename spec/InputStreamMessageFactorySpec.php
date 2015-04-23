@@ -6,7 +6,7 @@ use Mdb\PayPal\Ipn\InputStream;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class PhpInputStreamMessageFactorySpec extends ObjectBehavior
+class InputStreamMessageFactorySpec extends ObjectBehavior
 {
     function let(InputStream $inputStream)
     {
