@@ -1,7 +1,6 @@
 <?php
 
-use Mdb\PayPal\Ipn\Message;
-use Mdb\PayPal\Ipn\MessageFactory;
+namespace Mdb\PayPal\Ipn;
 
 class ArrayMessageFactory implements MessageFactory
 {

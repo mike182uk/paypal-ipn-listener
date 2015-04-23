@@ -3,6 +3,7 @@
 use Assert\Assertion;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use GuzzleHttp\Client;
+use Mdb\PayPal\Ipn\ArrayMessageFactory;
 use Mdb\PayPal\Ipn\Event\MessageVerificationEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
 use Mdb\PayPal\Ipn\Listener;
