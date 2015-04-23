@@ -2,4 +2,4 @@ default:
   suites:
     default:
       contexts:
-        - VerifierContext
+        - FeatureContext
