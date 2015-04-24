@@ -19,7 +19,7 @@ class FeatureContext implements SnippetAcceptingContext
     /**
      * @var array
      */
-    private $ipnMessageData = [];
+    protected $ipnMessageData = [];
 
     /**
      * @var bool
@@ -78,18 +78,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function iVerifyTheIpnMessageWithPaypal()
     {
-        $service = new GuzzleService(
-            new Client(),
-            $this->getServiceEndpoint()
-        );
-
-        $verifier = new Verifier($service);
-
-        $listener = new Listener(
-            new ArrayMessageFactory($this->ipnMessageData),
-            $verifier,
-            new EventDispatcher()
-        );
+        $listener = $this->getListener();
 
         $that = $this;
 
@@ -127,9 +116,28 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
+     * @return Listener
+     */
+    protected function getListener()
+    {
+        $service = new GuzzleService(
+            new Client(),
+            $this->getServiceEndpoint()
+        );
+
+        $verifier = new Verifier($service);
+
+        return new Listener(
+            new ArrayMessageFactory($this->ipnMessageData),
+            $verifier,
+            new EventDispatcher()
+        );
+    }
+
+    /**
      * @return string
      */
-    private function getServiceEndpoint()
+    protected function getServiceEndpoint()
     {
         return sprintf('%s:%s', self::SERVICE_ENDPOINT, getenv(self::SERVICE_ENDPOINT_PORT_ENV_VAR));
     }

@@ -3,3 +3,6 @@ default:
     default:
       contexts:
         - FeatureContext
+    listener_builder:
+      contexts:
+        - GuzzleArrayListenerBuilderContext
