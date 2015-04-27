@@ -29,9 +29,10 @@ bin/phpspec run
 
 ##Running Examples
 
-To successfully run the examples you need to make sure the mock server is running. The mock server requires node to be installed:
+To successfully run the examples you need to make sure the mock server is running. The mock server requires node to be installed and the `MOCK_SERVER_PORT` envrionment variable to be set:
 
 ```bash
+export MOCK_SERVER_PORT=3000
 cd features/bootstrap/server
 npm install
 node server.js
