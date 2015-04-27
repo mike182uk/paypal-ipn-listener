@@ -61,7 +61,7 @@ This package provides 1 service:
 
 ##<a id="usage"></a>Usage
 
-You can either build up the `Listener` object manually or you can use a `ListenerBuilder`. This package provides 2 listener builders:
+You can either build up the listener object manually or you can use a listener builder. This package provides 2 listener builders:
 
 1. `Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder` - Builds a listener using the guzzle service and the input stream message factory
 2. `Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\ArrayListenerBuilder` - Builds a listener using the guzzle service and the array message factory
@@ -103,7 +103,7 @@ $listener = new Listener(
 );
 ```
 
-Alot of plumbing is needed to create the listener manually. The job of the `ListenerBuilder` is to abstract away this logic.
+Alot of plumbing is needed to create the listener manually. The job of the listener builder is to abstract away this logic.
 
 ###Subscribing to events
 
@@ -117,19 +117,19 @@ use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
 $listener->onVerified(function (MessageVerifiedEvent $event) {
    $ipnMessage = $event->getMessage();
    
-   // IPN message was verified, everything is ok! Do your processing logic here.
+   // IPN message was verified, everything is ok! Do your processing logic here...
 });
 
 $listener->onInvalid(function (MessageInvalidEvent $event) {
    $ipnMessage = $event->getMessage();
    
-   // IPN message was was invalid, something is not right
+   // IPN message was was invalid, something is not right! Do your logging here...
 });
 
 $listener->onVerificationFailure(function (MessageVerificationFailureEvent $event) {
     $error = $event->getError();
     
-    // something bad happend when trying to communicate with PayPal
+    // Something bad happend when trying to communicate with PayPal! Do your logging here...
 });
 ```
 
@@ -151,22 +151,22 @@ use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder as Listener
 
 $listener = (new ListenerBuilder)->build();
 
-$listener->onVerified(function (MessageInvalidEvent $event) {
+$listener->onVerified(function (MessageVerifiedEvent $event) {
    $ipnMessage = $event->getMessage();
    
-   // IPN was verified, everything is ok! Do your processing logic here.
+   // IPN message was verified, everything is ok! Do your processing logic here...
 });
 
-$listener->onInvalid(function (MessageVerificationEvent $event) {
+$listener->onInvalid(function (MessageInvalidEvent $event) {
    $ipnMessage = $event->getMessage();
    
-   // IPN was was invalid, something is not right
+   // IPN message was was invalid, something is not right! Do your logging here...
 });
 
 $listener->onVerificationFailure(function (MessageVerificationFailureEvent $event) {
     $error = $event->getError();
     
-    // something bad happend when trying to communicate with PayPal
+    // Something bad happend when trying to communicate with PayPal! Do your logging here...
 });
 
 $listener->listen();
