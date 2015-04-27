@@ -4,7 +4,6 @@ Contributions are **welcome** and will be fully **credited**.
 
 Contributions can be made via a Pull Request on [Github](https://github.com/mike182uk/paypal-ipn-listener).
 
-
 ##Pull Requests
 
 - **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer) is included as a dev dependency. Make sure you run `bin/php-cs-fixer fix` before commiting your code.
@@ -25,11 +24,22 @@ Contributions can be made via a Pull Request on [Github](https://github.com/mike
 ##Running Specs
 
 ```bash
-$ bin/phpspec run
+bin/phpspec run
 ```
 
 ##Running Examples
 
+To successfully run the examples you need to make sure the mock server is running. The mock server requires node to be installed:
+
 ```bash
-$ bin/behat
+cd features/bootstrap/server
+npm install
+node server.js
 ```
+
+Once the server is running you should be able to run behat from the project directory:
+
+```bash
+bin/behat
+```
+
