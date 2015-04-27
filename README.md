@@ -29,8 +29,8 @@ Add this package as a dependency in `composer.json`
 
 ```json
 {
-    "require" : {
-        "mike182uk/paypal-ipn-listener" : "~3.0"
+    "require": {
+        "mike182uk/paypal-ipn-listener": "~3.0"
     }
 }
 ```
@@ -132,6 +132,8 @@ $listener->onVerificationFailure(function (MessageVerificationFailureEvent $even
     // Something bad happend when trying to communicate with PayPal! Do your logging here...
 });
 ```
+
+You can use any [callable](https://php.net/manual/en/language.types.callable.php) when subscribing to an event.
 
 ###Listening for IPN messages
 
