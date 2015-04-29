@@ -1,10 +1,23 @@
 <?php
 
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
-use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder as ListenerBuilder;
+use Mdb\PayPal\Ipn\Event\MessageInvalidEvent;
+use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
+use Mdb\PayPal\Ipn\Event\MessageVerifiedEvent;
+use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\ArrayListenerBuilder as ListenerBuilder;
 
-$listener = (new ListenerBuilder())->build();
+$listenerBuilder = new ListenerBuilder();
+
+// make sure this is actually the data you recieved from PayPal...
+$data = array(
+    'foo' => 'bar',
+    'bar' => 'baz',
+);
+
+$listenerBuilder->setData($data);
+
+$listener = $listenerBuilder->build();
 
 $listener->onInvalid(function (MessageInvalidEvent $event) {
     $ipnMessage = $event->getMessage();

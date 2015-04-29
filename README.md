@@ -53,7 +53,7 @@ The `MessageFactory` and `Service` components are swappable components.
 This package provides 2 message factories:
 
 1. `Mdb\PayPal\Ipn\MessageFactory\InputStreamMessageFactory` - Creates a message from the `php://input` stream
-2. `Mdb\PayPal\Ipn\MessageFactory\ArrayMessageFactory` - Creates a message from an array passed in through the message factory constructor
+2. `Mdb\PayPal\Ipn\MessageFactory\ArrayMessageFactory` - Creates a message from an array passed to the `setData` method
 
 This package provides 1 service:
 
@@ -133,7 +133,35 @@ $listener->onVerificationFailure(function (MessageVerificationFailureEvent $even
 });
 ```
 
-You can use any [callable](https://php.net/manual/en/language.types.callable.php) when subscribing to an event.
+You can use any [callable](https://php.net/manual/en/language.types.callable.php) when subscribing to an event:
+
+```php
+class IpnProcessor
+{
+    public function onVerified(MessageVerifiedEvent $event)
+    {
+        $message = $event->getMessage();
+        
+        // ...
+    }
+}
+
+$listener->onVerified(array(new Processor, 'onVerified'));
+```
+
+```php
+class IpnProcessor
+{
+    public static function onVerified(MessageVerifiedEvent $event)
+    {
+        $message = $event->getMessage();
+        
+        // ...
+    }
+}
+
+$listener->onVerified(array('IpnProcessor', 'onVerified'));
+```
 
 ###Listening for IPN messages
 
@@ -181,7 +209,7 @@ When using one of the provided listener builders you can set your listener to us
 ```php
 $listenerBuilder = new ListenerBuilder();
 
-$listnerBuilder->useSandbox(); // use PayPal sandbox
+$listenerBuilder->useSandbox(); // use PayPal sandbox
 
 $listener = $listenerBuilder()->build();
 ```
