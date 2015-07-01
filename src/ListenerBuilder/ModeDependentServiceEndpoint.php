@@ -5,13 +5,13 @@ namespace Mdb\PayPal\Ipn\ListenerBuilder;
 trait ModeDependentServiceEndpoint
 {
     /**
-     * @var int
+     * @var bool
      */
-    private $useSandbox = 0;
+    private $useSandbox = false;
 
     public function useSandbox()
     {
-        $this->useSandbox = 1;
+        $this->useSandbox = true;
     }
 
     /**
