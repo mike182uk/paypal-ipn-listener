@@ -11,7 +11,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class Listener
 {
     const IPN_VERIFIED_EVENT = 'ipn.message.verified';
-    const IPN_INVALID_EVENT  = 'ipn.message.invalid';
+    const IPN_INVALID_EVENT = 'ipn.message.invalid';
     const IPN_VERIFICATION_FAILURE_EVENT = 'ipn.message.verification_failure';
 
     /**
