@@ -8,7 +8,7 @@ use Mdb\PayPal\Ipn\Service\GuzzleService;
 
 abstract class GuzzleListenerBuilder extends ListenerBuilder
 {
-    use ModeDependentServiceEnpoint;
+    use ModeDependentServiceEndpoint;
 
     /**
      * {@inheritdoc}

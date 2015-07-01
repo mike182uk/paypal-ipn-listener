@@ -224,7 +224,7 @@ To create your own message factory you must implement `Mdb\PayPal\Ipn\MessageFac
 
 To create your own listener builder it is best to extend `Mdb\PayPal\Ipn\ListenerBuilder` as this provides most of the boilerplate code needed to create a listener builder.
 
-You will notice that when using any of the provided guzzle listener builders that there is a `useSandbox` method exposed. You can add this functionality to your listener builder by using the `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEnpoint` trait (see `Mdb\PayPal\Ipn\ListenerBuilder\GuzzleListenerBuilder` for usage example).
+You will notice that when using any of the provided guzzle listener builders that there is a `useSandbox` method exposed. You can add this functionality to your listener builder by using the `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEndpoint` trait (see `Mdb\PayPal\Ipn\ListenerBuilder\GuzzleListenerBuilder` for usage example).
 
 ##<a id="notes"></a>Notes
 
