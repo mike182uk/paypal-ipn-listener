@@ -2,7 +2,7 @@
 
 namespace Mdb\PayPal\Ipn\ListenerBuilder;
 
-trait ModeDependentServiceEnpoint
+trait ModeDependentServiceEndpoint
 {
     /**
      * @var int
