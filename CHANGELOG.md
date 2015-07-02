@@ -1,5 +1,9 @@
 #Changelog
 
+##4.0.0
+
+- Rename `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEnpoint` to `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEndpoint`
+
 ##3.0.0
 
 - Rewrite from the ground up

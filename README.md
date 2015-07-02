@@ -30,7 +30,7 @@ Add this package as a dependency in `composer.json`
 ```json
 {
     "require": {
-        "mike182uk/paypal-ipn-listener": "~3.0"
+        "mike182uk/paypal-ipn-listener": "~4.0"
     }
 }
 ```
