@@ -2,6 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/mike182uk/paypal-ipn-listener.svg?style=flat-square)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834/mini.png)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
 [![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![License](https://img.shields.io/github/license/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 
