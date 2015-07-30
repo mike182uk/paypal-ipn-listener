@@ -212,7 +212,7 @@ $listenerBuilder = new ListenerBuilder();
 
 $listenerBuilder->useSandbox(); // use PayPal sandbox
 
-$listener = $listenerBuilder()->build();
+$listener = $listenerBuilder->build();
 ```
 
 You can find some full usage examples in the examples directory.
