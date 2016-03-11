@@ -13,11 +13,11 @@
     "require" : {
         "php": ">=5.4.0",
         "guzzlehttp/guzzle": "~5.2",
-        "symfony/event-dispatcher": "~2.6"
+        "symfony/event-dispatcher": "~2.8|~3.0"
     },
     "require-dev" : {
         "phpspec/phpspec": "~2.1",
-        "behat/behat": "~3.0",
+        "behat/behat": "~3.1@rc",
         "beberlei/assert": "~2.0",
         "fabpot/php-cs-fixer": "~1.0"
     },
@@ -25,8 +25,5 @@
         "psr-4": {
           "Mdb\\PayPal\\Ipn\\": "src/"
         }
-    },
-    "config": {
-        "bin-dir" : "bin"
     }
 }
