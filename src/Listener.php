@@ -6,7 +6,7 @@ use Mdb\PayPal\Ipn\Event\MessageInvalidEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerifiedEvent;
 use Mdb\PayPal\Ipn\Exception\ServiceException;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Listener
 {
@@ -25,20 +25,20 @@ class Listener
     private $verifier;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
     /**
-     * @param MessageFactory  $messageFactory
-     * @param Verifier        $verifier
-     * @param EventDispatcher $eventDispatcher
+     * @param MessageFactory           $messageFactory
+     * @param Verifier                 $verifier
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         MessageFactory $messageFactory,
         Verifier $verifier,
-        EventDispatcher $eventDispatcher
-    ) {
+        EventDispatcherInterface $eventDispatcher)
+    {
         $this->messageFactory = $messageFactory;
         $this->verifier = $verifier;
         $this->eventDispatcher = $eventDispatcher;
