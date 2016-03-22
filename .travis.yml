@@ -12,9 +12,13 @@ addons:
 
 matrix:
   fast_finish: true
+  include:
+    - php: 5.5
+      env: dependencies=lowest
+    - php: 7.0
+      env: dependencies=highest
   allow_failures:
     - php: hhvm
-    - php: 7.0
 
 php:
   - 5.5
@@ -32,10 +36,14 @@ before_install:
   - popd
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-dist
+  - composer self-update
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
 
 script:
-  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
   - ./vendor/bin/phpspec run -fprogress
   - ./vendor/bin/behat -fprogress
+
+after_script:
+  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
