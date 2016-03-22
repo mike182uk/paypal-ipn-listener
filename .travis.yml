@@ -27,7 +27,8 @@ php:
   - hhvm
 
 env:
-  - MOCK_SERVER_PORT=3000
+  global:
+    - MOCK_SERVER_PORT=3000
 
 before_install:
   - pushd $TRAVIS_BUILD_DIR/features/bootstrap/server
