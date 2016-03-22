@@ -8,7 +8,7 @@ cache:
 
 addons:
   apt_packages:
-      - nodejs
+    - nodejs
 
 matrix:
   fast_finish: true
@@ -36,6 +36,6 @@ before_script:
   - travis_retry composer install --prefer-dist
 
 script:
-  - vendor/bin/php-cs-fixer fix --dry-run --verbose
-  - vendor/bin/phpspec run -fprogress
-  - vendor/bin/behat -fprogress
+  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
+  - ./vendor/bin/phpspec run -fprogress
+  - ./vendor/bin/behat -fprogress
