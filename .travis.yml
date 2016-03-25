@@ -1,34 +1,50 @@
 language: php
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+addons:
+  apt_packages:
+    - nodejs
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.5
+      env: dependencies=lowest
+    - php: 7.0
+      env: dependencies=highest
+  allow_failures:
+    - php: hhvm
+
 php:
-  - 5.4
   - 5.5
   - 5.6
   - 7.0
   - hhvm
 
 env:
-  - MOCK_SERVER_PORT=3000
+  global:
+    - MOCK_SERVER_PORT=3000
 
 before_install:
-  - sudo apt-get update
-  - travis_retry sudo apt-get install -y nodejs
   - pushd $TRAVIS_BUILD_DIR/features/bootstrap/server
   - travis_retry npm install
   - nohup node server.js &
   - popd
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source
+  - composer self-update
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
 
 script:
-  - bin/php-cs-fixer fix --dry-run --verbose
-  - bin/phpspec run -fprogress
-  - bin/behat -fprogress
+  - ./vendor/bin/phpspec run -fprogress
+  - ./vendor/bin/behat -fprogress
 
-matrix:
-  allow_failures:
-    - php: hhvm
-    - php: 7.0
-  fast_finish: true
+after_script:
+  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
