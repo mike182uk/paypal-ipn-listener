@@ -2,12 +2,12 @@
 
 namespace Mdb\PayPal\Ipn;
 
+use Http\Client\Exception;
 use Http\Message\StreamFactory;
 use Mdb\PayPal\Ipn\Event\IpnInvalidEvent;
 use Mdb\PayPal\Ipn\Event\IpnVerificationFailureEvent;
 use Mdb\PayPal\Ipn\Event\IpnVerifiedEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Http\Client\Exception;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Listener
 {
@@ -26,19 +26,19 @@ class Listener
     private $verifier;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
     /**
-     * @param StreamFactory   $streamFactory
-     * @param Verifier        $verifier
-     * @param EventDispatcher $eventDispatcher
+     * @param StreamFactory            $streamFactory
+     * @param Verifier                 $verifier
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         StreamFactory  $streamFactory,
         Verifier $verifier,
-        EventDispatcher $eventDispatcher
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->streamFactory = $streamFactory;
         $this->verifier = $verifier;
