@@ -2,11 +2,12 @@
 
 namespace Mdb\PayPal\Ipn;
 
-use Mdb\PayPal\Ipn\Event\MessageInvalidEvent;
-use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
-use Mdb\PayPal\Ipn\Event\MessageVerifiedEvent;
-use Mdb\PayPal\Ipn\Exception\ServiceException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Http\Message\StreamFactory;
+use Mdb\PayPal\Ipn\Event\IpnInvalidEvent;
+use Mdb\PayPal\Ipn\Event\IpnVerificationFailureEvent;
+use Mdb\PayPal\Ipn\Event\IpnVerifiedEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Http\Client\Exception;
 
 class Listener
 {
@@ -15,9 +16,9 @@ class Listener
     const IPN_VERIFICATION_FAILURE_EVENT = 'ipn.message.verification_failure';
 
     /**
-     * @var MessageFactory
+     * @var StreamFactory
      */
-    private $messageFactory;
+    private $streamFactory;
 
     /**
      * @var Verifier
@@ -25,45 +26,45 @@ class Listener
     private $verifier;
 
     /**
-     * @var EventDispatcherInterface
+     * @var EventDispatcher
      */
     private $eventDispatcher;
 
     /**
-     * @param MessageFactory           $messageFactory
-     * @param Verifier                 $verifier
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param StreamFactory   $streamFactory
+     * @param Verifier        $verifier
+     * @param EventDispatcher $eventDispatcher
      */
     public function __construct(
-        MessageFactory $messageFactory,
+        StreamFactory  $streamFactory,
         Verifier $verifier,
-        EventDispatcherInterface $eventDispatcher)
-    {
-        $this->messageFactory = $messageFactory;
+        EventDispatcher $eventDispatcher
+    ) {
+        $this->streamFactory = $streamFactory;
         $this->verifier = $verifier;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     public function listen()
     {
-        $message = $this->messageFactory->createMessage();
+        $datas = \GuzzleHttp\Psr7\parse_query($this->createStream()->getContents(), PHP_QUERY_RFC1738);
 
         try {
-            $result = $this->verifier->verify($message);
+            $result = $this->verifier->verify($datas);
 
             if ($result) {
                 $eventName = self::IPN_VERIFIED_EVENT;
-                $event = new MessageVerifiedEvent($message);
+                $event = new IpnVerifiedEvent($datas);
             } else {
                 $eventName = self::IPN_INVALID_EVENT;
-                $event = new MessageInvalidEvent($message);
+                $event = new IpnInvalidEvent($datas);
             }
         } catch (\UnexpectedValueException $e) {
             $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
-            $event = new MessageVerificationFailureEvent($message, $e->getMessage());
-        } catch (ServiceException $e) {
+            $event = new IpnVerificationFailureEvent($datas, $e->getMessage());
+        } catch (Exception $e) {
             $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
-            $event = new MessageVerificationFailureEvent($message, $e->getMessage());
+            $event = new IpnVerificationFailureEvent($datas, $e->getMessage());
         }
 
         $this->eventDispatcher->dispatch($eventName, $event);
@@ -91,5 +92,13 @@ class Listener
     public function onVerificationFailure($listener)
     {
         $this->eventDispatcher->addListener(self::IPN_VERIFICATION_FAILURE_EVENT, $listener);
+    }
+
+    /**
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    protected function createStream()
+    {
+        return $this->streamFactory->createStream(\GuzzleHttp\Psr7\try_fopen('php://input', 'r'));
     }
 }
