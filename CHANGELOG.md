@@ -1,5 +1,15 @@
 #Changelog
 
+##5.0.0
+
+- Drop support for php 5.4 ([@Lctrs](https://github.com/Lctrs))
+- Upgrade symfony deps ([@Lctrs](https://github.com/Lctrs))
+- Refactor travis config ([@Lctrs](https://github.com/Lctrs))
+
+##4.0.1
+
+- Use `EventDispatcherInterface` type hint instead of `EventDispatcher` in `Mdb\PayPal\Ipn\Listener` ([@mablae](https://github.com/mablae))
+
 ##4.0.0
 
 - Rename `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEnpoint` to `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEndpoint`
@@ -10,7 +20,7 @@
 
 ##2.0.2
 
-- Send `User-Agent` header in `CurlVerifier::sendVerificationRequest`
+- Send `User-Agent` header in `CurlVerifier::sendVerificationRequest` ([@stefanneubig](https://github.com/stefanneubig))
 - Send `Connection: Close` header in `CurlVerifier::sendVerificationRequest`
 
 ##2.0.1
@@ -30,10 +40,10 @@
 
 ##1.1.0
 
-- Removed ``PayPal\Ipn\Response\Standard``
-- ``PayPal\Ipn\Response`` is no longer abstract
-- Renamed ``status`` property on ``PayPal\Ipn\Response`` to ``statusCode``. Getter / setters also renamed
-- Renamed ``getStatusReport`` method on ``PayPal\Ipn\Listener`` to ``getReport``
+- Removed `PayPal\Ipn\Response\Standard`
+- `PayPal\Ipn\Response` is no longer abstract
+- Renamed `status` property on `PayPal\Ipn\Response` to `statusCode`. Getter / setters also renamed
+- Renamed `getStatusReport` method on `PayPal\Ipn\Listener` to `getReport`
 - Added basic listener test
 - Misc refactoring + cleaning up
 
