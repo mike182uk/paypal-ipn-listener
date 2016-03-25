@@ -12,14 +12,18 @@
     ],
     "require" : {
         "php": "~5.5|~7.0",
-        "guzzlehttp/guzzle": "~5.2",
-        "symfony/event-dispatcher": "~2.8|~3.0"
+        "guzzlehttp/psr7": "^1.2",
+        "php-http/message": "^1.0",
+        "php-http/client-implementation": "^1.0",
+        "symfony/event-dispatcher": "~2.8|~3.0",
+        "symfony/options-resolver": "~2.8|~3.0"
     },
     "require-dev" : {
+        "fabpot/php-cs-fixer": "~1.0",
         "phpspec/phpspec": "~2.1",
         "behat/behat": "~3.1@rc",
         "beberlei/assert": "~2.0",
-        "fabpot/php-cs-fixer": "~1.0"
+        "php-http/guzzle6-adapter": "^1.0"
     },
     "autoload": {
         "psr-4": {
