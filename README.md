@@ -1,5 +1,5 @@
 #PayPal IPN Listener
-
+[![Packagist](https://img.shields.io/packagist/v/mike182uk/paypal-ipn-listener.svg)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![Build Status](https://img.shields.io/travis/mike182uk/paypal-ipn-listener.svg?style=flat-square)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834/mini.png)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
@@ -26,16 +26,10 @@ A PayPal IPN (Instant Payment Notification) listener for PHP >=5.5
 
 ### Composer
 
-Add this package as a dependency in `composer.json`
+Add this package as a dependency in `composer.json` using the `composer require` command:
 
-```json
-{
-    "require": {
-        "mike182uk/paypal-ipn-listener": "~5.0"
-    }
-}
-```
-
+    $ composer require mike182uk/paypal-ipn-listener
+    
 ##<a id="architecture"></a>Architecture
 
 This package is made up of several components that work together:
