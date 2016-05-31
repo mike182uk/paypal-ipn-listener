@@ -26,6 +26,9 @@ class ListenerBuilder
         $resolver
             ->setDefaults([
                 'use_sandbox' => false,
+                'event_dispatcher' => function () {
+                    return new EventDispatcher();
+                },
                 'httplug.client' => function () {
                     if (class_exists('\Http\Discovery\HttpClientDiscovery')) {
                         return \Http\Discovery\HttpClientDiscovery::find();
@@ -47,7 +50,7 @@ class ListenerBuilder
                         return new \Http\Client\Curl\Client();
                     }
 
-                    if (class_exists('Http\Adapter\Buzz\Client')) {
+                    if (class_exists('\Http\Adapter\Buzz\Client')) {
                         return new \Http\Adapter\Buzz\Client();
                     }
 
@@ -85,6 +88,7 @@ class ListenerBuilder
                 },
             ])
             ->setAllowedTypes('use_sandbox', 'bool')
+            ->setAllowedTypes('event_dispatcher', '\Symfony\Component\EventDispatcher\EventDispatcher')
             ->setAllowedTypes('httplug.client', '\Http\Client\HttpClient')
             ->setAllowedTypes('httplug.message_factory', '\Http\Message\MessageFactory')
             ->setAllowedTypes('httplug.stream_factory', '\Http\Message\StreamFactory');
@@ -98,7 +102,7 @@ class ListenerBuilder
         return new Listener(
             $this->options['httplug.stream_factory'],
             $this->getVerifier(),
-            $this->getEventDispatcher()
+            $this->options['event_dispatcher']
         );
     }
 
@@ -112,13 +116,5 @@ class ListenerBuilder
             $this->options['httplug.message_factory'],
             $this->options['use_sandbox']
         );
-    }
-
-    /**
-     * @return EventDispatcher
-     */
-    private function getEventDispatcher()
-    {
-        return new EventDispatcher();
     }
 }
