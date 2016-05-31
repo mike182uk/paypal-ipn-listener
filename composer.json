@@ -12,7 +12,6 @@
     ],
     "require" : {
         "php": "~5.5|~7.0",
-        "guzzlehttp/psr7": "^1.2",
         "php-http/message": "^1.0",
         "php-http/client-implementation": "^1.0",
         "symfony/event-dispatcher": "~2.8|~3.0",

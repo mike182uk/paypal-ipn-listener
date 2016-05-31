@@ -47,7 +47,7 @@ class Listener
 
     public function listen()
     {
-        $datas = \GuzzleHttp\Psr7\parse_query($this->createStream()->getContents(), PHP_QUERY_RFC1738);
+        $datas = $this->parseQuery($this->createStream()->getContents());
 
         try {
             $result = $this->verifier->verify($datas);
@@ -99,6 +99,50 @@ class Listener
      */
     protected function createStream()
     {
-        return $this->streamFactory->createStream(\GuzzleHttp\Psr7\try_fopen('php://input', 'r'));
+        $ex = null;
+        set_error_handler(function () use ($filename, $mode, &$ex) {
+            $ex = new \RuntimeException(sprintf(
+                'Unable to open %s using mode %s: %s',
+                $filename,
+                $mode,
+                func_get_args()[1]
+            ));
+        });
+
+        $handle = fopen('php://input', 'r');
+        restore_error_handler();
+
+        if ($ex) {
+            /* @var $ex \RuntimeException */
+            throw $ex;
+        }
+
+        return $this->streamFactory->createStream($handle);
+    }
+
+    private function parseQuery($str)
+    {
+        $result = [];
+
+        if ($str === '') {
+            return $result;
+        }
+
+        foreach (explode('&', $str) as $kvp) {
+            $parts = explode('=', $kvp, 2);
+            $key = urldecode($parts[0]);
+            $value = isset($parts[1]) ? urldecode($parts[1]) : null;
+
+            if (!isset($result[$key])) {
+                $result[$key] = $value;
+            } else {
+                if (!is_array($result[$key])) {
+                    $result[$key] = [$result[$key]];
+                }
+                $result[$key][] = $value;
+            }
+        }
+
+        return $result;
     }
 }
