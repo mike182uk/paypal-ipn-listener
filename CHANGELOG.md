@@ -1,5 +1,11 @@
 #Changelog
 
+##6.0.0
+
+- Upgrade `Guzzle` to `~6.0.0`
+- Upgrade `Behat` to `~3.1`
+- Use correct vendor for `php-cs-fixer`
+
 ##5.0.0
 
 - Drop support for php 5.4 ([@Lctrs](https://github.com/Lctrs))

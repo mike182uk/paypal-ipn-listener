@@ -17,9 +17,9 @@
     },
     "require-dev" : {
         "phpspec/phpspec": "~2.1",
-        "behat/behat": "~3.1@rc",
+        "behat/behat": "~3.1",
         "beberlei/assert": "~2.0",
-        "fabpot/php-cs-fixer": "~1.0"
+        "friendsofphp/php-cs-fixer": "~1.0"
     },
     "autoload": {
         "psr-4": {
