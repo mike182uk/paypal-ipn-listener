@@ -43,7 +43,7 @@ class GuzzleService implements Service
         try {
             $response = $this->httpClient->post(
                 $this->serviceEndpoint,
-                array('body' => $requestBody)
+                array('form_params' => $requestBody)
             );
         } catch (\Exception $e) {
             throw new ServiceException($e->getMessage());

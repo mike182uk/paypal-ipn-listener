@@ -3,14 +3,14 @@
 namespace spec\Mdb\PayPal\Ipn\Service;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 use Mdb\PayPal\Ipn\Message;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class GuzzleServiceSpec extends ObjectBehavior
 {
-    function let(Client $httpClient)
+    function let(ClientStub $httpClient)
     {
         $this->beConstructedWith($httpClient, 'http://foo.bar');
     }
@@ -21,7 +21,7 @@ class GuzzleServiceSpec extends ObjectBehavior
     }
 
     function it_should_return_a_service_response_when_verifying_an_ipn_message(
-        Client $httpClient,
+        ClientStub $httpClient,
         Message $message,
         ResponseInterface $response
     ) {
@@ -41,7 +41,7 @@ class GuzzleServiceSpec extends ObjectBehavior
     }
 
     function it_should_throw_a_service_exception_when_a_request_fails(
-        Client $httpClient,
+        ClientStub $httpClient,
         Message $message
     ) {
         $httpClient->post(
@@ -53,4 +53,8 @@ class GuzzleServiceSpec extends ObjectBehavior
 
         $this->shouldThrow('Mdb\PayPal\Ipn\Exception\ServiceException')->during('verifyIpnMessage', array($message));
     }
+}
+
+class ClientStub extends Client {
+    public function post() {}
 }
