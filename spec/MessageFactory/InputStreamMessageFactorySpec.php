@@ -29,7 +29,7 @@ class InputStreamMessageFactorySpec extends ObjectBehavior
 
     function it_should_url_decode_values_from_the_input_stream(InputStream $inputStream)
     {
-        $streamContents = 'foo=bar&baz=quz+foo+%28bar%29';
+        $streamContents = 'foo=bar&baz=quz%2Bfoo%2B%28bar%29';
 
         $inputStream->getContents()->willReturn($streamContents);
 

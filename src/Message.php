@@ -53,7 +53,7 @@ class Message
         $str = '';
 
         foreach ($this->data as $k => $v) {
-            $str .= sprintf('%s=%s&', $k, urlencode($v));
+            $str .= sprintf('%s=%s&', $k, rawurlencode($v));
         }
 
         return rtrim($str, '&');
@@ -72,7 +72,7 @@ class Message
         foreach ($keyValuePairs as $keyValuePair) {
             list($k, $v) = explode('=', $keyValuePair);
 
-            $data[$k] = urldecode($v);
+            $data[$k] = rawurldecode($v);
         }
 
         return $data;
