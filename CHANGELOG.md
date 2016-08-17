@@ -1,5 +1,9 @@
 #Changelog
 
+##7.0.0
+
+- Use `rawurlencode` / `rawurldecode` in place of `urlencode` / `urldecode` to resolve [this issue](https://github.com/paypal/ipn-code-samples/issues/51) ([@swader](https://github.com/Swader))
+
 ##6.0.0
 
 - Upgrade `Guzzle` to `~6.0.0`
