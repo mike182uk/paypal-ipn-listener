@@ -1,5 +1,9 @@
 #Changelog
 
+##7.0.1
+
+- Update dependencies so version of guzzle with security vuln is not depended on
+
 ##7.0.0
 
 - Use `rawurlencode` / `rawurldecode` in place of `urlencode` / `urldecode` to resolve [this issue](https://github.com/paypal/ipn-code-samples/issues/51) ([@swader](https://github.com/Swader))
