@@ -1,12 +1,13 @@
-#PayPal IPN Listener
+# PayPal IPN Listener
+
 [![Packagist](https://img.shields.io/packagist/v/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![Build Status](https://img.shields.io/travis/mike182uk/paypal-ipn-listener.svg?style=flat-square)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834/mini.png)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/969dd452-b91e-4048-a871-5babcd64b834.svg?style=flat-square)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
 [![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![License](https://img.shields.io/github/license/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 
-A PayPal IPN (Instant Payment Notification) listener for PHP >=5.5
+A PayPal IPN (Instant Payment Notification) listener for PHP
 
 ## Index
 
@@ -17,20 +18,18 @@ A PayPal IPN (Instant Payment Notification) listener for PHP >=5.5
 - [Extending](#extending)
 - [Notes](#notes)
 
-##<a id="prerequisites"></a>Prerequisites
+## <a id="prerequisites"></a>Prerequisites
 
 1. PHP >=5.5.0
 2. A good understanding of how the PayPal Instant Payment Notification system works. See [https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/](https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/)
 
-##<a id="installation"></a>Installation
+## <a id="installation"></a>Installation
 
-### Composer
+```bash
+composer require mike182uk/paypal-ipn-listener
+```
 
-Add this package as a dependency in `composer.json` using the `composer require` command:
-
-    $ composer require mike182uk/paypal-ipn-listener
-    
-##<a id="architecture"></a>Architecture
+## <a id="architecture"></a>Architecture
 
 This package is made up of several components that work together:
 
@@ -54,16 +53,16 @@ This package provides 1 service:
 
 1. `Mdb\PayPal\Ipn\Service\GuzzleService` - Uses [Guzzle](https://github.com/guzzle/guzzle) to communicate with PayPal
 
-##<a id="usage"></a>Usage
+## <a id="usage"></a>Usage
 
 You can either build up the listener object manually or you can use a listener builder. This package provides 2 listener builders:
 
 1. `Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder` - Builds a listener using the guzzle service and the input stream message factory
 2. `Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\ArrayListenerBuilder` - Builds a listener using the guzzle service and the array message factory
 
-Using a listener builder is the prefered way of building up a listener object.
+Using a listener builder is the preferred way of building up a listener object.
 
-###Using a listener builder
+### Using a listener builder
 
 ```php
 use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder as ListenerBuilder;
@@ -71,7 +70,7 @@ use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\InputStreamListenerBuilder as Listener
 $listener = (new ListenerBuilder)->build();
 ```
 
-###Building up the listener manually
+### Building up the listener manually
 
 ```php
 use GuzzleHttp\Client;
@@ -98,9 +97,9 @@ $listener = new Listener(
 );
 ```
 
-Alot of plumbing is needed to create the listener manually. The job of the listener builder is to abstract away this logic.
+A lot of plumbing is needed to create the listener manually. The job of the listener builder is to abstract away this logic.
 
-###Subscribing to events
+### Subscribing to events
 
 Once you have created the listener object you can subscribe to the events that it will dispatch:
 
@@ -158,7 +157,7 @@ class IpnProcessor
 $listener->onVerified(array('IpnProcessor', 'onVerified'));
 ```
 
-###Listening for IPN messages
+### Listening for IPN messages
 
 The last thing you need to do to kick of the process is listen for an IPN message:
 
@@ -166,7 +165,7 @@ The last thing you need to do to kick of the process is listen for an IPN messag
 $listener->listen();
 ```
 
-###Full Example 
+### Full Example 
 
 ```php
 use Mdb\PayPal\Ipn\Event\MessageVerifiedEvent;
@@ -197,7 +196,7 @@ $listener->onVerificationFailure(function (MessageVerificationFailureEvent $even
 $listener->listen();
 ```
 
-####Sandbox mode
+#### Sandbox mode
 
 When using one of the provided listener builders you can set your listener to use PayPal's sandbox for testing purposes:
 
@@ -211,7 +210,7 @@ $listener = $listenerBuilder->build();
 
 You can find some full usage examples in the examples directory.
 
-##<a id="extending"></a>Extending
+## <a id="extending"></a>Extending
 
 To create your own service you must implement `Mdb\PayPal\Ipn\Service`.
 
@@ -221,8 +220,8 @@ To create your own listener builder it is best to extend `Mdb\PayPal\Ipn\Listene
 
 You will notice that when using any of the provided guzzle listener builders that there is a `useSandbox` method exposed. You can add this functionality to your listener builder by using the `Mdb\PayPal\Ipn\ListenerBuilder\ModeDependentServiceEndpoint` trait (see `Mdb\PayPal\Ipn\ListenerBuilder\GuzzleListenerBuilder` for usage example).
 
-##<a id="notes"></a>Notes
+## <a id="notes"></a>Notes
 
-###Testing
+### Testing
 
 PayPal provide an Instant Payment Notification (IPN) simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
