@@ -25,5 +25,13 @@
         "psr-4": {
           "Mdb\\PayPal\\Ipn\\": "src/"
         }
+    },
+    "scripts": {
+        "specs": "phpspec run --ansi",
+        "examples": "behat --colors",
+        "specs-ci": "phpspec run --ansi -f progress",
+        "examples-ci": "behat --colors -f progress",
+        "lint": "php-cs-fixer fix --dry-run --verbose --ansi",
+        "fix": "php-cs-fixer fix --ansi"
     }
 }

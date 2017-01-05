@@ -10,7 +10,7 @@ Please report issues via the issue tracker on [GitHub](https://github.com/mike18
 
 ## Pull Requests
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) is a dev dependency. Make sure you run `./vendor/bin/php-cs-fixer fix` before committing your code.
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer). Make sure you run `composer run-script fix` before committing your code.
 
 - **Add specs where appropriate** - [PHPSpec](http://www.phpspec.net/en/latest/)
 
@@ -24,26 +24,32 @@ Please report issues via the issue tracker on [GitHub](https://github.com/mike18
 
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 
-## Running Specs
+## Running the specs
 
 ```bash
-./vendor/bin/phpspec run
+composer run-script specs
 ```
 
-## Running Examples
+## Running the examples
 
-To successfully run the examples you need to make sure the mock server is running. The mock server requires node to be installed and the `MOCK_SERVER_PORT` environment variable to be set:
+To run the examples you need to make sure the mock server is running. The mock server requires node to be installed and the `MOCK_SERVER_PORT` environment variable to be set:
 
 ```bash
 export MOCK_SERVER_PORT=3000
+```
+
+Once the `MOCK_SERVER_PORT` environment variable, start the mock server:
+
+```bash
 cd features/bootstrap/server
 npm install
 node server.js
 ```
 
-Once the server is running you should be able to run Behat from the project directory:
+You should now be able to run the examples:
 
 ```bash
-export MOCK_SERVER_PORT=3000 
-./vendor/bin/behat
+composer run-script examples
 ```
+
+If you start the mock server in a different terminal window / tab to where you are running the examples, you will need to set the `MOCK_SERVER_PORT` environment variable again.
