@@ -9,10 +9,10 @@ class MessageSpec extends ObjectBehavior
 {
     function let()
     {
-        $data = array(
+        $data = [
             'foo' => 'bar',
             'baz' => 'quz'
-        );
+        ];
 
         $this->beConstructedWith($data);
     }

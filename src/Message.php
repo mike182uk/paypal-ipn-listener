@@ -66,7 +66,7 @@ class Message
      */
     private function extractDataFromRawPostDataString($rawPostDataString)
     {
-        $data = array();
+        $data = [];
         $keyValuePairs = preg_split('/&/', $rawPostDataString, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($keyValuePairs as $keyValuePair) {

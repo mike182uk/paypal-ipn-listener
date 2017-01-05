@@ -51,7 +51,7 @@ class GuzzleServiceSpec extends ObjectBehavior
 
         $message->getAll()->willReturn(['foo' => 'bar']);
 
-        $this->shouldThrow('Mdb\PayPal\Ipn\Exception\ServiceException')->during('verifyIpnMessage', array($message));
+        $this->shouldThrow('Mdb\PayPal\Ipn\Exception\ServiceException')->during('verifyIpnMessage', [$message]);
     }
 }
 
