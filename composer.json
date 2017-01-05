@@ -32,6 +32,7 @@
         "specs-ci": "phpspec run --ansi -f progress",
         "examples-ci": "behat --colors -f progress",
         "lint": "php-cs-fixer fix --dry-run --verbose --ansi",
-        "fix": "php-cs-fixer fix --ansi"
+        "fix": "php-cs-fixer fix --ansi",
+        "mock-server": "cd features/bootstrap/server && php -S localhost:$MOCK_SERVER_PORT"
     }
 }

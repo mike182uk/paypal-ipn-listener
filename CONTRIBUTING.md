@@ -32,18 +32,16 @@ composer run-script specs
 
 ## Running the examples
 
-To run the examples you need to make sure the mock server is running. The mock server requires node to be installed and the `MOCK_SERVER_PORT` environment variable to be set:
+To run the examples you need to make sure the mock server is running. The mock server requires the `MOCK_SERVER_PORT` environment variable to be set:
 
 ```bash
 export MOCK_SERVER_PORT=3000
 ```
 
-Once the `MOCK_SERVER_PORT` environment variable, start the mock server:
+Once the `MOCK_SERVER_PORT` environment variable is set, start the mock server:
 
 ```bash
-cd features/bootstrap/server
-npm install
-node server.js
+composer run-script mock-server
 ```
 
 You should now be able to run the examples:
@@ -52,4 +50,4 @@ You should now be able to run the examples:
 composer run-script examples
 ```
 
-If you start the mock server in a different terminal window / tab to where you are running the examples, you will need to set the `MOCK_SERVER_PORT` environment variable again.
+If you start the mock server in a different terminal window / tab to where you are running the examples, you will need to set the `MOCK_SERVER_PORT` environment variable again in this terminal window / tab.
