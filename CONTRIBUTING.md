@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are **welcome** and will be fully **credited**.
+Contributions are **welcome!**
 
 Contributions can be made via a Pull Request on [GitHub](https://github.com/mike182uk/paypal-ipn-listener).
 
@@ -50,4 +50,4 @@ You should now be able to run the examples:
 composer run-script examples
 ```
 
-If you start the mock server in a different terminal window / tab to where you are running the examples, you will need to set the `MOCK_SERVER_PORT` environment variable again in this terminal window / tab.
+If you started the mock server in a different terminal window / tab to where you are running the examples, you will need to set the `MOCK_SERVER_PORT` environment variable again.

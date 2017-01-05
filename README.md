@@ -224,4 +224,4 @@ You will notice that when using any of the provided guzzle listener builders tha
 
 ### Testing
 
-PayPal provide an Instant Payment Notification (IPN) simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
+PayPal provides an IPN simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
