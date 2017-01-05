@@ -1,8 +1,15 @@
 # Changelog
 
+## 8.0.0
+
+- drop support for php <5.6
+- upgrade dependencies
+- remove node.js mock server
+- misc refactoring
+
 ## 7.0.1
 
-- update dependencies so version of guzzle with security vuln is not depended on
+- update dependencies so version of guzzle with security vulnerability is not depended on
 
 ## 7.0.0
 
