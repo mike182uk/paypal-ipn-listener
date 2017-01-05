@@ -1,11 +1,18 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
+$finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/spec')
     ->in(__DIR__ . '/features')
-    ->in(__DIR__ . '/examples')
 ;
 
-return Symfony\CS\Config\Config::create()
-    ->finder($finder)
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        'array_syntax' => [
+          'syntax' => 'short',
+        ],
+    ])
+    ->setUsingCache(false)
+    ->setFinder($finder)
 ;

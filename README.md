@@ -20,7 +20,7 @@ A PayPal IPN (Instant Payment Notification) listener for PHP
 
 ## <a id="prerequisites"></a>Prerequisites
 
-1. PHP >=5.5.0
+1. PHP >=5.6.0
 2. A good understanding of how the PayPal Instant Payment Notification system works. See [https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/](https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/)
 
 ## <a id="installation"></a>Installation
