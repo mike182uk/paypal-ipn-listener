@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.1
+
+- update sandbox endpoint ([#31](https://github.com/mike182uk/paypal-ipn-listener/pull/31) - [@swader](https://github.com/Swader))
+
 ## 8.0.0
 
 - drop support for php <5.6
