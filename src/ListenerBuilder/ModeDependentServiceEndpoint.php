@@ -20,7 +20,7 @@ trait ModeDependentServiceEndpoint
     protected function getServiceEndpoint()
     {
         return ($this->useSandbox) ?
-            'https://www.sandbox.paypal.com/cgi-bin/webscr' :
+            'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr' :
             'https://ipnpb.paypal.com/cgi-bin/webscr';
     }
 }
