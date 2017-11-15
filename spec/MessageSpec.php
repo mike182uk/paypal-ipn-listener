@@ -49,7 +49,7 @@ class MessageSpec extends ObjectBehavior
 
         $this->beConstructedWith($data);
 
-        $this->__toString()->shouldReturn('foo=foo%20%2B%20bar%20%28baz%29');
+        $this->__toString()->shouldReturn('foo=foo+%2B+bar+%28baz%29');
     }
 
     function it_should_accept_a_string_of_raw_post_data_for_its_data_source()
@@ -68,6 +68,6 @@ class MessageSpec extends ObjectBehavior
 
         $this->beConstructedWith($data);
 
-        $this->get('foo')->shouldReturn('foo+++bar+(baz)');
+        $this->get('foo')->shouldReturn('foo + bar (baz)');
     }
 }

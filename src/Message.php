@@ -50,13 +50,7 @@ class Message
      */
     public function __toString()
     {
-        $str = '';
-
-        foreach ($this->data as $k => $v) {
-            $str .= sprintf('%s=%s&', $k, rawurlencode($v));
-        }
-
-        return rtrim($str, '&');
+        return http_build_query($this->getAll(), null, '&');
     }
 
     /**
@@ -66,15 +60,7 @@ class Message
      */
     private function extractDataFromRawPostDataString($rawPostDataString)
     {
-        $data = [];
-        $keyValuePairs = preg_split('/&/', $rawPostDataString, null, PREG_SPLIT_NO_EMPTY);
-
-        foreach ($keyValuePairs as $keyValuePair) {
-            list($k, $v) = explode('=', $keyValuePair);
-
-            $data[$k] = rawurldecode($v);
-        }
-
+        parse_str($rawPostDataString, $data);
         return $data;
     }
 }
