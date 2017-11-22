@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.2
+
+- use standard PHP functions for building / parsing input in `Message` - ([#32](https://github.com/mike182uk/paypal-ipn-listener/pull/32) [@willemstuursma](https://github.com/willemstuursma))
+
 ## 8.0.1
 
 - update sandbox endpoint ([#31](https://github.com/mike182uk/paypal-ipn-listener/pull/31) - [@swader](https://github.com/Swader))
