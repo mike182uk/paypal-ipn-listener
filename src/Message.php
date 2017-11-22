@@ -12,7 +12,7 @@ class Message
     /**
      * @param array|string $data
      */
-    public function __construct($data)
+    public function __construct($data = [])
     {
         if (!is_array($data)) {
             $data = $this->extractDataFromRawPostDataString($data);
@@ -61,6 +61,7 @@ class Message
     private function extractDataFromRawPostDataString($rawPostDataString)
     {
         parse_str($rawPostDataString, $data);
+
         return $data;
     }
 }
