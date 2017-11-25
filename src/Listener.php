@@ -37,8 +37,8 @@ class Listener
     public function __construct(
         MessageFactory $messageFactory,
         Verifier $verifier,
-        EventDispatcherInterface $eventDispatcher)
-    {
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->messageFactory = $messageFactory;
         $this->verifier = $verifier;
         $this->eventDispatcher = $eventDispatcher;
