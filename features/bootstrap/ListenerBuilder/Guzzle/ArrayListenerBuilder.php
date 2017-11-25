@@ -12,11 +12,11 @@ class ArrayListenerBuilder extends BaseListenerBuilder
     private $serviceEndpoint;
 
     /**
-     * @param string $serviceEnpoint
+     * @param string $serviceEndpoint
      */
-    public function setServiceEndpoint($serviceEnpoint)
+    public function setServiceEndpoint($serviceEndpoint)
     {
-        $this->serviceEndpoint = $serviceEnpoint;
+        $this->serviceEndpoint = $serviceEndpoint;
     }
 
     /**
