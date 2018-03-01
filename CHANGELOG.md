@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.3
+
+- Add support for Symfony 4
+- Remove bundled `composer.lock` file
+- Update build config
+
 ## 8.0.2
 
 - use standard PHP functions for building / parsing input in `Message` ([#32](https://github.com/mike182uk/paypal-ipn-listener/pull/32) - [@willemstuursma](https://github.com/willemstuursma))
