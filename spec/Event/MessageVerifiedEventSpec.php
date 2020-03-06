@@ -8,18 +8,18 @@ use Prophecy\Argument;
 
 class MessageVerifiedEventSpec extends ObjectBehavior
 {
-    function let(Message $message)
+    public function let(Message $message)
     {
         $this->beConstructedWith($message);
     }
 
-    function it_should_be_an_event()
+    public function it_should_be_an_event()
     {
-        $this->shouldHaveType('Symfony\Component\EventDispatcher\Event');
+        $this->shouldHaveType('Symfony\Contracts\EventDispatcher\Event');
         $this->shouldHaveType('Mdb\PayPal\Ipn\Event\MessageVerificationEvent');
     }
 
-    function it_should_retrieve_the_ipn_message(Message $message)
+    public function it_should_retrieve_the_ipn_message(Message $message)
     {
         $this->getMessage()->shouldReturn($message);
     }

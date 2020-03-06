@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add support for Symfony 5
+- Drop support for Symfony <4.3
+- Drop support for PHP <7.1
+
 ## 8.0.3
 
 - Add support for Symfony 4

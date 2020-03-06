@@ -3,7 +3,7 @@
 namespace Mdb\PayPal\Ipn\Event;
 
 use Mdb\PayPal\Ipn\Message;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 abstract class MessageVerificationEvent extends Event
 {
