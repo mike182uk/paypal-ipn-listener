@@ -6,8 +6,6 @@ php:
   - 7.3
   - 7.4
 
-sudo: false
-
 cache:
   directories:
     - $HOME/.composer/cache
@@ -27,8 +25,3 @@ script:
   - composer run-script specs-ci
   - composer run-script examples-ci
   - composer run-script lint
-
-matrix:
-  allow_failures:
-    - php: nightly
-  fast_finish: true
