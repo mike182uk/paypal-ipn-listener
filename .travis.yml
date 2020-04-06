@@ -30,5 +30,5 @@ script:
   - composer run-script examples-ci
   - composer run-script lint
 
-matrix:
+jobs:
   fast_finish: true
