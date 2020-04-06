@@ -15,14 +15,14 @@
   ],
   "require": {
     "php": "^7.1",
-    "guzzlehttp/guzzle": "^6.2",
-    "symfony/event-dispatcher": "^4.3||^5.0"
+    "guzzlehttp/guzzle": "^6.5.2",
+    "symfony/event-dispatcher": "^4.4.0|^5.0.7"
   },
   "require-dev": {
-    "phpspec/phpspec": "^4.3||^5.1||^6.1",
-    "behat/behat": "^3.3",
-    "beberlei/assert": "^3.0",
-    "friendsofphp/php-cs-fixer": "^2.0"
+    "phpspec/phpspec": "^6.1.1",
+    "behat/behat": "^3.6.1",
+    "beberlei/assert": "^3.2.7",
+    "friendsofphp/php-cs-fixer": "^2.16.1"
   },
   "autoload": {
     "psr-4": {
@@ -36,9 +36,9 @@
   },
   "scripts": {
     "specs": "@php vendor/bin/phpspec run --ansi",
-    "examples": "@php vendor/bin/behat --colors",
+    "examples": "@php vendor/bin/behat --colors --snippets-for=FeatureContext",
     "specs-ci": "@php vendor/bin/phpspec run --ansi -f progress",
-    "examples-ci": "@php vendor/bin/behat --colors -f progress",
+    "examples-ci": "@php vendor/bin/behat --colors -f progress --snippets-for=FeatureContext",
     "lint": "@php vendor/bin/php-cs-fixer fix --dry-run --verbose --ansi --config .php_cs.php",
     "fix": "@php vendor/bin/php-cs-fixer fix --ansi --config .php_cs.php",
     "mock-server": "@php -S localhost:$MOCK_SERVER_PORT -t features/bootstrap/server"

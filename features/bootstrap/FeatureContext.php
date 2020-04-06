@@ -1,7 +1,7 @@
 <?php
 
 use Assert\Assertion;
-use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Context\Context;
 use GuzzleHttp\Client;
 use Mdb\PayPal\Ipn\Event\MessageVerificationEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
@@ -11,7 +11,7 @@ use Mdb\PayPal\Ipn\Service\GuzzleService;
 use Mdb\PayPal\Ipn\Verifier;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class FeatureContext implements SnippetAcceptingContext
+class FeatureContext implements Context
 {
     private const SERVICE_ENDPOINT = 'http://localhost';
     private const SERVICE_ENDPOINT_PORT_ENV_VAR = 'MOCK_SERVER_PORT';
