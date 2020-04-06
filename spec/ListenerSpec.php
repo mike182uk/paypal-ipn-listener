@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         MessageFactory $messageFactory,
         Message $message,
         Verifier $verifier,
@@ -30,7 +30,7 @@ class ListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_should_dispatch_an_event_when_a_message_is_verified(
+    public function it_should_dispatch_an_event_when_a_message_is_verified(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     ) {
@@ -39,14 +39,14 @@ class ListenerSpec extends ObjectBehavior
         )->willReturn(true);
 
         $eventDispatcher->dispatch(
-            Listener::IPN_VERIFIED_EVENT,
-            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerifiedEvent')
+            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerifiedEvent'),
+            Listener::IPN_VERIFIED_EVENT
         )->shouldBeCalled();
 
         $this->listen();
     }
 
-    function it_should_dispatch_an_event_when_a_message_is_invalid(
+    public function it_should_dispatch_an_event_when_a_message_is_invalid(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     ) {
@@ -55,14 +55,14 @@ class ListenerSpec extends ObjectBehavior
         )->willReturn(false);
 
         $eventDispatcher->dispatch(
-            Listener::IPN_INVALID_EVENT,
-            Argument::type('Mdb\PayPal\Ipn\Event\MessageInvalidEvent')
+            Argument::type('Mdb\PayPal\Ipn\Event\MessageInvalidEvent'),
+            Listener::IPN_INVALID_EVENT
         )->shouldBeCalled();
 
         $this->listen();
     }
 
-    function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_an_unexpected_response(
+    public function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_an_unexpected_response(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     ) {
@@ -71,14 +71,14 @@ class ListenerSpec extends ObjectBehavior
         )->willThrow('UnexpectedValueException');
 
         $eventDispatcher->dispatch(
-            Listener::IPN_VERIFICATION_FAILURE_EVENT,
-            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent')
+            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent'),
+            Listener::IPN_VERIFICATION_FAILURE_EVENT
         )->shouldBeCalled();
 
         $this->listen();
     }
 
-    function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_a_service_failure(
+    public function it_should_dispatch_an_event_when_it_fails_to_verify_a_message_due_to_a_service_failure(
         Verifier $verifier,
         EventDispatcher $eventDispatcher
     ) {
@@ -87,40 +87,43 @@ class ListenerSpec extends ObjectBehavior
         )->willThrow('Mdb\PayPal\Ipn\Exception\ServiceException');
 
         $eventDispatcher->dispatch(
-            Listener::IPN_VERIFICATION_FAILURE_EVENT,
-            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent')
+            Argument::type('Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent'),
+            Listener::IPN_VERIFICATION_FAILURE_EVENT
         )->shouldBeCalled();
 
         $this->listen();
     }
 
-    function it_should_attach_a_listener_for_the_message_verified_event(EventDispatcher $eventDispatcher)
+    public function it_should_attach_a_listener_for_the_message_verified_event(EventDispatcher $eventDispatcher)
     {
         $eventDispatcher->addListener(
             Listener::IPN_VERIFIED_EVENT,
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onVerified(function (MessageVerifiedEvent $event) {});
+        $this->onVerified(function (MessageVerifiedEvent $event) {
+        });
     }
 
-    function it_should_attach_a_listener_for_the_message_invalid_event(EventDispatcher $eventDispatcher)
+    public function it_should_attach_a_listener_for_the_message_invalid_event(EventDispatcher $eventDispatcher)
     {
         $eventDispatcher->addListener(
             Listener::IPN_INVALID_EVENT,
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onInvalid(function (MessageInvalidEvent $event) {});
+        $this->onInvalid(function (MessageInvalidEvent $event) {
+        });
     }
 
-    function it_should_attach_a_listener_for_the_message_verification_failure_event(EventDispatcher $eventDispatcher)
+    public function it_should_attach_a_listener_for_the_message_verification_failure_event(EventDispatcher $eventDispatcher)
     {
         $eventDispatcher->addListener(
             Listener::IPN_VERIFICATION_FAILURE_EVENT,
             Argument::type('callable')
         )->shouldBeCalled();
 
-        $this->onVerificationFailure(function (MessageVerificationFailureEvent $event) {});
+        $this->onVerificationFailure(function (MessageVerificationFailureEvent $event) {
+        });
     }
 }

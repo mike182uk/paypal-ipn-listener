@@ -58,15 +58,12 @@ class Listener
                 $eventName = self::IPN_INVALID_EVENT;
                 $event = new MessageInvalidEvent($message);
             }
-        } catch (\UnexpectedValueException $e) {
-            $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
-            $event = new MessageVerificationFailureEvent($message, $e->getMessage());
-        } catch (ServiceException $e) {
+        } catch (\UnexpectedValueException | ServiceException $e) {
             $eventName = self::IPN_VERIFICATION_FAILURE_EVENT;
             $event = new MessageVerificationFailureEvent($message, $e->getMessage());
         }
 
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->eventDispatcher->dispatch($event, $eventName);
     }
 
     /**
