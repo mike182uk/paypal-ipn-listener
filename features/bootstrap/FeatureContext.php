@@ -3,18 +3,18 @@
 use Assert\Assertion;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use GuzzleHttp\Client;
-use Mdb\PayPal\Ipn\MessageFactory\ArrayMessageFactory;
 use Mdb\PayPal\Ipn\Event\MessageVerificationEvent;
 use Mdb\PayPal\Ipn\Event\MessageVerificationFailureEvent;
 use Mdb\PayPal\Ipn\Listener;
+use Mdb\PayPal\Ipn\MessageFactory\ArrayMessageFactory;
 use Mdb\PayPal\Ipn\Service\GuzzleService;
 use Mdb\PayPal\Ipn\Verifier;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class FeatureContext implements SnippetAcceptingContext
 {
-    const SERVICE_ENDPOINT = 'http://localhost';
-    const SERVICE_ENDPOINT_PORT_ENV_VAR = 'MOCK_SERVER_PORT';
+    private const SERVICE_ENDPOINT = 'http://localhost';
+    private const SERVICE_ENDPOINT_PORT_ENV_VAR = 'MOCK_SERVER_PORT';
 
     /**
      * @var array
@@ -115,10 +115,7 @@ class FeatureContext implements SnippetAcceptingContext
         Assertion::true($this->verifiedIpn);
     }
 
-    /**
-     * @return Listener
-     */
-    protected function getListener()
+    protected function getListener() : Listener
     {
         $service = new GuzzleService(
             new Client(),
@@ -134,10 +131,7 @@ class FeatureContext implements SnippetAcceptingContext
         );
     }
 
-    /**
-     * @return string
-     */
-    protected function getServiceEndpoint()
+    protected function getServiceEndpoint() : string
     {
         return sprintf('%s:%s', self::SERVICE_ENDPOINT, getenv(self::SERVICE_ENDPOINT_PORT_ENV_VAR));
     }

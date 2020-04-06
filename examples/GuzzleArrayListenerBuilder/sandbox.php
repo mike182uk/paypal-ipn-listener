@@ -10,10 +10,10 @@ use Mdb\PayPal\Ipn\ListenerBuilder\Guzzle\ArrayListenerBuilder as ListenerBuilde
 $listenerBuilder = new ListenerBuilder();
 
 // make sure this is actually the data you recieved from PayPal...
-$data = array(
+$data = [
     'foo' => 'bar',
     'bar' => 'baz',
-);
+];
 
 $listenerBuilder->setData($data);
 $listenerBuilder->useSandbox();

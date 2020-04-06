@@ -12,18 +12,12 @@ abstract class MessageVerificationEvent extends Event
      */
     private $message;
 
-    /**
-     * @param Message $message
-     */
     public function __construct(Message $message)
     {
         $this->message = $message;
     }
 
-    /**
-     * @return Message
-     */
-    public function getMessage()
+    public function getMessage() : Message
     {
         return $this->message;
     }

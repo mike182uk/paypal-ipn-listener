@@ -4,7 +4,6 @@ namespace spec\Mdb\PayPal\Ipn\Event;
 
 use Mdb\PayPal\Ipn\Message;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class MessageInvalidEventSpec extends ObjectBehavior
 {

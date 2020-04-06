@@ -1,13 +1,11 @@
 <?php
 
 use ListenerBuilder\Guzzle\ArrayListenerBuilder;
+use Mdb\PayPal\Ipn\Listener;
 
 class GuzzleArrayListenerBuilderContext extends FeatureContext
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getListener()
+    protected function getListener() : Listener
     {
         $listenerBuilder = new ArrayListenerBuilder();
 

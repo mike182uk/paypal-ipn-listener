@@ -4,30 +4,23 @@ namespace Mdb\PayPal\Ipn;
 
 class Verifier
 {
-    const STATUS_KEYWORD_VERIFIED = 'VERIFIED';
-    const STATUS_KEYWORD_INVALID = 'INVALID';
+    public const STATUS_KEYWORD_VERIFIED = 'VERIFIED';
+    public const STATUS_KEYWORD_INVALID = 'INVALID';
 
     /**
      * @var Service
      */
     private $service;
 
-    /**
-     * @param Service $service
-     */
     public function __construct(Service $service)
     {
         $this->service = $service;
     }
 
     /**
-     * @param Message $message
-     *
-     * @return bool
-     *
      * @throws UnexpectedValueException
      */
-    public function verify(Message $message)
+    public function verify(Message $message) : bool
     {
         $serviceResponse = $this->service->verifyIpnMessage($message);
         $serviceResponseBody = $serviceResponse->getBody();

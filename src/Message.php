@@ -21,12 +21,7 @@ class Message
         $this->data = $data;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
-    public function get($key)
+    public function get(string $key) : string
     {
         $value = '';
 
@@ -37,28 +32,17 @@ class Message
         return $value;
     }
 
-    /**
-     * @return array
-     */
-    public function getAll()
+    public function getAll() : array
     {
         return $this->data;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString() : string
     {
         return http_build_query($this->getAll(), null, '&');
     }
 
-    /**
-     * @param string $rawPostDataString
-     *
-     * @return array
-     */
-    private function extractDataFromRawPostDataString($rawPostDataString)
+    private function extractDataFromRawPostDataString($rawPostDataString) : array
     {
         parse_str($rawPostDataString, $data);
 

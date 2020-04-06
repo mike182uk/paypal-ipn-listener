@@ -35,12 +35,12 @@
     }
   },
   "scripts": {
-    "specs": "phpspec run --ansi",
-    "examples": "behat --colors",
-    "specs-ci": "phpspec run --ansi -f progress",
-    "examples-ci": "behat --colors -f progress",
-    "lint": "php-cs-fixer fix --dry-run --verbose --ansi",
-    "fix": "php-cs-fixer fix --ansi",
-    "mock-server": "cd features/bootstrap/server && php -S localhost:$MOCK_SERVER_PORT"
+    "specs": "@php vendor/bin/phpspec run --ansi",
+    "examples": "@php vendor/bin/behat --colors",
+    "specs-ci": "@php vendor/bin/phpspec run --ansi -f progress",
+    "examples-ci": "@php vendor/bin/behat --colors -f progress",
+    "lint": "@php vendor/bin/php-cs-fixer fix --dry-run --verbose --ansi --config .php_cs.php",
+    "fix": "@php vendor/bin/php-cs-fixer fix --ansi --config .php_cs.php",
+    "mock-server": "@php -S localhost:$MOCK_SERVER_PORT -t features/bootstrap/server"
   }
 }

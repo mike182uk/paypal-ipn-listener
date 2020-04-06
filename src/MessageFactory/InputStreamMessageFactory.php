@@ -13,18 +13,12 @@ class InputStreamMessageFactory implements MessageFactory
      */
     private $inputStream;
 
-    /**
-     * @param InputStream $inputStream
-     */
     public function __construct(InputStream $inputStream)
     {
         $this->inputStream = $inputStream;
     }
 
-    /**
-     * @return Message
-     */
-    public function createMessage()
+    public function createMessage() : Message
     {
         $streamContents = $this->inputStream->getContents();
 

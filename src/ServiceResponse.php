@@ -17,10 +17,7 @@ class ServiceResponse
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
-    public function getBody()
+    public function getBody() : string
     {
         return $this->body;
     }

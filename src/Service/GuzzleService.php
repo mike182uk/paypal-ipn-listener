@@ -20,20 +20,13 @@ class GuzzleService implements Service
      */
     private $serviceEndpoint;
 
-    /**
-     * @param ClientInterface $httpClient
-     * @param string          $serviceEndpoint
-     */
     public function __construct(ClientInterface $httpClient, $serviceEndpoint)
     {
         $this->httpClient = $httpClient;
         $this->serviceEndpoint = $serviceEndpoint;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function verifyIpnMessage(Message $message)
+    public function verifyIpnMessage(Message $message) : ServiceResponse
     {
         $requestBody = array_merge(
             ['cmd' => '_notify-validate'],

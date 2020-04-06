@@ -4,10 +4,7 @@ namespace Mdb\PayPal\Ipn;
 
 class InputStream
 {
-    /**
-     * @return string
-     */
-    public function getContents()
+    public function getContents() : string
     {
         return file_get_contents('php://input');
     }

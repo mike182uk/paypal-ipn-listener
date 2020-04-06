@@ -12,18 +12,12 @@ class ArrayMessageFactory implements MessageFactory
      */
     private $data;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createMessage()
+    public function createMessage() : Message
     {
         return new Message($this->data);
     }

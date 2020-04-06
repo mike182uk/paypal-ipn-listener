@@ -6,10 +6,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 abstract class ListenerBuilder
 {
-    /**
-     * @return Listener
-     */
-    public function build()
+    public function build() : Listener
     {
         $verifier = $this->getVerifier();
         $messageFactory = $this->getMessageFactory();
@@ -22,31 +19,19 @@ abstract class ListenerBuilder
         );
     }
 
-    /**
-     * @return Verifier
-     */
-    private function getVerifier()
+    private function getVerifier() : Verifier
     {
         $service = $this->getService();
 
         return new Verifier($service);
     }
 
-    /**
-     * @return EventDispatcher
-     */
-    private function getEventDispatcher()
+    private function getEventDispatcher() : EventDispatcher
     {
         return new EventDispatcher();
     }
 
-    /**
-     * @return MessageFactory
-     */
-    abstract protected function getMessageFactory();
+    abstract protected function getMessageFactory() : MessageFactory;
 
-    /**
-     * @return Service
-     */
-    abstract protected function getService();
+    abstract protected function getService() : Service;
 }
