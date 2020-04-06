@@ -1,3 +1,7 @@
+dist: xenial
+os:
+  - linux
+
 language: php
 
 php:
@@ -25,3 +29,6 @@ script:
   - composer run-script specs-ci
   - composer run-script examples-ci
   - composer run-script lint
+
+matrix:
+  fast_finish: true
