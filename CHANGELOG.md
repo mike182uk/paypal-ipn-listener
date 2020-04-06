@@ -2,15 +2,19 @@
 
 ## Unreleased
 
-- Add support for Symfony 5
-- Drop support for Symfony <4.3
-- Drop support for PHP <7.1
+- 
+
+## 9.0.0
+
+- add support for Symfony 5 ([#39](https://github.com/mike182uk/paypal-ipn-listener/pull/39) - [@sebdesign](https://github.com/sebdesign))
+- drop support for Symfony <4.3 ([#39](https://github.com/mike182uk/paypal-ipn-listener/pull/39) - [@sebdesign](https://github.com/sebdesign))
+- drop support for PHP <7.1 ([#39](https://github.com/mike182uk/paypal-ipn-listener/pull/39) - [@sebdesign](https://github.com/sebdesign))
 
 ## 8.0.3
 
-- Add support for Symfony 4
-- Remove bundled `composer.lock` file
-- Update build config
+- add support for Symfony 4
+- remove bundled `composer.lock` file
+- update build config
 
 ## 8.0.2
 
