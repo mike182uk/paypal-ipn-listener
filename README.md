@@ -20,7 +20,7 @@ A PayPal IPN (Instant Payment Notification) listener for PHP
 ## <a id="prerequisites"></a>Prerequisites
 
 1. PHP >=7.1.0
-2. A good understanding of how the PayPal Instant Payment Notification system works. See [https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/](https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/)
+2. A good understanding of how the PayPal Instant Payment Notification system works (see [here](https://developer.paypal.com/docs/ipn/integration-guide/IPNIntro/))
 
 ## <a id="installation"></a>Installation
 
@@ -223,4 +223,4 @@ You will notice that when using any of the provided guzzle listener builders tha
 
 ### Testing
 
-PayPal provides an IPN simulator here: [https://developer.paypal.com/webapps/developer/applications/ipn_simulator](https://developer.paypal.com/webapps/developer/applications/ipn_simulator)
+PayPal provides an IPN simulator [here](https://developer.paypal.com/developer/ipnSimulator/).
