@@ -1,10 +1,10 @@
 # PayPal IPN Listener
 
-[![Packagist](https://img.shields.io/packagist/v/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
-[![Build Status](https://img.shields.io/travis/mike182uk/paypal-ipn-listener.svg?style=flat-square)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/969dd452-b91e-4048-a871-5babcd64b834.svg?style=flat-square)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
-[![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
+[![Packagist Version](https://img.shields.io/packagist/v/mike182uk/paypal-ipn-listener?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
+[![Build Status](https://img.shields.io/travis/mike182uk/paypal-ipn-listener/master?style=flat-square)](http://travis-ci.org/mike182uk/paypal-ipn-listener)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/quality/g/mike182uk/paypal-ipn-listener/master?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
+[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/969dd452-b91e-4048-a871-5babcd64b834?style=flat-square)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
+[![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/paypal-ipn-listener?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![License](https://img.shields.io/github/license/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 
 A PayPal IPN (Instant Payment Notification) listener for PHP
