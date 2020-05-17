@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        php: [7.1, 7.2, 7.3, 7.4]
+        os: [ubuntu-latest]
+      fail-fast: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+
+      - name: Setup project
+        run: composer install --no-interaction
+
+      - name: Run linter
+        run: composer run-script lint
+
+      - name: Run specs
+        run: composer run-script specs
+
+      - name: Run examples
+        run: |
+          nohup composer run-script mock-server >& /dev/null &
+          composer run-script examples
+        env:
+          MOCK_SERVER_PORT: 3000
