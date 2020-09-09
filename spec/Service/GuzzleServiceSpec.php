@@ -57,7 +57,8 @@ class GuzzleServiceSpec extends ObjectBehavior
 
 class ClientStub extends Client
 {
-    public function post()
+    public function post($uri, array $options = []): ResponseInterface
     {
+        return parent::post($uri, $options);
     }
 }
