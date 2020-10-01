@@ -4,6 +4,10 @@
 
 - 
 
+## 9.0.1
+
+- add support for Guzzle 7 ([#40](https://github.com/mike182uk/paypal-ipn-listener/pull/40), [#41](https://github.com/mike182uk/paypal-ipn-listener/pull/41) - [@sebdesign](https://github.com/sebdesign))
+
 ## 9.0.0
 
 - add support for Symfony 5 ([#39](https://github.com/mike182uk/paypal-ipn-listener/pull/39) - [@sebdesign](https://github.com/sebdesign))
