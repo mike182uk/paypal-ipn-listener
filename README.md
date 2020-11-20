@@ -3,7 +3,6 @@
 [![Packagist Version](https://img.shields.io/packagist/v/mike182uk/paypal-ipn-listener?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![Build Status](https://img.shields.io/github/workflow/status/mike182uk/paypal-ipn-listener/CI/master?style=flat-square)](https://github.com/mike182uk/paypal-ipn-listener/actions?query=workflow%3ACI)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/paypal-ipn-listener/)
-[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/969dd452-b91e-4048-a871-5babcd64b834?style=flat-square)](https://insight.sensiolabs.com/projects/969dd452-b91e-4048-a871-5babcd64b834)
 [![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/paypal-ipn-listener?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 [![License](https://img.shields.io/github/license/mike182uk/paypal-ipn-listener.svg?style=flat-square)](https://packagist.org/packages/mike182uk/paypal-ipn-listener)
 
