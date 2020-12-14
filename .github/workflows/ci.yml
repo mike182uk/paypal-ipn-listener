@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.1, 7.2, 7.3, 7.4]
+        php: [7.1, 7.2, 7.3, 7.4, 8.0]
         os: [ubuntu-latest]
       fail-fast: false
 
@@ -32,6 +32,7 @@ jobs:
 
       - name: Run linter
         run: composer run-script lint
+        if: matrix.php < '8.0'
 
       - name: Run specs
         run: composer run-script specs
