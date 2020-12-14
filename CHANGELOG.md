@@ -4,6 +4,10 @@
 
 - 
 
+## 9.0.2
+
+- add support for PHP 8 ([#43](https://github.com/mike182uk/paypal-ipn-listener/pull/43) - [@sebdesign](https://github.com/sebdesign))
+
 ## 9.0.1
 
 - add support for Guzzle 7 ([#40](https://github.com/mike182uk/paypal-ipn-listener/pull/40), [#41](https://github.com/mike182uk/paypal-ipn-listener/pull/41) - [@sebdesign](https://github.com/sebdesign))
