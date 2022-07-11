@@ -39,7 +39,7 @@ class Message
 
     public function __toString() : string
     {
-        return http_build_query($this->getAll(), null, '&');
+        return http_build_query($this->getAll(), '', '&');
     }
 
     private function extractDataFromRawPostDataString($rawPostDataString) : array
