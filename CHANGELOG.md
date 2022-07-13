@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-- 
+-
+
+## 9.0.3
+
+- fix `http_build_query` `null` deprecation ([#47](https://github.com/mike182uk/paypal-ipn-listener/pull/47)) - [@garyross](https://github.com/garyross)
 
 ## 9.0.2
 
