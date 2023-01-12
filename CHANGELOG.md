@@ -4,9 +4,13 @@
 
 -
 
+## 9.0.4
+
+- allow installation of `symfony/event-dispatcher` v6 - ([#49](https://github.com/mike182uk/paypal-ipn-listener/pull/49) - [@shirshir](https://github.com/shirshir))
+
 ## 9.0.3
 
-- fix `http_build_query` `null` deprecation ([#47](https://github.com/mike182uk/paypal-ipn-listener/pull/47)) - [@garyross](https://github.com/garyross)
+- fix `http_build_query` `null` deprecation ([#47](https://github.com/mike182uk/paypal-ipn-listener/pull/47) - [@garyross](https://github.com/garyross))
 
 ## 9.0.2
 
