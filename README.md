@@ -139,7 +139,7 @@ class IpnProcessor
     }
 }
 
-$listener->onVerified(array(new Processor, 'onVerified'));
+$listener->onVerified(array(new IpnProcessor, 'onVerified'));
 ```
 
 ```php
@@ -223,4 +223,4 @@ You will notice that when using any of the provided guzzle listener builders tha
 
 ### Testing
 
-PayPal provides an IPN simulator [here](https://developer.paypal.com/developer/ipnSimulator/).
+PayPal provides an IPN simulator [here](https://developer.paypal.com/dashboard/ipnSimulator).
