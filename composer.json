@@ -22,7 +22,7 @@
     "phpspec/phpspec": "^4.3||^5.1||^6.1||^7.0",
     "behat/behat": "^3.3",
     "beberlei/assert": "^3.0",
-    "friendsofphp/php-cs-fixer": "^2.0"
+    "friendsofphp/php-cs-fixer": "^2.0 || ^3.0"
   },
   "autoload": {
     "psr-4": {
