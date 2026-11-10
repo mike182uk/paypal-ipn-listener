@@ -4,6 +4,10 @@
 
 -
 
+## 9.1.0
+
+- allow installation of `symfony/event-dispatcher` v7 and v8 - ([#54](https://github.com/mike182uk/paypal-ipn-listener/pull/54) - [@Robiussani152](https://github.com/Robiussani152))
+
 ## 9.0.4
 
 - allow installation of `symfony/event-dispatcher` v6 - ([#49](https://github.com/mike182uk/paypal-ipn-listener/pull/49) - [@shirshir](https://github.com/shirshir))
